@@ -1,0 +1,1001 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2023-02-21T19:20:48+08:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Home</title><subtitle>Build Jekyll site with the GitBook style.
+</subtitle><author><name>Benson Hsu</name></author><entry><title type="html">Leetcode - Algorithm | KMP</title><link href="http://0.0.0.0:4000/jekyll/2023-02-04-algorithm_kmp.html" rel="alternate" type="text/html" title="Leetcode - Algorithm | KMP" /><published>2023-02-04T00:00:00+08:00</published><updated>2023-02-04T00:00:00+08:00</updated><id>http://0.0.0.0:4000/jekyll/algorithm_kmp</id><content type="html" xml:base="http://0.0.0.0:4000/jekyll/2023-02-04-algorithm_kmp.html"><![CDATA[<blockquote class="block-tip">
+  <p>Note to KMP (Knuth Morris Pratt). <a href="https://www.bilibili.com/video/BV1PD4y1o7nd/?vd_source=534430193309f41034d31f469a3f029f">reference</a> here.</p>
+</blockquote>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>字串尋找演算法 (KMP), 可在一個字串中尋找另一個字串的出現位子, 使用這個算法的平均時間複雜度是 O(n+m),
+其中 n 為字串的長度, m 為模式串的長度.</p>
+
+<h4 id="brute-force">Brute Force</h4>
+
+<p>我們先看看暴力解如何去解，假設有兩個字串:</p>
+<ol>
+  <li>text: “aabaabaaf”</li>
+  <li>pattern: “aabaaf”</li>
+</ol>
+
+<p>最值觀的寫法就是從 text 開始做 for loop, 接下來逐字匹配 text, 如果 pattern 找到匹配失敗的 text 才往前移動 1 直到能將 pattern 匹配完或者 traverse text 結束.
+在這種寫法下時間複雜度為 O(m*n), 因為至少每個 text 的 element 都要經過一次 pattern 的匹配過程. 也可以想像成一個滑動的窗口, 窗口的大小為 pattern size.</p>
+
+<p><a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/28.Find_Index_of_First_Occurrence_String.md">28. Find the Index of the First Occurrence in a String</a> 中的暴力解法.</p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">strStr</span><span class="p">(</span><span class="n">haystack</span> <span class="kt">string</span><span class="p">,</span> <span class="n">needle</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+	<span class="k">var</span> <span class="n">result</span> <span class="kt">int</span> <span class="o">=</span> <span class="o">-</span><span class="m">1</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">haystack</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">needle</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">result</span>
+	<span class="p">}</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">haystack</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="n">checkStr</span><span class="p">(</span><span class="n">haystack</span><span class="p">,</span> <span class="n">needle</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">result</span> <span class="o">=</span> <span class="n">i</span>
+			<span class="k">return</span> <span class="n">result</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">result</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">checkStr</span><span class="p">(</span><span class="n">haystack</span><span class="p">,</span> <span class="n">needle</span> <span class="kt">string</span><span class="p">,</span> <span class="n">index</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">needle</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">needle</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="no">true</span>
+		<span class="p">}</span>
+		<span class="k">if</span> <span class="n">index</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">haystack</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="no">false</span>
+		<span class="p">}</span>
+		<span class="k">if</span> <span class="n">haystack</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="n">needle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">{</span>
+			<span class="n">index</span><span class="o">++</span>
+		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="no">false</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="no">false</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="kmp-algorithm">KMP Algorithm</h3>
+
+<p><a href="https://writings.sh/post/algorithm-string-searching-kmp">Diagram reference</a></p>
+
+<p>因此我們可以將暴力解用圖解來展開：<br />
+<img src="https://writings.sh/assets/images/posts/algorithm-string-searching-kmp/naive-expanded.png?raw=true" alt="" height="60%" width="60%" /></p>
+
+<p>那我們就能想像如何減少不必要的搜尋, 首先如下兩張圖: 
+如果右移後的 overlap 都無法比對, 下次比對時我們都可以先跳過這些 overlap.</p>
+
+<p><img src="https://writings.sh/assets/images/posts/algorithm-string-searching-kmp/explan-kmp-01.png?raw=true" alt="" height="60%" width="60%" /></p>
+
+<p>但是看下面這個例子, 這次比對到的目標中含有符合的子串. 因此我們就有必要進一步的比對,</p>
+
+<p><img src="https://writings.sh/assets/images/posts/algorithm-string-searching-kmp/explan-kmp-03.png?raw=true" alt="" height="60%" width="60%" />
+<img src="https://writings.sh/assets/images/posts/algorithm-string-searching-kmp/explan-kmp-05.png?raw=true" alt="" height="60%" width="60%" /></p>
+
+<p>那這段 overlap 要如何找出來? 假設已經比對成功的部分是 p’, 他是 p 的一個子串, 
+那重疊部分就是 p’ tail 和右移 p’ 的head. 因此我們可以說</p>
+
+<p><img src="https://writings.sh/assets/images/posts/algorithm-string-searching-kmp/explan-kmp-06.png?raw=true" alt="" height="60%" width="60%" /></p>
+
+<p>結合以上的兩種方式, 我們可以看到這個算法最終的樣子:</p>
+
+<p><img src="https://writings.sh/assets/images/posts/algorithm-string-searching-kmp/explan-kmp-09.png?raw=true" alt="" height="60%" width="60%" /></p>]]></content><author><name>Benson Hsu</name></author><category term="Jekyll" /><category term="algorithm" /><category term="string" /><summary type="html"><![CDATA[Note to KMP (Knuth Morris Pratt). reference here.]]></summary></entry><entry><title type="html">Notes - Vboxmanage operation</title><link href="http://0.0.0.0:4000/jekyll/2023-01-18-linux_virtualbox.html" rel="alternate" type="text/html" title="Notes - Vboxmanage operation" /><published>2023-01-18T00:00:00+08:00</published><updated>2023-01-18T00:00:00+08:00</updated><id>http://0.0.0.0:4000/jekyll/linux_virtualbox</id><content type="html" xml:base="http://0.0.0.0:4000/jekyll/2023-01-18-linux_virtualbox.html"><![CDATA[<blockquote>
+  <p>Notes How to using linux vboxmanage operation.</p>
+</blockquote>
+
+<h3 id="vboxmanage-command">vboxmanage command</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Virtual box指令操作
+手動相關指令說明:
+ 新建一個名為「New VM」的虛擬機器
+vboxmanage createvm <span class="nt">-name</span> 「New VM」 <span class="nt">-register</span>
+
+ 設定「New VM」的記憶體是128MB並開啟acpi 設定第一開機碟為dvd 以及新增一個網路介面
+vboxmanage modifyvm 「New VM」 <span class="nt">-memory</span> 「128MB」 <span class="nt">-acpi</span> on <span class="nt">-boot1</span> dvd <span class="nt">-nic1</span> intnet
+
+ 建立一個虛擬硬碟名為「newhd.vdi」  大小為 4000MB
+vboxmanage createvdi <span class="nt">-filename</span> 「newhd.vdi」 <span class="nt">-size</span> 4000 <span class="nt">-register</span>
+
+ 將「New VM」的 hda 設定為「newhd.vdi」虛擬磁碟
+vboxmanage modifyvm 「New VM」 <span class="nt">-hda</span> 「newhd.vdi」
+
+ 將在<span class="s2">"/home/file/iso.iso"</span>的ISO映像檔 設定到 名為 dvd的光碟映像檔庫
+vboxmanage registerimage dvd /home/file/iso.iso
+
+ 設定名為「New VM」的 dvd裝置為 /home/file/iso.iso
+vboxmanage modifyvm 「New VM」 <span class="nt">-dvd</span> /home/file/iso.iso
+
+ 設定「New VM」所使用的 VRDP 的連接Port為 3390
+vboxmanage modifyvm 「New VM」 <span class="nt">-vrdpport</span> 3390
+
+ 啟動 VRDP
+VBoxVRDP <span class="nt">-startvm</span> 「New VM」
+
+<span class="nt">-----</span> List <span class="k">function
+
+ </span>查詢目前vbox上有設定多少個vm
+vboxmanage list vms
+
+ 查看支援的 OS Type
+vboxmanage list ostypes
+
+ 查看運行中的 VM
+vboxmanage list runningvms
+
+ 其它可以list的指令
+vboxmanage list hostdvds
+vboxmanage list hostinfo
+vboxmanage list hddbackends
+vboxmanage list systemproperties
+vboxmanage list dhcpservers
+vboxmanage list hdds
+vboxmanage list dvds
+
+ 指令啟動vm
+vboxmanage startvm <span class="s2">"VM name"</span> <span class="nt">--type</span> headless <span class="o">(</span>用背景啟動，不加上--type headless參數可能會有錯誤!!<span class="o">)</span>
+</code></pre></div></div>
+
+<h3 id="how-to-autostart-virtual-machine-by-systemctl-reference">How to autostart virtual machine by systemctl. <a href="http://www.ericerfanian.com/automatically-starting-virtualbox-vms-on-archlinux-using-systemd/">reference</a></h3>
+
+<ol>
+  <li>Create a systemd service file.</li>
+</ol>
+
+<p><code class="language-plaintext highlighter-rouge">sudo vim /etc/systemd/system/$service-filename</code></p>
+<pre><code class="language-systemctl.service">[Unit]
+Description=VBox Virtual Machine %i Service
+Requires=systemd-modules-load.service
+After=systemd-modules-load.service
+
+[Service]
+User=user
+Group=vboxusers
+ExecStart=/usr/bin/VBoxHeadless -s %i
+ExecStop=/usr/bin/VBoxManage controlvm %i savestate
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<ul>
+  <li>change %i to you virtual machine UUID or name.</li>
+  <li>user is you virtual machine manager username.</li>
+</ul>
+
+<ol>
+  <li>reload systemd service file and enable service.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl daemon-reload
+<span class="nb">sudo </span>systemctl <span class="nb">enable</span> <span class="nv">$service</span><span class="nt">-filename</span>
+<span class="nb">sudo </span>systemctl start <span class="nv">$service</span><span class="nt">-filename</span>
+</code></pre></div>    </div>
+  </li>
+  <li>check virtual machine is runing <code class="language-plaintext highlighter-rouge">vboxmanage list runningvms</code></li>
+</ol>]]></content><author><name>Benson Hsu</name></author><category term="Jekyll" /><category term="linux" /><category term="tool" /><summary type="html"><![CDATA[Notes How to using linux vboxmanage operation.]]></summary></entry><entry><title type="html">AI - Gomoku AI | Game Tree</title><link href="http://0.0.0.0:4000/jekyll/2023-01-12-gomoku_ai.html" rel="alternate" type="text/html" title="AI - Gomoku AI | Game Tree" /><published>2023-01-12T00:00:00+08:00</published><updated>2023-01-12T00:00:00+08:00</updated><id>http://0.0.0.0:4000/jekyll/gomoku_ai</id><content type="html" xml:base="http://0.0.0.0:4000/jekyll/2023-01-12-gomoku_ai.html"><![CDATA[<blockquote>
+  <p>練習基礎AI演算法的入門題目，博弈樹搜尋與啟發式演算法，順手完成一個 GUI <a href="https://github.com/Hotshot824/gomoku-ai">小遊戲</a>。</p>
+</blockquote>
+
+<p><img src="https://github.com/Hotshot824/gomoku-ai/blob/main/image/document_image.png?raw=true" alt="" height="60%" width="60%" /></p>
+
+<h2 id="introduction">Introduction</h2>
+
+<blockquote class="block-tip">
+  <p>傳統的AI演算法題目，以非神經網路的方式來嘗試AI撰寫。睡不著乾脆更新下Blog，至少忙起來能讓我轉移一些注意力，順便做個筆記。</p>
+</blockquote>
+
+<p>博弈樹(Game Tree)其實就是一種將賽局中所有可能展開後的 Tree，那其中的每個 Node 就代表著遊戲進行中的某個狀態，
+那我們以 Tic-Tac-Toe (井字棋)來看，就會有 26830 種遊戲過程。</p>
+
+<p>Tic-Tac-Toe 的棋盤大小不過才 3x3 就有 26830 種可能，那五子棋的棋盤為 15x15 一個簡易的算法是 15! 幾近是天文數字。
+如果想以全部遍歷的方式來找出最佳解幾乎是不可能做到的事，那這時就需要一些策略去找出最佳路徑，所以我們會用到幾種算法。</p>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Tic-tac-toe-game-tree.svg/1280px-Tic-tac-toe-game-tree.svg.png?raw=true" alt="" height="50%" width="50%" /></p>
+
+<ol>
+  <li>Maximin algorithm. (對抗性的搜尋算法)</li>
+  <li>Alpha Beta pruning. (剪枝算法)</li>
+  <li>Heuristic. (啟發式算法)</li>
+</ol>
+
+<h4 id="maximin-algorithm"><a href="https://en.wikipedia.org/wiki/Minimax">Maximin algorithm</a></h4>
+
+<p>Maximin algorithm (極大極小值演算法)，是一種找出失敗的最大可能性下的最小值的演算法，這是 wikipedia 上的解釋。
+簡單來說在一個五子棋博弈樹中，必然有兩個不同的玩家互相下棋，故博弈樹我們也可以分成玩家層與AI層來看待，因此在搜尋的過程中我們要去找尋每一層的最有利狀態，
+最後去找到玩家下的最好的狀態下，AI能下出的最佳步驟。</p>
+
+<p><img src="https://thesharperdev.com/wp-content/uploads/2020/04/minimaxNoPlayers.png" alt="" height="60%" width="60%" /></p>
+
+<p><a href="https://thesharperdev.com/implementing-minimax-tree-search/">the source picture</a></p>
+
+<p>其實看上圖就能發現其實就跟 Max-Min-Heap 很相像，只是今天 Heap 是從下往上，
+但 Tree 是從上往下，一個中序遍歷的搜尋方式。在搜尋過程中我們要去找到都是極大或極小的路徑，
+但是如果我們真的去遍歷整個棋盤，時間複雜度將為 O(b<sup>2</sup>)，
+在棋盤為15*15，深度為4的情況下，225<sup>4</sup>是一個非常慢的演算法。</p>
+
+<h4 id="alpha-beta-pruning"><a href="https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning">Alpha Beta pruning</a></h4>
+
+<p>但是即便我們能做到棋盤的對抗搜尋，但是搜尋時間還是很慢，因此我們需要去做到剪枝的動作，
+放棄不可能的分支做搜尋，把希望放在更有可能的分支上以做到更深的深度。在最糟的情況下，
+時間複雜度將為 O(b<sup>2</sup>)，而在最佳的情況下有機會達到 O(sqrt(b<sup>d</sup>))，</p>
+
+<p>實作上我們就是在遞迴時，如果當前層數為極大層，但是下下層出現一個比最大值還要小的節點我們就直接剪掉，
+因為我們要找的是極大值，就不用去考慮更小的值了，同理運用在極小層。</p>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/AB_pruning.svg/1920px-AB_pruning.svg.png" alt="" height="60%" width="60%" /></p>
+
+<p>Wikipedia中圖的第三層中的 7 節點其實也是要剪掉的，圖有錯誤。</p>
+
+<h4 id="heuristic"><a href="https://en.wikipedia.org/wiki/Heuristic_(computer_science)">Heuristic</a></h4>
+
+<p>但是即使我們能做到剪枝搜索時間還是平均需要 O(b<sup>3d/4</sup>)，但同時我們也知道初始的搜尋節點很重要，
+如果一個棋盤如下圖，我們以一個2D Array來實現這個棋盤狀態，像是 x, y = 0, 0這樣的位置如果不會影響大局完全沒有搜尋的必要。</p>
+
+<p><img src="https://github.com/Hotshot824/Hotshot824.github.io/blob/master/_image/gomoku_ai_1.jpg?raw=true" alt="" height="60%" width="60%" /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>State</th>
+      <th>Operate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>五子</td>
+      <td>直接返回</td>
+    </tr>
+    <tr>
+      <td>活四</td>
+      <td>直接返回</td>
+    </tr>
+    <tr>
+      <td>活三</td>
+      <td>…</td>
+    </tr>
+    <tr>
+      <td>死三</td>
+      <td>…</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="https://github.com/Hotshot824/Hotshot824.github.io/blob/master/_image/gomoku_ai_2.jpg?raw=true" alt="" height="60%" width="60%" /></p>
+
+<p>因此我們可以在尋找搜尋節點以有鄰居的空位為主，並且加入一些評分機制來對這些位置排序：</p>
+
+<p>把每次搜尋的位置 print 出來來觀察搜尋的順序與影響。除去五子活四這種直接將軍的局面，
+剩下的依照分數排序來做搜尋，這樣我們能更快的找到最佳的路徑，
+分數不符的路徑就將會被剪掉，把時間用來做到更深的搜尋層數。</p>
+
+<p>要記住即便使用了啟發式函數，但是只要局面變得複雜，搜尋速度同樣會下降很多，
+畢竟每做一個搜尋就是需要付出 P<sup>d</sup> 的時間消耗，因此排序並消除不重要位置的步驟就很重要。</p>
+
+<h4 id="note">Note</h4>
+
+<ol>
+  <li>寫輔助函數時的注意事項
+    <ul>
+      <li>在寫這些輔助函數的時候，要盡量減少做整個棋盤的搜尋動作，同時可以嘗試將棋盤視為字串，
+ 這樣就能以 Regex 來處理連線確認將會大幅加快執行速度，尤其是如果你的棋盤</li>
+    </ul>
+  </li>
+  <li>評估函數要仔細設計
+    <ul>
+      <li>評估函數；尋找的棋形；搜尋深度；是最直接的影響棋力的選項，如果AI的落子有問題，
+ 通常應該往這幾個方向做修改，例如搜尋深度與評估函數設計不好就有可能使AI自殺的情形發生。</li>
+    </ul>
+  </li>
+</ol>
+
+<blockquote class="block-tip">
+  <h5 id="note-1">NOTE</h5>
+
+  <p>之後更新，目前已完成一個簡易的算法在Github，希望能在過年前把它做到一個更滿意的狀態。</p>
+</blockquote>]]></content><author><name>Benson Hsu</name></author><category term="Jekyll" /><category term="ai" /><category term="algorithm" /><category term="game" /><summary type="html"><![CDATA[練習基礎AI演算法的入門題目，博弈樹搜尋與啟發式演算法，順手完成一個 GUI 小遊戲。]]></summary></entry><entry><title type="html">Git - Commit Message Format</title><link href="http://0.0.0.0:4000/jekyll/2022-11-24-git_commit.html" rel="alternate" type="text/html" title="Git - Commit Message Format" /><published>2022-11-24T00:00:00+08:00</published><updated>2022-11-24T00:00:00+08:00</updated><id>http://0.0.0.0:4000/jekyll/git_commit</id><content type="html" xml:base="http://0.0.0.0:4000/jekyll/2022-11-24-git_commit.html"><![CDATA[<blockquote>
+  <p>說明 Git 提交時應注意的 Commit message format，建立良好的規範才能有效的合作</p>
+</blockquote>
+
+<ul>
+  <li>做 issue 的時候不應該一次 Commit 所有變動！應該獨立每個 Commit 不同意義的異動，這樣才能使 Commit 快速閱讀與程式碼間的關係。</li>
+  <li>每次 Commit 都是針對異動做說明，Why &amp; What。</li>
+  <li>每次 Commit 加上 issue 編號，方便追蹤後續問題。</li>
+</ul>
+
+<h3 id="basic-format">Basic format</h3>
+
+<p><strong>Header:</strong></p>
+<ul>
+  <li>type: 代表 commit 的類別：feat, fix, docs, style, refactor, test, chore，必要欄位。</li>
+  <li>scope 代表 commit 影響的範圍，例如資料庫、控制層、模板層等等，視專案不同而不同，為可選欄位。</li>
+  <li>subject 代表此 commit 的簡短描述，不要超過 50 個字元，結尾不要加句號，為必要欄位。</li>
+</ul>
+
+<p><strong>Body:</strong></p>
+<ul>
+  <li>Body 部份是對本次 Commit 的詳細描述，可以分成多行，每一行不要超過 72 個字元。</li>
+  <li>說明程式碼變動的項目與原因，還有與先前行為的對比。</li>
+</ul>
+
+<p><strong>Footer:</strong></p>
+<ul>
+  <li>填寫任務編號（如果有的話）.</li>
+  <li>BREAKING CHANGE（可忽略），記錄不兼容的變動，以 BREAKING CHANGE: 開頭，後面是對變動的描述、
+以及變動原因和遷移方法。</li>
+</ul>
+
+<p><strong>type</strong> 需規範好有哪些類別：</p>
+<ul>
+  <li>feat: 新增/修改功能 (feature)。</li>
+  <li>fix: 修補 bug (bug fix)。</li>
+  <li>docs: 文件 (documentation)。</li>
+  <li>style: 格式 (不影響程式碼運行的變動 white-space, formatting, missing semi colons, etc)。</li>
+  <li>refactor: 重構 (既不是新增功能，也不是修補 bug 的程式碼變動)。</li>
+  <li>perf: 改善效能 (A code change that improves performance)。</li>
+  <li>test: 增加測試 (when adding missing tests)。</li>
+  <li>chore: 建構程序或輔助工具的變動 (maintain)。</li>
+  <li>revert: 撤銷回覆先前的 commit 例如：revert: type(scope): subject (回覆版本：xxxx)。</li>
+</ul>
+
+<h3 id="example">Example</h3>
+
+<ul>
+  <li>一個簡單的 feat 範例</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#Feat Example
+feat: message 信件通知功能
+
+因應新需求做調整：
+ 通知和 message 都要寄發每日信件，
+ 通知和 message 都用放在同一封信裡面就好，
+ 不然信件太多可能也不會有人想去看。
+
+調整項目：
+1. mail_template.php，新增 message 區塊。
+2. Send_today_notify_mail.php，新增 取得每日 Message 邏輯。
+3. Message_model_api.php，新增 $where 參數，以便取得每日訊息。
+4. Message_api.php、Message_group_user_model_api.php，新增 *取得訊息使用者* 邏輯，以便撈取每日訊息。
+
+issue #863
+</code></pre></div></div>
+
+<blockquote class="block-tip">
+  <h5 id="note">NOTE</h5>
+
+  <p>只會寫程式只能代表你是一個會寫程式的人，能跟一群人一起寫程式才是一個好的工程師。</p>
+</blockquote>]]></content><author><name>Benson Hsu</name></author><category term="Jekyll" /><category term="github" /><category term="tool" /><summary type="html"><![CDATA[說明 Git 提交時應注意的 Commit message format，建立良好的規範才能有效的合作]]></summary></entry><entry><title type="html">AI - Constraint Satisfaction Problem</title><link href="http://0.0.0.0:4000/jekyll/2022-11-08-ai_csp.html" rel="alternate" type="text/html" title="AI - Constraint Satisfaction Problem" /><published>2022-11-08T00:00:00+08:00</published><updated>2022-11-08T00:00:00+08:00</updated><id>http://0.0.0.0:4000/jekyll/ai_csp</id><content type="html" xml:base="http://0.0.0.0:4000/jekyll/2022-11-08-ai_csp.html"><![CDATA[<blockquote class="block-tip">
+  <p>Introduction to Artificial Intelligence Week 6 Notes</p>
+</blockquote>
+
+<h3 id="csps-introduction">CSPs Introduction</h3>
+
+<p><em>Constraint Satisfaction Problem</em> 其定義為一組物件，而這些物件需要滿足一定的限制或條件，而這個問題可能有很多的解。CSP 問題經常表現出高複雜性，需要結合啟發式搜尋和搜尋方法來在一個合理的時間內解決問題。</p>
+
+<p>主要解法：通過識別違反約束的變量與值的組合消除大規模的搜索空間。</p>
+<ul>
+  <li>CSP related
+    <ul>
+      <li>Linear programming</li>
+      <li>Nonlinear progaramming</li>
+      <li>Numerical analysis</li>
+    </ul>
+  </li>
+  <li>CSP application
+    <ul>
+      <li>Operations research</li>
+      <li>Network flows</li>
+      <li>optimization problems</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="csp-define">CSP Define</h5>
+
+<p>定義一個 3-tuple(X, D, C) 其中<br />
+X = {X1, …, Xn} Finite set of variables.<br />
+D = {D1, …, Dn} Nonempty domain of possible values for each variable.<br />
+C = {C1, …, Cn} Finite set of constraints, Each constraint Ci limits the values that variables can take.</p>
+
+<h5 id="example">Example</h5>
+
+<p>Map coloring 就是一個經典的 CSP。每個區域即是變數，顏色便是值域，相鄰區域顏色不同是約束。</p>
+
+<p>其中關於 Constraint 可被劃分為:</p>
+<ul>
+  <li>unary constraint: 只約束單個 variable 的取值。如 SA 不能被染成綠色。</li>
+  <li>binary constraint: 兩個 variable 相關的約束。如 SA 不能與 WA 的顏色相同。</li>
+  <li>global constraint: 全局約束。如 Alldiff, 即約束中所有 variable 皆需取不同的值。</li>
+</ul>
+
+<p><img src="https://github.com/Hotshot824/Hotshot824.github.io/blob/master/_image/ai_csp_1.jpg?raw=true" alt="" height="80%" width="80%" /></p>
+
+<h5 id="arc-consistency-example"><a href="https://medium.com/swlh/how-to-solve-constraint-satisfaction-problems-csps-with-ac-3-algorithm-in-python-f7a9be538cfe">Arc Consistency example</a></h5>
+
+<h3 id="backtracking-search-for-csps">Backtracking search for CSPs</h3>
+
+<p>回朔搜索，用於 DFS 中。他每次為 Single variable 進行取值，當沒有合法的值可給某個 variable 時就進行回朔。</p>
+<ul>
+  <li>為使 search 變的高效，須解決以下問題:
+    <ol>
+      <li>下一步應該給哪個 variable 取值? 按照什麼順序取值?</li>
+      <li>每步 search 應該做怎樣的推理?</li>
+    </ol>
+  </li>
+</ul>
+
+<h5 id="variable-select-minimum-remaining-values-mrv">Variable select: Minimum remaining values (MRV)</h5>
+
+<p>最少剩餘值啟發式: 選擇<em>合法取值最少的 variable</em> 開始。這樣選擇的 variable 可能很快地導致失敗，從而進行回朔。
+<img src="https://1.bp.blogspot.com/-T4GOGoV6rwY/VRj6JLmgOJI/AAAAAAAAnsA/XruZvjnw4RU/s1600/%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%2B2015-03-30%2B%E4%B8%8B%E5%8D%883.03.36.png" alt="" height="50%" width="50%" /></p>
+
+<h5 id="degree-heuristic">Degree heuristic</h5>
+<p>鄰接度啟發式: <em>選擇與其他未取值 variable 約束最多的 variable</em> 來試圖降低未來可能的分支。<br />
+<img src="https://3.bp.blogspot.com/-rjmvY3Vk-LM/VRj6PQz4BkI/AAAAAAAAnsI/AMLsxDX1e2I/s1600/%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%2B2015-03-30%2B%E4%B8%8B%E5%8D%883.03.14.png" alt="" height="50%" width="50%" /></p>
+
+<h5 id="value-order">Value order</h5>
+<p>Least constraining value (最少限制值): 選擇 value 時優先選擇給鄰居 variable 留下最多選擇的分支。</p>
+
+<p><img src="https://1.bp.blogspot.com/-TK2n4EuROlE/VRj6pJvBGHI/AAAAAAAAnsQ/OzilSPyBSxQ/s1600/%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%2B2015-03-30%2B%E4%B8%8B%E5%8D%883.25.58.png" alt="" height="50%" width="50%" /></p>
+
+<h3 id="inference-in-csps">Inference in CSPs</h3>
+
+<p>在 CSP 問題中，Algorithm 可以進行搜索，也可以做<a href="https://www.ibm.com/docs/zh-tw/icos/12.8.0.0?topic=constraints-constraint-propagation-algorithm">約束傳播</a> (The constraint propagation) 的推理</p>
+
+<p><em>約束傳播:</em> 使用約束來減少一個 variable 的合法取值範圍，從而影響與此 variable 有約束關係的另一個 variable 的取值。 <em>(局部相容性)</em></p>
+
+<h5 id="node-consistency-節點相容">Node Consistency (節點相容)</h5>
+
+<p>Single variable (In CSP Single node) 值域中的所有取值滿足他的 unary constraint.</p>
+
+<blockquote class="block-tip">
+  <p>if SA = NA = {Red, Blue, Green};<br />
+SA != Blue, NA != Red, SA = {Green, Red}, NA = {Blue, Green};</p>
+</blockquote>
+
+<h5 id="arc-consistency-弧相容">Arc Consistency (弧相容)</h5>
+
+<p>CSP 中某 variable range 所有取值滿足該 variable 的所有 binary constraint.</p>
+
+<p>最常用的算法為 AC-3, 算法流程大致如下:</p>
+<blockquote class="block-tip">
+  <ol>
+    <li>Get all the constraint and turn each one into two arcs.<br />
+ Expmale: A &gt; B becomes A &gt; B and B &lt; A.</li>
+    <li>Add all the arcs to a queue.</li>
+    <li>Repeat until the queue is empty:<br />
+ 3.1. Take the first arc (𝑥, 𝑦), off the queue (dequeue).<br />
+ 3.2. For every value in the 𝑥 domain, there must be some value of the 𝑦 domain.<br />
+ 3.3. Make 𝑥 arc consistent with 𝑦. To do so, remove values from 𝑥 domain for which there is no possible corresponding value for 𝑦 domain.<br />
+ 3.4. If the 𝑥 domain has changed, add all arcs of the form (𝑘, 𝑥) to the queue (enqueue). Here 𝑘 is another variable different from 𝑦 that has a relation to 𝑥.</li>
+  </ol>
+</blockquote>
+
+<h5 id="forward-checking">Forward Checking</h5>
+
+<p>向前檢驗是最簡單的推理形式，只要 X variable 被賦值了，就向前檢驗過程對他做 Arc Consistency. 檢查對於每個通過約束與 X 相關的, 未賦予值的 Y variable,
+從 Y 的 range 中消去與 X 不相容的值。</p>
+
+<blockquote class="block-tip">
+  <h5 id="note">NOTE</h5>
+
+  <p>待更新</p>
+</blockquote>
+
+<!-- - 我們將各區域定義成變數(Variables)
+    - Variables : V={WA,NT,Q,NSW,V,SA,T}
+- 每個變數的值域(Domains)
+    - Domains : Di={red,green,blue}
+- 將值賦予變數時的限制(Constraints)相鄰區域必須不同顏色, WA≠NT
+    - (WA,NT)={(red,green),(red,blue),(green,red),…}
+
+![](https://slideplayer.com/slide/10791455/38/images/25/Minimum+remaining+values+%28MRV%29.jpg){:height="80%" width="80%"}
+
+[ref]: https://mropengate.blogspot.com/2015/03/constraint-satisfaction-problems-csp.html -->]]></content><author><name>Benson Hsu</name></author><category term="Jekyll" /><category term="ai" /><category term="algorithm" /><summary type="html"><![CDATA[Introduction to Artificial Intelligence Week 6 Notes]]></summary></entry><entry><title type="html">Notes - UART</title><link href="http://0.0.0.0:4000/jekyll/2022-11-07-network_urat.html" rel="alternate" type="text/html" title="Notes - UART" /><published>2022-11-07T00:00:00+08:00</published><updated>2022-11-07T00:00:00+08:00</updated><id>http://0.0.0.0:4000/jekyll/network_urat</id><content type="html" xml:base="http://0.0.0.0:4000/jekyll/2022-11-07-network_urat.html"><![CDATA[<blockquote>
+  <p>修網路實作的時候，給學弟妹講解 URAT 跟怎麼在 Arduino 上實作準備的一些教材</p>
+</blockquote>
+
+<h2 id="how-to-transfer-data-between-two-computers">How to transfer data between two computers?</h2>
+
+<ul>
+  <li>5 Volts logic</li>
+  <li>Signal on transmission medium
+    <ul>
+      <li>Metal : Square wave &amp; Sine ware</li>
+      <li>Optical fiber : Light square ware</li>
+      <li>Wireless : Electromagnetic waves</li>
+    </ul>
+  </li>
+</ul>
+
+<p>5伏邏輯，怎麼傳遞資料？不同材料的波。</p>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Waveforms.svg/600px-Waveforms.svg.png" alt="" height="50%" width="50%" /></p>
+
+<h2 id="the-universal-asynchronous-receivertransmitter-uart">The Universal Asynchronous Receiver/Transmitter (UART)</h2>
+
+<ul>
+  <li>In a world where technology can become obsolete very quickly
+    <ul>
+      <li>Still enjoys immense popularity.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>UART這種簡單的通訊方式已經存在了幾十年，依然廣受歡迎。</p>
+
+<h2 id="asynchronous-communication">Asynchronous communication</h2>
+
+<p>異步通訊，所代表的是通訊中兩個byte之間的空隙是不固定的，而一個byte中的bit間隔是固定的。</p>
+
+<h2 id="capabilities-and-characteristics">Capabilities and Characteristics</h2>
+
+<p>a basic UART system provides robust, moderate-speed, full-duplex communication with only three signals: Tx (transmitted serial data), Rx (received serial data), and ground.</p>
+
+<p>一個基本收送的UART傳輸，僅需要三個端口Tx, Rx, GND。</p>
+
+<p>但在這之前的前提是Rx, Tx, 在相同的數據傳輸頻率。</p>
+
+<p><img src="https://www.allaboutcircuits.com/uploads/articles/BBUART_diagram1_2.JPG" alt="" height="50%" width="50%" /></p>
+
+<h2 id="key-terms">Key Terms</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Start bit</code>: The first bit of a one-byte UART transmission. It indicates that the data line is leaving its idle state. The idle state is typically logic high, so the start bit is logic low.
+    <ul>
+      <li>The start bit is an overhead bit; this means that it facilitates communication between receiver and transmitter but does not transfer meaningful data.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">Stop bit</code>: The last bit of a one-byte UART transmission. Its logic level is the same as the signal’s idle state, i.e., logic high. This is another overhead bit.</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">Start bit</code>代表空閒的結束，Srart bit僅代表開始，不具實際數據。</p>
+
+<p><code class="language-plaintext highlighter-rouge">Stop bit</code>代表傳輸結束，電位拉高等待下一次 Start。</p>
+
+<p><img src="https://www.allaboutcircuits.com/uploads/articles/BBUART_diagram2_2.JPG" alt="" /></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Baud rate</code>: The approximate rate (in bits per second, or bps) at which data can be transferred.</li>
+</ul>
+
+<p>Example : 9600-baud system，即代表 1 bit 需要 1/(9600 bps) ≈ 104.2 µs，注意
+不是實際上每秒傳送 9600 資料，實際上有開銷bit的消耗。</p>
+
+<p><img src="https://www.allaboutcircuits.com/uploads/articles/BBUART_diagram3_2.JPG" alt="" height="50%" width="50%" /></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Parity bi</code>: An error-detection bit added to the end of the byte.
+    <ul>
+      <li>Odd or Even</li>
+    </ul>
+  </li>
+</ul>
+
+<p>如果要設定校正位，就多傳送一個Bit，並預先設計好Odd or Even。</p>
+
+<p>如今天要傳送 00001110 而 even 即 校正為 1 這樣就會有偶數個 1。</p>
+
+<p><img src="https://ithelp.ithome.com.tw/upload/images/20201010/20120093cFTF1aC2Wb.png" alt="" height="50%" width="50%" /></p>
+
+<h1 id="synchronizing-and-sampling">Synchronizing and Sampling</h1>
+
+<p>the UART interface does not use a clock signal to synchronize the Tx and Rx devices. So how does the receiver know when to sample the transmitter’s data signal?</p>
+
+<p>接收器的clock完全獨立於發送器clock。</p>
+
+<p><img src="https://www.allaboutcircuits.com/uploads/articles/BBUART_diagram5_2.JPG" alt="" height="25%" width="25%" /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>所以當今天要設計一個UART單方向傳輸，僅用一條線就可以完成。
+可以想像接收端的狀態，用程式的表示方式會不會是以迴圈進行，當接到0時，
+以預設的頻率收接下來的 8 bit，當電位拉高代表一次傳送的結束。等待下次開始。</p>
+
+<p><a href="https://www.allaboutcircuits.com/technical-articles/back-to-basics-the-universal-asynchronous-receiver-transmitter-uart/">Reference</a> Back to Basics: The Universal Asynchronous Receiver/Transmitter (UART)</p>]]></content><author><name>Benson Hsu</name></author><category term="Jekyll" /><category term="communication" /><category term="protocol" /><summary type="html"><![CDATA[修網路實作的時候，給學弟妹講解 URAT 跟怎麼在 Arduino 上實作準備的一些教材]]></summary></entry><entry><title type="html">Jekyll | Docker Build Github Pages</title><link href="http://0.0.0.0:4000/jekyll/2022-11-05-docker_jekyll.html" rel="alternate" type="text/html" title="Jekyll | Docker Build Github Pages" /><published>2022-11-05T00:00:00+08:00</published><updated>2022-11-05T00:00:00+08:00</updated><id>http://0.0.0.0:4000/jekyll/docker_jekyll</id><content type="html" xml:base="http://0.0.0.0:4000/jekyll/2022-11-05-docker_jekyll.html"><![CDATA[<blockquote>
+  <p>說明如何使用 Jekyll docker image 在不用熟悉 Ruby 與相關套件管理下，生成靜態文件。</p>
+</blockquote>
+
+<p>之前就想找一個能用 Markdown 寫筆記的地方，過去都是寫在 Github 的 Repositories 裡面但是檔案一多起來想整理也不方便，那就自己寫個 Blog 當作紀錄，
+剛好就趁這個機會把這次的內容當作第一篇紀錄。</p>
+
+<p>Jekyll 是一個用 Ruby 寫的簡單靜態網頁生成器，但是目前我幾乎都是用 Lab 的電腦做事，平時也是遠端到上面，所以很直覺的就想用 Docker 來處理環境，
+之後跑腳本把生成好的文件在推上 Github 就可以做好一次更新了。</p>
+
+<p>Required:</p>
+<ul>
+  <li>Docker image Jekyll/Jekyll</li>
+  <li>Html, Javascript, CSS</li>
+</ul>
+
+<p>剛開始就先找個模板來用，<a href="http://jekyllthemes.org/">Jekyll themes</a>上就有很多可以用的模板來用，像我用的就是使用 GitBook 風格的模板，同時有搜尋功能之後文章的找尋也會比較方便。
+找到模板之後去把他 forks 到自己的儲存庫，clone 下來就可以開始修改了。</p>
+
+<h3 id="docker-jekyll">Docker Jekyll</h3>
+
+<p>Jekyll 官方有一個 <a href="https://hub.docker.com/r/jekyll/jekyll/">Docker image</a> 所以拉這個 image 就可以了，裡面 Readme 教學寫得還蠻詳細的，只要把模板 volume 
+到 container 裡面就可以執行 Jekyll 生成。第一次運行安裝套件等等會花一點時間，之後啟動容器速度就快很多了。
+之後再簡單寫個 <a href="https://github.com/Hotshot824/Hotshot824.github.io/blob/master/build.sh">bash script</a> 這樣一個能快速生成的 Jekyll 環境就搭建完成了。</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">jekyll build</code> 直接生成網頁</li>
+  <li><code class="language-plaintext highlighter-rouge">jekyll serve</code> 生成網頁後運行在 localhost:4000</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="se">\</span>
+  <span class="nt">-v</span> <span class="nv">$WD</span>:/srv/jekyll:z <span class="se">\</span>
+  <span class="nt">-v</span> /etc/localtime:/etc/localtime:ro<span class="se">\</span>
+  <span class="nt">-p</span> 4000:4000 <span class="se">\</span>
+  <span class="nt">--name</span> jekyll <span class="se">\</span>
+  <span class="nt">-it</span> jekyll/jekyll <span class="se">\</span>
+  jekyll serve 2&gt; /dev/null <span class="o">||</span> 
+  docker start jekyll <span class="o">&amp;&amp;</span> docker attach jekyll<span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="customize">Customize</h3>
+
+<p>之後就等文件生成好，同時記得設定 <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site">Github pages publishing source</a>, 把發布源改到生成的目錄。這樣 github.io 
+的內容就直接指向這個目錄。然後就是一些自定義的小修改，這裡只要會一點 Js, Html 就可以搞定。
+像我用的模板本來是舊的 post 優先，稍微改排序，預設字體，加入時間註記，這樣一個簡單的靜態網頁就完成了。</p>
+
+<ul>
+  <li>Change default font size: gitbook-plugin-fontsettings</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  "pluginsConfig": {
+      "fontsettings": {
+          "size": 1,
+      }
+  }
+</code></pre></div></div>
+
+<ul>
+  <li>Add date in post: _layout/post.html</li>
+  <li>change sort method: _includes/toc-date.htnl</li>
+</ul>
+
+<blockquote class="block-tip">
+  <h5 id="note">NOTE</h5>
+
+  <p>之後想到要修改的再更新吧，可能加入留言系統、標籤之類的，目前這樣的靜態網頁我就很滿意了。</p>
+</blockquote>]]></content><author><name>Benson Hsu</name></author><category term="Jekyll" /><category term="github" /><category term="jekyll" /><category term="tool" /><summary type="html"><![CDATA[說明如何使用 Jekyll docker image 在不用熟悉 Ruby 與相關套件管理下，生成靜態文件。]]></summary></entry><entry><title type="html">Notes - Linux Common Command</title><link href="http://0.0.0.0:4000/jekyll/2022-11-05-linux_cmmand.html" rel="alternate" type="text/html" title="Notes - Linux Common Command" /><published>2022-11-05T00:00:00+08:00</published><updated>2022-11-05T00:00:00+08:00</updated><id>http://0.0.0.0:4000/jekyll/linux_cmmand</id><content type="html" xml:base="http://0.0.0.0:4000/jekyll/2022-11-05-linux_cmmand.html"><![CDATA[<blockquote>
+  <p>Notes to Linux Common Commands</p>
+</blockquote>
+
+<h3 id="vcgencmd">vcgencmd</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>如果要查詢硬體目前的時脈頻率，可以使用 measure_clock 參數：
+
+vcgencmd measure_clock &lt;clock&gt;
+其中的 &lt;clock&gt; 是指定要查詢的硬體，可用的選項有 arm、 core、 h264、 isp、 v3d、 uart、pwm、 emmc、 pixel、 vec、 hdmi、 dpi。
+
+如果要查詢 CPU 的時脈頻率（也就是速度），可以執行
+
+vcgencmd measure_clock arm
+輸出為
+frequency(45)=700000000
+
+如果想查詢所有的硬體時脈頻率，可以使用簡單的 shell 指令稿：
+
+for src in arm core h264 isp v3d uart pwm emmc pixel vec hdmi dpi ; do \
+  echo -e "$src:\t$(vcgencmd measure_clock $src)" ; \
+done
+輸出為
+arm:   frequency(45)=700000000
+core:  frequency(1)=250000000
+h264:  frequency(28)=250000000
+isp:   frequency(42)=250000000
+v3d:   frequency(43)=250000000
+uart:  frequency(22)=3000000
+pwm:   frequency(25)=0
+emmc:  frequency(47)=250000000
+pixel: frequency(29)=108000000
+vec:   frequency(10)=0
+hdmi:  frequency(9)=163682000
+dpi:   frequency(4)=0
+
+電壓（voltage）
+如果要查詢硬體目前的工作電壓，可以使用 measure_volts 參數：
+
+vcgencmd measure_volts &lt;id&gt;
+其中 &lt;id&gt; 是指定要查詢的硬體，可用的選項有 core、 sdram_c、 sdram_i、 sdram_p。如果沒有指定 &lt;id&gt;，則預設為 core：
+
+vcgencmd measure_volts
+輸出為
+volt=1.200V
+
+查詢所有工作電壓的 shell 指令稿：
+
+for id in core sdram_c sdram_i sdram_p ; do \
+  echo -e "$id:\t$(vcgencmd measure_volts $id)" ; \
+done
+輸出為
+core: volt=1.200V
+sdram_c: volt=1.200V
+sdram_i: volt=1.200V
+sdram_p: volt=1.225V
+
+溫度（temperature）
+如果要查詢 BCM2835 SoC 目前的溫度，可以使用 measure_temp 參數：
+
+vcgencmd measure_temp
+輸出為
+temp=43.3’C
+
+Codec
+若要查詢特定的 codec 有沒有啟用，可以使用 codec_enabled 參數：
+
+vcgencmd codec_enabled &lt;codec&gt;
+其中 &lt;codec&gt; 是指定要查詢的 codec，可用的選項有：H264、 MPG2、 WVC1、 MPG4、 MJPG、 WMV9。
+
+查詢所有 codec 的指令稿：
+
+for codec in H264 MPG2 WVC1 MPG4 MJPG WMV9 ; do \
+  echo -e "$codec:\t$(vcgencmd codec_enabled $codec)" ; \
+done
+輸出為：
+H264: H264=enabled
+MPG2: MPG2=disabled
+WVC1: WVC1=disabled
+MPG4: MPG4=enabled
+MJPG: MJPG=enabled
+WMV9: WMV9=disabled
+
+設定值（configurations）
+get_config 參數可以列出目前系統中所有被設定的參數值：
+
+vcgencmd get_config [config|int|str]
+最後一個參數可用來指定要查詢的設定值名稱或是類型，例如查詢 temp_limit 的數值可以執行：
+
+vcgencmd get_config temp_limit
+輸出為
+temp_limit=85
+
+查詢所有數值資料的設定值可用
+
+vcgencmd get_config int
+輸出為
+hdmi_force_hotplug=1
+disable_overscan=1
+overscan_left=24
+overscan_right=24
+overscan_top=16
+overscan_bottom=16
+program_serial_random=1
+config_hdmi_boost=4
+emmc_pll_core=1
+hdmi_force_cec_address=65535
+framebuffer_ignore_alpha=1
+framebuffer_swap=1
+disable_splash=1
+temp_limit=85
+force_pwm_open=1
+pause_burst_frames=1
+second_boot=1
+avoid_fix_ts=1
+
+記憶體配置
+Raspberry Pi 的 CPU 與 GPU 是共用同同一個記憶體的，get_mem 參數可以查詢目前記憶體的配置狀態。查詢配置給 CPU 的記憶體大小：
+
+vcgencmd get_mem arm
+輸出為
+arm=448M
+
+查詢配置給 GPU 的記憶體大小：
+
+vcgencmd get_mem gpu
+輸出為
+gpu=64M
+
+韌體版本（firmware version）
+查詢韌體版本可以使用
+
+vcgencmd version
+輸出為
+Dec 19 2014 18:44:06
+Copyright (c) 2012 Broadcom
+version 5abd572e2ed1811283443387af09377b95501c50 (clean) (release)
+
+OTP 記憶體
+若要查詢 SoC 裡面 OTP（one time programmable）記憶體的內容，可以使用 otp_dump：
+
+vcgencmd otp_dump
+
+其中 28 與 30 代表硬體序號（serial）與修訂版（revision）的版本號碼，/proc/cpuinfo 中所顯示的序號與修訂版本號碼就是從這裡取得的，而 Model B/B+ 的網路卡 MAC 卡號也是根據硬體序號來產生的。
+
+查看 vcgencmd 所有可用的參數
+如果要查看 vcgencmd 指令所有可用的參數，可以執行
+
+vcgencmd commands
+輸出會類似這樣：
+commands=”vcos, ap_output_control, ap_output_post_processing, vchi_test_init, vchi_test_exit, pm_set_policy, pm_get_status, pm_show_stats, pm_start_logging, pm_stop_logging, version, commands, set_vll_dir, led_control, set_backlight, set_logging, get_lcd_info, set_bus_arbiter_mode, cache_flush, otp_dump, test_result, codec_enabled, get_camera, get_mem, measure_clock, measure_volts, scaling_kernel, measure_temp, get_config, hdmi_ntsc_freqs, hdmi_adjust_clock, hdmi_status_show, hvs_update_fields, pwm_speedup, force_audio, hdmi_stream_channels, hdmi_channel_map, display_power, read_ring_osc, memtest, get_rsts, render_bar, disk_notify, inuse_notify, sus_suspend, sus_status, sus_is_enabled, sus_stop_test_thread, egl_platform_switch, mem_validate, mem_oom, mem_reloc_stats, file, vctest_memmap, vctest_start, vctest_stop, vctest_set, vctest_get”
+
+這些就是所有可以使用的參數，這些參數會因為韌體版本不同而有差異。
+</code></pre></div></div>
+
+<h3 id="ufw-uncomplicated-firewall">ufw (Uncomplicated Firewall)</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>如果要允許連線指定 port 可以輸入指令:
+sudo ufw allow &lt;port-number&gt;
+sudo ufw deny &lt;port-number&gt;
+
+只允許特定 IP 才能連線的話，可以輸入以下指令:
+sudo ufw allow from &lt;IP&gt; to any port &lt;port-number&gt;
+sudo ufw deny from &lt;IP&gt; to any port &lt;port-number&gt;
+
+只允許子網路可以連線到，可以輸入以下指令:
+sudo ufw allow from &lt;IP-with-mask&gt; to any port &lt;port-number&gt;
+sudo ufw deny from &lt;IP-with-mask&gt; to any port &lt;port-number&gt;
+sudo ufw allow from 159.66.109.0/24 to any port 22
+
+刪除已經建立的規則:
+sudo ufw status numbered
+知道指定編號可以輸入以下指令來刪除規則:
+sudo ufw delete &lt;rule-number&gt;
+</code></pre></div></div>
+
+<h3 id="wifi-config">wifi config</h3>
+
+<p><code class="language-plaintext highlighter-rouge">$ sudo vim /etc/netplan/50-cloud-init.yaml</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># This file is generated from information provided by the datasource.  Changes
+# to it will not persist across an instance reboot.  To disable cloud-init's
+# network configuration capabilities, write a file
+# /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:
+# network: {config: disabled}
+network:
+    ethernets:
+        eth0:
+            dhcp4: true
+            optional: true
+    version: 2
+    wifis:
+        wl0:
+            optional: true
+            access-points:
+                "SSID-NAME-HERE":
+                    password: "PASSWORD-HERE"
+            dhcp4: true
+</code></pre></div></div>
+
+<h3 id="fix-wifi-mt7601u-driver">Fix Wifi Mt7601u driver</h3>
+<p>How to fix wireless adapter Mt7601u not working.
+<a href="https://askubuntu.com/questions/1189490/ralink-technology-wireless-adapter-mt7601u-mercury-mw150uh-usb-not-working">Reference</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/jeremyb31/mt7601u.git
+sudo dkms add ./mt7601u
+sudo dkms install mt7601u/1.0
+</code></pre></div></div>]]></content><author><name>Benson Hsu</name></author><category term="Jekyll" /><category term="linux" /><category term="tool" /><summary type="html"><![CDATA[Notes to Linux Common Commands]]></summary></entry><entry><title type="html">Leetcode - Master Guide</title><link href="http://0.0.0.0:4000/jekyll/0000-01-01-leetcode_array.html" rel="alternate" type="text/html" title="Leetcode - Master Guide" /><published>0000-01-01T00:00:00+08:06</published><updated>0000-01-01T00:00:00+08:06</updated><id>http://0.0.0.0:4000/jekyll/leetcode_array</id><content type="html" xml:base="http://0.0.0.0:4000/jekyll/0000-01-01-leetcode_array.html"><![CDATA[<blockquote class="block-tip">
+  <p>Note to leetcode problem</p>
+</blockquote>
+
+<p>Reference to the <a href="https://github.com/youngyangyang04/leetcode-master">leetcode-master</a> guide for the sequence of questions.</p>
+
+<h3 id="array">Array</h3>
+
+<p><a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/704.Binary_search.md">704. Binary search</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/35.Search_Insert_Position.md">35. Search Insert Position</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/34.FFLPE_in_Sorted_Array.md">34. Find First and Last Position of Element in Sorted Array</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/69.Sqrt.md">69. Sqrt(x)</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/367.Valid_Perfect_Square.md">367. Valid Perfect Square</a>
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/27.Remove_Element.md">27. Remove Element</a> 
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/26.Remove_Duplicates_from_Sorted_Array.md">26. Remove Duplicates from Sorted Array</a><br />
+<a href="">80. Remove Duplicates from Sorted Array II</a>
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/283.Move_Zeroes.md">283. Move Zeroes</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/844.Backspace_String_Compare.md">844. Backspace String Compare</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/977.Squares_of_Sorted_Array.md">977. Squares of a Sorted Array</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Hard/4.median-of-two-sorted-arrays.md">4. Median of Two Sorted Arrays</a></p>
+
+<h3 id="linkedlist">Linkedlist</h3>
+
+<p><a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/203.Remove_Linked_List_Elements.md">203. Remove Linked List Elements</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/707.Design_Linked_List.md">707. Design Linked List</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/206.Reverse_Linked_List.md">206. Reverse Linked List</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/24.Swap_Nodes_in_Pairs.md">24. Swap Nodes in Pairs</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/24.Swap_Nodes_in_Pairs.md">19. Remove Nth Node From End of List</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/160.Intersection_Two_Linked_Lists.md">160. Intersection of Two Linked Lists</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/141.Linked_List_Cycle.md">141. Linked List Cycle</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/142.Linked_List_Cycle_II.md">142. Linked List Cycle II</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/21.Merge_Two_Sorted_Lists.md">21. Merge Two Sorted Lists</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Hard/23.merge_k_sorted_lists.md">23. Merge k Sorted Lists</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Hard/25.reverse_nodes_in_k_group.md">25. Reverse Nodes in k-Group</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/83.remove-duplicates-from-sorted-list.md">83. Remove Duplicates from Sorted List</a><br />
+<a href="https://github.com/youngyangyang04/leetcode-master/blob/master/problems/%E9%93%BE%E8%A1%A8%E6%80%BB%E7%BB%93%E7%AF%87.md">Linkedlist Summarize</a></p>
+
+<h3 id="string">String</h3>
+
+<p><a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/344.Reverse_String.md">344. Reverse String</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/541.Reverse_String_II.md">541. Reverse String II</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/151.Reverse_Words_String.md">151. Reverse Words in a String</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/58.Length_Last_Word.md">58. Length of Last Word</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/28.Find_Index_of_First_Occurrence_String.md">28. Find the Index of the First Occurrence in a String</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/459.Repeated_Substring_Pattern.md">459. Repeated Substring Pattern</a><br />
+<a href="https://github.com/youngyangyang04/leetcode-master/blob/master/problems/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%80%BB%E7%BB%93.md">String Summarize</a></p>
+
+<h3 id="hash">Hash</h3>
+
+<p><a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/242.Valid_Anagram.md">242. Valid Anagram</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/1002.Find_Common_Characters.md">1002. Find Common Characters</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/349.Intersection_of_Two_Arrays.md">349. Intersection of Two Arrays</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/202.Happy_Number.md">202. Happy Number</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/454.4Sum_II.md">454. 4Sum II</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/383.Ransom_Note.md">383. Ransom Note</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/15.3Sum.md">15. 3Sum (Hash)</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/18.4Sum.md">18. 4Sum (Hash)</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/459.Repeated_Substring_Pattern.md">459. Repeated Substring Pattern</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/268.missing-number.md">268. Missing Number</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Hard/41.first-missing-positive.md">41. First Missing Positive</a></p>
+
+<h3 id="two-pointer">Two Pointer</h3>
+
+<p><a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/1365.how_many_numbers_are_smaller_than_the_current_number.md">1365. How Many Numbers Are Smaller Than the Current Number</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/125.valid-palindrome.md">125. Valid Palindrome</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/5.longest-palindromic-substring.md">5. Longest Palindromic Substring</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/15.3Sum.md">15. 3Sum (E)</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/18.4Sum.md">18. 4Sum (E)</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Hard/42.trapping-rain-water.md">42. Trapping Rain Water</a></p>
+
+<h3 id="queue--stack">Queue &amp; Stack</h3>
+
+<p><a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/232.Implement_Queue_using_Stacks.md">232. Implement Queue using Stacks</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/225.Implement_Stack_using_Queues.md">225. Implement Stack using Queues</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/20.Valid_Parentheses.md">20. Valid Parentheses</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/1047.Remove_All_Adjacent_Duplicates_String.md">1047. Remove All Adjacent Duplicates In String</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/150.Evaluate_Reverse_Polish_Notation.md">150. Evaluate Reverse Polish Notation</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Hard/239.Sliding_Window_Maximum.md">239. Sliding Window Maximum</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/347.Top_K_Frequent_Elements.md">347. Top K Frequent Elements</a><br />
+<a href="https://github.com/youngyangyang04/leetcode-master/blob/master/problems/%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97%E6%80%BB%E7%BB%93.md">Stack&amp;Queue Summarize</a></p>
+
+<h3 id="binary-tree">Binary Tree</h3>
+
+<p><a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/Bulid_Binary_Tree_for_Array.md">Build Binary Tree for Array</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/Recursion_Binary_Tree_Traversal.md">Recursion Binary Tree Traversal</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/Iteration_Binary_Tree_Traversal.md">Iteration Binary Tree Traversal</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/Iteration_Binary_Trees_Unified_Method.md">Iteration Binary Trees Unified Method</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/Binary_Tree_Level_Order_Traversal.md">Binary Tree Level Order Traversal</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/N-ary_Tree_Traversal.md">N-ary Tree Traversal</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/226.Invert_Binary_Tree.md">226. Invert Binary Tree</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/559.Maximum_Depth_of_N-ary_Tree.md">559. Maximum Depth of N-ary Tree</a><br />
+<a href="">783. Minimum Distance Between BST Nodes</a><br />
+<a href="https://github.com/youngyangyang04/leetcode-master/blob/master/problems/%E5%91%A8%E6%80%BB%E7%BB%93/20200927%E4%BA%8C%E5%8F%89%E6%A0%91%E5%91%A8%E6%9C%AB%E6%80%BB%E7%BB%93.md">Binary Tree Summarize 1</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/100.Same_Tree.md">100. Same Tree</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/572.Subtree_of_Another_Tree.md">572. Subtree of Another Tree</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/101.Symmetric_Tree.md">101. Symmetric Tree</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/222.Count_Complete_Tree_Nodes.md">222. Count Complete Tree Nodes</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/513.Find_Bottom_Left_Tree_Value.md">513. Find Bottom Left Tree Value</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/110.balanced-binary-tree.md">110. Balanced Binary Tree</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/257.binary-tree-paths.md">257. Binary Tree Paths</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/112.path-sum.md">112. Path Sum &amp; II &amp; III</a><br />
+<a href="https://github.com/youngyangyang04/leetcode-master/blob/master/problems/%E5%91%A8%E6%80%BB%E7%BB%93/20201003%E4%BA%8C%E5%8F%89%E6%A0%91%E5%91%A8%E6%9C%AB%E6%80%BB%E7%BB%93.md">Binary Tree Summarize 2</a></p>
+
+<h3 id="backtracking">Backtracking</h3>
+
+<p><a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/77.combinations.md">77. Combinations</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/17.Letter_Combinations_Phone_Number.md">17. Letter Combinations of a Phone Number</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/39.combination-sum.md">39. Combination Sum I &amp; II &amp; III</a><br />
+<a href="https://github.com/youngyangyang04/leetcode-master/blob/master/problems/%E5%91%A8%E6%80%BB%E7%BB%93/20201030%E5%9B%9E%E6%BA%AF%E5%91%A8%E6%9C%AB%E6%80%BB%E7%BB%93.md">Backtracking Summarize</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/131.palindrome-partitioning.md">131. Palindrome Partitioning</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/93.restore-ip-addresses.md">93. Restore IP Addresses</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/78.subsets.md">78. Subsets</a><br />
+<a href="https://github.com/youngyangyang04/leetcode-master/blob/master/problems/%E5%91%A8%E6%80%BB%E7%BB%93/20201107%E5%9B%9E%E6%BA%AF%E5%91%A8%E6%9C%AB%E6%80%BB%E7%BB%93.md">Backtracking Summarize 2</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Hard/51.N-Queens.md">51. N-Queens</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Hard/52.N-Queens_II.md">52. N-Queens II</a></p>
+
+<h3 id="greedy-algorithm">Greedy Algorithm</h3>
+
+<p><a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/55.jump-game.md">55. Jump Game I &amp; II</a></p>
+
+<h3 id="other">Other</h3>
+
+<p><a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/1.Two_sum.md">1. Two sum</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/2.Add_Two_Numbers.md">2. Add Two Numbers</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/7.Reverse_Integer.md">7. Reverse Integer</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/11.Container_With_Most_Water.md">11. Container With Most Water</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/13.RomantoInteger.md">13. Roman to Integer</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/16.3Sum_Closest.md">16. 3Sum_Closest</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/49.Group_Anagrams.md">49. Group Anagrams</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Medium/50.powx-n.md">50. Pow(x, n)</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/67.add-binary.md">67. Add Binary</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/989.add-to-array-form-of-integer.md">989. Add to Array-Form of Integer</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/1523.count-odd-numbers-in-an-interval-range.md">1523. Count Odd Numbers in an Interval Range</a><br />
+<a href="https://github.com/Hotshot824/Leetcode/blob/main/Easy/1979.FGCD_of_Array.md">1979. Find Greatest Common Divisor of Array</a></p>
+
+<blockquote class="block-tip">
+  <h5 id="note">NOTE</h5>
+
+  <p>Last update 17-02-2023 Binary tree level order.</p>
+</blockquote>]]></content><author><name>Benson Hsu</name></author><category term="Jekyll" /><category term="leetcode" /><category term="array" /><category term="easy" /><summary type="html"><![CDATA[Note to leetcode problem]]></summary></entry></feed>
