@@ -1,68 +1,158 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-03-06T22:31:22+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Home</title><subtitle>Build Jekyll site with the GitBook style.
-</subtitle><author><name>Benson Hsu</name></author><entry><title type="html">Server 端口清單</title><link href="http://localhost:4000/jekyll/2023-03-02-port-list.html" rel="alternate" type="text/html" title="Server 端口清單" /><published>2023-03-02T00:00:00+08:00</published><updated>2023-03-02T00:00:00+08:00</updated><id>http://localhost:4000/jekyll/port-list</id><content type="html" xml:base="http://localhost:4000/jekyll/2023-03-02-port-list.html"><![CDATA[<p>全部程式都用 Nginx 反向代理出去<br />
-這樣憑證寫在 Nginx 就好，不會髒到 code</p>
+<!DOCTYPE HTML>
+<html lang="en" >
+    <head><meta charset="UTF-8">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<meta name="google-site-verification" content="MrJpPCJ8htzZlGpC1wo97QA1_XWns05Ez0LBsW3wj3I" /><title>RockyLinux · Home</title><meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="description" content="Build Jekyll site with the GitBook style.
+"><meta name="generator" content="Jekyll (using style of GitBook 3.2.3)"><meta name="author" content="Benson Hsu"><link rel="stylesheet" href="/assets/gitbook/style.css">
+<link rel="stylesheet" href="/assets/gitbook/gitbook-plugin-fontsettings/website.css">
+<link rel="stylesheet" href="/assets/gitbook/gitbook-plugin-search-pro/search.css">
+<link rel="stylesheet" href="/assets/gitbook/gitbook-plugin-back-to-top-button/plugin.css">
 
-<p>Nginx 對外端口</p>
-<div class="table-wrapper">
+<link rel="stylesheet" href="/assets/gitbook/rouge/github.css">
 
-  <table>
-    <thead>
-      <tr>
-        <th style="text-align: center">對外端口</th>
-        <th style="text-align: center">代理端口</th>
-        <th style="text-align: center">用途</th>
-        <th style="text-align: center">nginx設定檔</th>
-        <th style="text-align: center">程式路徑</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td style="text-align: center">57443</td>
-        <td style="text-align: center">44301</td>
-        <td style="text-align: center">學長舊的專題</td>
-        <td style="text-align: center">old_db.conf</td>
-        <td style="text-align: center">/home/IoT/Desktop/Github/theweb</td>
-      </tr>
-      <tr>
-        <td style="text-align: center"> </td>
-        <td style="text-align: center"> </td>
-        <td style="text-align: center"> </td>
-        <td style="text-align: center"> </td>
-        <td style="text-align: center"> </td>
-      </tr>
-      <tr>
-        <td style="text-align: center"> </td>
-        <td style="text-align: center"> </td>
-        <td style="text-align: center"> </td>
-        <td style="text-align: center"> </td>
-        <td style="text-align: center"> </td>
-      </tr>
-      <tr>
-        <td style="text-align: center"> </td>
-        <td style="text-align: center"> </td>
-        <td style="text-align: center"> </td>
-        <td style="text-align: center"> </td>
-        <td style="text-align: center"> </td>
-      </tr>
-    </tbody>
-  </table>
+<link rel="stylesheet" href="/assets/gitbook/custom.css">
 
-</div>]]></content><author><name>hmes98318</name></author><category term="Jekyll" /><summary type="html"><![CDATA[全部程式都用 Nginx 反向代理出去 這樣憑證寫在 Nginx 就好，不會髒到 code]]></summary></entry><entry><title type="html">資料庫帳號</title><link href="http://localhost:4000/jekyll/2023-03-01-database.html" rel="alternate" type="text/html" title="資料庫帳號" /><published>2023-03-01T00:00:00+08:00</published><updated>2023-03-01T00:00:00+08:00</updated><id>http://localhost:4000/jekyll/database</id><content type="html" xml:base="http://localhost:4000/jekyll/2023-03-01-database.html"><![CDATA[<p>資料庫: old_db<br />
-帳號: db-old_db<br />
-密碼: netlab!db!old_db<br />
-權限範圍: localhost</p>
+<meta name="HandheldFriendly" content="true"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/gitbook/images/apple-touch-icon-precomposed-152.png">
+<link rel="shortcut icon" href="assets/gitbook/images/favicon.ico" type="image/x-icon">
 
-<p>資料庫: test_db<br />
-帳號: db-test_db<br />
-密碼: netlab!db!test_db<br />
-權限範圍: localhost</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE DATABASE test_db;
-CREATE USER 'db-test_db'@'localhost' IDENTIFIED BY 'netlab!db!test_db';
-GRANT ALL PRIVILEGES ON test_db.* TO 'db-test_db'@'localhost';
-FLUSH PRIVILEGES;
-QUIT;
-</code></pre></div></div>]]></content><author><name>hmes98318</name></author><category term="Jekyll" /><summary type="html"><![CDATA[資料庫: old_db 帳號: db-old_db 密碼: netlab!db!old_db 權限範圍: localhost]]></summary></entry><entry><title type="html">RockyLinux</title><link href="http://localhost:4000/jekyll/2023-02-16-rocky_linux.html" rel="alternate" type="text/html" title="RockyLinux" /><published>2023-02-16T00:00:00+08:00</published><updated>2023-02-16T00:00:00+08:00</updated><id>http://localhost:4000/jekyll/rocky_linux</id><content type="html" xml:base="http://localhost:4000/jekyll/2023-02-16-rocky_linux.html"><![CDATA[<h3 id="ssh-端口設置">SSH 端口設置</h3>
+
+
+            <link rel="prev" href="/jekyll/2023-01-01-front_end.html" />
+        
+
+        
+            <link rel="next" href="/jekyll/2023-03-01-database.html" />
+        
+    </head>
+    <body>
+        <div class="book"><div class="book-summary">
+    <nav role="navigation">
+        <div id="book-search-input" role="search">
+            <input type="text" placeholder="Type to search" />
+        </div>
+        <div id="book-search-input-link" role="search">
+            <a href="/assets/search.html">Click to Search</a>
+        </div>
+        <ul class="summary">
+            
+            <li class="chapter" data-level="1.1" data-path="">
+            
+                <a href="/">
+                    Home
+                </a>
+            </li>
+
+            <li class="divider"></li>
+
+            
+                <!-- <p>pages</p> -->
+                
+                    
+
+                    
+
+                    
+                
+            
+                <!-- <p>posts</p> -->
+                
+                    
+
+                    
+                        
+                        <li class="chapter" data-level="1.1" data-path="/jekyll/2023-03-02-port-list.html">
+                        
+                            <a href="/jekyll/2023-03-02-port-list.html">
+                                Server 端口清單
+                            </a>
+                            
+                                
+                            
+                        </li>
+                    
+                        
+                        <li class="chapter" data-level="1.1" data-path="/jekyll/2023-03-01-database.html">
+                        
+                            <a href="/jekyll/2023-03-01-database.html">
+                                資料庫帳號
+                            </a>
+                            
+                                
+                            
+                        </li>
+                    
+                        
+                        <li class="chapter active" data-level="1.2" data-path="/jekyll/2023-02-16-rocky_linux.html">
+                        
+                            <a href="/jekyll/2023-02-16-rocky_linux.html">
+                                RockyLinux
+                            </a>
+                            
+                                
+                                    <ul><li><a href="#ssh-端口設置">SSH 端口設置</a></li><li><a href="#遠端桌面rdp">遠端桌面(RDP)</a></li><li><a href="#nvm-nodejs-版本管理">nvm node.js 版本管理</a></li><li><a href="#vscode-安裝">VScode 安裝</a></li><li><a href="#mariadb-安裝">MariaDB 安裝</a></li><li><a href="#dbeaver-安裝">DBeaver 安裝</a></li><li><a href="#nginx-安裝">Nginx 安裝</a></li><li><a href="#certbot-安裝">Certbot 安裝</a></li></ul>
+
+                                
+                            
+                        </li>
+                    
+                        
+                        <li class="chapter" data-level="1.1" data-path="/jekyll/2023-01-01-front_end.html">
+                        
+                            <a href="/jekyll/2023-01-01-front_end.html">
+                                前端
+                            </a>
+                            
+                                
+                            
+                        </li>
+                    
+
+                    
+                        <li class="divider"></li>
+                    
+                
+            
+
+            <!-- <li>
+                <a href="https://github.com/sighingnow/jekyll-gitbook/fork" target="blank" class="gitbook-link">
+                    Fork it Now!
+                </a>
+            </li> -->
+        </ul>
+    </nav>
+</div>
+<div class="book-body">
+                <div class="book-header" role="navigation">
+                    <!-- Title -->
+                    <h1>
+                        <i class="fa fa-circle-o-notch fa-spin"></i>
+                        
+                            <a href="." >RockyLinux</a>
+                        
+                    </h1>
+                </div>
+
+                <div class="body-inner"><div class="page-wrapper" tabindex="-1" role="main">
+    
+
+    <div class="page-inner">
+        <div class="normal">
+            
+        </div>
+        <div id="book-search-results">
+            <div class="search-noresults">
+                <section class="normal markdown-section">
+                    
+                        <h1 id="/jekyll/rocky_linux">RockyLinux</h1>
+                    
+
+                    <h3 id="ssh-端口設置">SSH 端口設置</h3>
 <p>以下是一份開啟SSH連接埠的指令教學。這份教學將引導您完成必要的步驟以開啟SSH連接埠。</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 第一步：編輯 SSH 設定檔</span>
 <span class="nb">sudo </span>vim /etc/ssh/sshd_config
@@ -268,4 +358,172 @@ mysqladmin <span class="nt">-u</span> root <span class="nt">-p</span> version
 <span class="c"># 添加以下行</span>
 0 0,12 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> certbot renew
 </code></pre></div></div>
-<p>以上命令中，0 0,12 * * * 表示每天 0 點和 12 點執行。更多有關 cron 設定的詳細資料，請參閱相關文件。</p>]]></content><author><name>hmes98318</name></author><category term="Jekyll" /><summary type="html"><![CDATA[SSH 端口設置 以下是一份開啟SSH連接埠的指令教學。這份教學將引導您完成必要的步驟以開啟SSH連接埠。 ```bash 第一步：編輯 SSH 設定檔 sudo vim /etc/ssh/sshd_config]]></summary></entry><entry><title type="html">前端</title><link href="http://localhost:4000/jekyll/2023-01-01-front_end.html" rel="alternate" type="text/html" title="前端" /><published>2023-01-01T00:00:00+08:00</published><updated>2023-01-01T00:00:00+08:00</updated><id>http://localhost:4000/jekyll/front_end</id><content type="html" xml:base="http://localhost:4000/jekyll/2023-01-01-front_end.html"><![CDATA[<p>front end</p>]]></content><author><name>front end</name></author><category term="Jekyll" /><summary type="html"><![CDATA[front end]]></summary></entry></feed>
+<p>以上命令中，0 0,12 * * * 表示每天 0 點和 12 點執行。更多有關 cron 設定的詳細資料，請參閱相關文件。</p>
+
+
+                </section>
+            </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div></div>
+    </div>
+</div>
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [ ['$', '$'], ['\\(', '\\)'] ]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script
+  type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<!-- customize line 38-50 swap next previous-->
+                    
+                        <a href="/jekyll/2023-03-01-database.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 前端">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                    
+
+                    
+                        <a href="/jekyll/2023-01-01-front_end.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 資料庫帳號">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    
+                </div>
+            </div>
+
+            <script>
+            var gitbook = gitbook || [];
+            gitbook.push(function() {
+                gitbook.page.hasChanged({
+    "page": {
+        "title": "Introduction",
+        "level": "1.1",
+        "depth": 1,
+        
+        "next": {
+            "title": "資料庫帳號",
+            "level": "1.2",
+            "depth": 1,
+            "path": "_posts/2023-03-01-database.md",
+            "ref": "_posts/2023-03-01-database.md",
+            "articles": []
+        },
+        
+        "dir": "ltr"
+    },    "config": {
+        "plugins": ["fontsettings", "highlight", "livereload", "lunr", "search", "sharing", "theme-default", "livereload"],
+        "styles": {
+            "ebook": "styles/ebook.css",
+            "epub": "styles/epub.css",
+            "mobi": "styles/mobi.css",
+            "pdf": "styles/pdf.css",
+            "print": "styles/print.css",
+            "website": "styles/website.css"
+        },
+        "pluginsConfig": {
+            "fontsettings": {
+                "family": "sans",
+                "size": 1,
+                "theme": "white"
+            },
+            "highlight": {},
+            "livereload": {},
+            "lunr": {
+                "ignoreSpecialCharacters": false,
+                "maxIndexSize": 1000000
+            },
+            "search": {},            "sharing": {
+                "all": ["facebook", "google", "twitter", "weibo", "instapaper", "github", "telegram"],
+                "facebook": false,
+                "google": false,
+                "github": true,
+                "github_link": "https://github.com/",
+                "telegram": false,
+                "telegram_link": "https://t.me",
+                "instapaper": false,
+                "twitter": false,
+                "vk": false,
+                "weibo": false
+            },
+"theme-default": {
+                "showLevel": false,
+                "styles": {
+                    "ebook": "styles/ebook.css",
+                    "epub": "styles/epub.css",
+                    "mobi": "styles/mobi.css",
+                    "pdf": "styles/pdf.css",
+                    "print": "styles/print.css",
+                    "website": "styles/website.css"
+                }
+            }
+        },
+        "theme": "default",
+        "author": "Tao He",
+        "pdf": {
+            "pageNumbers": true,
+            "fontSize": 12,
+            "fontFamily": "Arial",
+            "paperSize": "a4",
+            "chapterMark": "pagebreak",
+            "pageBreaksBefore": "/",
+            "margin": {
+                "right": 62,
+                "left": 62,
+                "top": 56,
+                "bottom": 56
+            }
+        },
+        "structure": {
+            "langs": "LANGS.md",
+            "readme": "Home.md",
+        },
+        "variables": {},
+        "title": "Home",
+        "language": "en",
+        "gitbook": "*"
+    },
+    "file": {
+        "path": "_posts/2023-02-16-rocky_linux.md",
+        "mtime": "2023-02-16 00:00:00 +0800",
+        "type": "markdown"
+    },
+    "gitbook": {
+        "version": "3.2.3",
+        "time": "2023-03-06 22:31:22 +0800"
+    },
+    "basePath": "",
+    "book": {
+        "language": ""
+    }
+});
+            });
+            </script>
+        </div><script src="/assets/gitbook/gitbook.js"></script>
+<script src="/assets/gitbook/theme.js"></script>
+
+<script src="/assets/gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+<script src="/assets/gitbook/gitbook-plugin-sharing/buttons.js"></script>
+
+<!-- <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+<script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+<script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+<script src="../gitbook/gitbook-plugin-search/search.js"></script> -->
+
+<script src="/assets/gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+<script src="/assets/gitbook/gitbook-plugin-search-pro/search.js"></script>
+<script src="/assets/gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
+
+</body>
+</html>

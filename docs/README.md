@@ -1,10 +1,3 @@
-## How to build
-
-Run the jekyll web service locally, and push in [github pages].
-
-1. first install docker 
-2. run `bash build.sh`
-3. waiting the docs generated
-4. ctrl + c exit.
-
-[github pages]: https://hotshot824.github.io/
+這邊主要拿來放前後端安裝教學   
+跟一些 DB, 端口清單  
+頁面連結: [https://contract-farming.github.io/](https://contract-farming.github.io/)  
