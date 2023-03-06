@@ -2,7 +2,7 @@
 <html lang="en" >
     <head><meta charset="UTF-8">
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-<meta name="google-site-verification" content="MrJpPCJ8htzZlGpC1wo97QA1_XWns05Ez0LBsW3wj3I" /><title>資料庫帳號 · Home</title><meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="google-site-verification" content="MrJpPCJ8htzZlGpC1wo97QA1_XWns05Ez0LBsW3wj3I" /><title>資料庫 · Home</title><meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="description" content="Build Jekyll site with the GitBook style.
 "><meta name="generator" content="Jekyll (using style of GitBook 3.2.3)"><meta name="author" content="contract-farming"><link rel="stylesheet" href="/assets/gitbook/style.css">
 <link rel="stylesheet" href="/assets/gitbook/gitbook-plugin-fontsettings/website.css">
@@ -80,11 +80,11 @@
                         <li class="chapter active" data-level="1.2" data-path="/jekyll/2023-03-01-database.html">
                         
                             <a href="/jekyll/2023-03-01-database.html">
-                                資料庫帳號
+                                資料庫
                             </a>
                             
                                 
-                                    
+                                    <ul><li><a href="#架構圖">架構圖</a></li><li><a href="#帳號">帳號</a></li></ul>
 
                                 
                             
@@ -133,7 +133,7 @@
                     <h1>
                         <i class="fa fa-circle-o-notch fa-spin"></i>
                         
-                            <a href="." >資料庫帳號</a>
+                            <a href="." >資料庫</a>
                         
                     </h1>
                 </div>
@@ -149,18 +149,146 @@
             <div class="search-noresults">
                 <section class="normal markdown-section">
                     
-                        <h1 id="/jekyll/database">資料庫帳號</h1>
+                        <h1 id="/jekyll/database">資料庫</h1>
                     
 
-                    <p>資料庫: old_db<br />
-帳號: db-old_db<br />
-密碼: netlab!db!old_db<br />
-權限範圍: localhost</p>
+                    <h3 id="架構圖">架構圖</h3>
 
-<p>資料庫: test_db<br />
-帳號: db-test_db<br />
-密碼: netlab!db!test_db<br />
-權限範圍: localhost</p>
+<pre>
+契作合約 (<span style="color:#00A026;">struct</span>)  
+│  
+├── 序號 (<span style="color:#A2025F;">DB</span>)  
+├── 年度 (<span style="color:#3B00F7;">int</span>)  
+├── 期號 (<span style="color:#3B00F7;">int</span>)  
+│  
+└── 契作農民 (<span style="color:#00A026;">struct</span>) -&gt; 序號 (<span style="color:#A2025F;">DB</span>)  
+</pre>
+
+<pre>
+契作農民 (<span style="color:#00A026;">struct</span>)  
+│  
+├── 序號 (<span style="color:#A2025F;">DB</span>)  
+├── 身分證字號 (<span style="color:OrangeRed;">string</span>)  
+├── 姓名 (<span style="color:OrangeRed;">string</span>)  
+├── 電話 (<span style="color:OrangeRed;">string</span>)  
+└── 地址 (<span style="color:OrangeRed;">string</span>)  
+</pre>
+
+<hr />
+
+<pre>
+農地 (<span style="color:#00A026;">struct</span>)  
+│  
+├── 地號 (<span style="color:#3B00F7;">int</span>)  
+├── 地段 (<span style="color:OrangeRed;">string</span>)  
+├── 地目 (<span style="color:OrangeRed;">string</span>)  
+│  
+├── 所有權人_姓名 (<span style="color:OrangeRed;">string</span>)  
+├── 所有權人_身分證字號 (<span style="color:OrangeRed;">string</span>)  
+│  
+├── 本筆面積 (<span style="color:#3B00F7;">int</span>)  
+├── 權利面積 (<span style="color:#3B00F7;">int</span>)  
+├── 可耕面積 (<span style="color:#3B00F7;">int</span>)  
+├── 地段類型 (<span style="color:#BDB200;">type</span>) (產銷履歷/新增地段/一般地段)  
+└── 契作中   (<span style="color:#BDB200;">Y/N</span>) (可有可無)  
+</pre>
+
+<hr />
+
+<pre>
+契作農地 (<span style="color:#00A026;">struct</span>)  
+│  
+├── 序號 (<span style="color:#A2025F;">DB</span>)  
+├── 地號 (<span style="color:#3B00F7;">int</span>)  
+├── 地段 (<span style="color:OrangeRed;">string</span>)  
+├── 作物品種-&gt;序號 (<span style="color:#A2025F;">DB</span>)  
+│  
+│   <span style="color:DarkGreen;">/*----- 契作農地_流程資訊 -----*/</span>  
+├── 整地紀錄  
+│   ├── 確認  (<span style="color:#BDB200;">Y/N</span>)  
+│   └── 日期 (<span style="color:OrangeRed;">string</span>)  
+│  
+├── 插秧紀錄  
+│   ├── 確認 (<span style="color:#BDB200;">Y/N</span>)  
+│   ├── 領苗日期 (<span style="color:OrangeRed;">string</span>)  
+│   ├── 插秧日期 (<span style="color:OrangeRed;">string</span>)  
+│   ├── 秧苗品種 (作物品種)
+│   ├── 秧苗數量 (<span style="color:#3B00F7;">int</span>)  
+│   └── 秧苗領取人 (<span style="color:OrangeRed;">string</span>)  
+│  
+├── 除草紀錄  
+│   ├── 確認  (<span style="color:#BDB200;">Y/N</span>)  
+│   ├── 日期 (<span style="color:OrangeRed;">string</span>)  
+│   ├── 農藥種類-&gt;序號 (<span style="color:#A2025F;">DB</span>)  
+│   └── 用量(公升) (<span style="color:#3B00F7;">int</span>)  
+│  
+├── 曬田紀錄  
+│   ├── 確認 (<span style="color:#BDB200;">Y/N</span>)  
+│   └── 日期 (<span style="color:OrangeRed;">string</span>)  
+│  
+├── 穗前肥紀錄
+│   ├── 確認 (<span style="color:#BDB200;">Y/N</span>)  
+│   ├── 日期 (<span style="color:OrangeRed;">string</span>)  
+│   ├── 肥料種類-&gt;序號 (<span style="color:#A2025F;">DB</span>)  
+│   └── 用量(公斤) (<span style="color:#3B00F7;">int</span>)  
+│  
+├── 穗後肥紀錄  
+│   ├── 確認 (<span style="color:#BDB200;">Y/N</span>)  
+│   ├── 日期 (<span style="color:OrangeRed;">string</span>)  
+│   ├── 肥料種類-&gt;序號 (<span style="color:#A2025F;">DB</span>)  
+│   └── 用量(公斤) (<span style="color:#3B00F7;">int</span>)  
+│  
+├── 噴藥紀錄  
+│   ├── 確認 (<span style="color:#BDB200;">Y/N</span>)  
+│   ├── 日期 (<span style="color:OrangeRed;">string</span>)  
+│   ├── 農藥種類-&gt;序號 (<span style="color:#A2025F;">DB</span>)  
+│   └── 用量(公升) (<span style="color:#3B00F7;">int</span>)  
+│  
+└── 採收紀錄  
+    ├── 確認 (<span style="color:#BDB200;">Y/N</span>)  
+    └── 日期 (<span style="color:OrangeRed;">string</span>)  
+</pre>
+
+<pre>
+作物品種 (<span style="color:#00A026;">struct</span>)  
+│  
+├── 序號 (<span style="color:#A2025F;">DB</span>)  
+└── 名稱 (<span style="color:OrangeRed;">string</span>)  
+</pre>
+
+<pre>
+農藥種類 (<span style="color:#00A026;">struct</span>)  
+│  
+├── 序號 (<span style="color:#A2025F;">DB</span>)  
+└── 名稱 (<span style="color:OrangeRed;">string</span>)  
+</pre>
+
+<pre>
+肥料種類 (<span style="color:#00A026;">struct</span>)  
+│  
+├── 序號 (<span style="color:#A2025F;">DB</span>)  
+└── 名稱 (<span style="color:OrangeRed;">string</span>)  
+</pre>
+
+<hr />
+
+<h3 id="帳號">帳號</h3>
+
+<pre>
+資料庫: old_db  
+帳號: db-old_db  
+密碼: netlab!db!old_db  
+權限範圍: localhost  
+</pre>
+
+<pre>
+資料庫: test_db  
+帳號: db-test_db  
+密碼: netlab!db!test_db  
+權限範圍: localhost  
+</pre>
+
+<hr />
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE DATABASE test_db;
 CREATE USER 'db-test_db'@'localhost' IDENTIFIED BY 'netlab!db!test_db';
@@ -309,7 +437,7 @@ MathJax = {
     },
     "gitbook": {
         "version": "3.2.3",
-        "time": "2023-03-06 22:43:04 +0800"
+        "time": "2023-03-07 00:17:27 +0800"
     },
     "basePath": "",
     "book": {

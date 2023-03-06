@@ -81,7 +81,7 @@
                         <li class="chapter" data-level="1.1" data-path="/jekyll/2023-03-01-database.html">
                         
                             <a href="/jekyll/2023-03-01-database.html">
-                                資料庫帳號
+                                資料庫
                             </a>
                             
                                 
@@ -171,11 +171,11 @@
         <td style="text-align: center">57443</td>
         <td style="text-align: center">44301</td>
         <td style="text-align: center">學長舊的專題</td>
-        <td style="text-align: center">old_db.conf</td>
+        <td style="text-align: center"><a href="#old_dbconf">old_db.conf</a></td>
         <td style="text-align: center">/home/IoT/Desktop/Github/theweb</td>
       </tr>
       <tr>
-        <td style="text-align: center"> </td>
+        <td style="text-align: center">58443</td>
         <td style="text-align: center"> </td>
         <td style="text-align: center"> </td>
         <td style="text-align: center"> </td>
@@ -199,6 +199,29 @@
   </table>
 
 </div>
+
+<h4 id="old_dbconf">old_db.conf</h4>
+<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">server</span> {
+    <span class="n">listen</span>      <span class="m">57443</span> <span class="n">ssl</span> <span class="n">http2</span>;
+    <span class="n">listen</span>      [::]:<span class="m">57443</span> <span class="n">http2</span> <span class="n">ssl</span>;
+    <span class="n">server_name</span> <span class="n">netlab</span>.<span class="n">isu</span>.<span class="n">edu</span>.<span class="n">tw</span>;
+
+
+    <span class="n">location</span> / {
+        <span class="n">proxy_pass</span> <span class="n">http</span>://<span class="m">127</span>.<span class="m">0</span>.<span class="m">0</span>.<span class="m">1</span>:<span class="m">44301</span>;
+
+        <span class="n">proxy_set_header</span> <span class="n">Host</span> $<span class="n">host</span>;
+        <span class="n">proxy_set_header</span> <span class="n">X</span>-<span class="n">Real</span>-<span class="n">IP</span> $<span class="n">remote_addr</span>;
+        <span class="n">proxy_set_header</span> <span class="n">X</span>-<span class="n">Forwarded</span>-<span class="n">Proto</span> $<span class="n">scheme</span>;
+        <span class="n">proxy_set_header</span> <span class="n">X</span>-<span class="n">Forwarded</span>-<span class="n">For</span> $<span class="n">proxy_add_x_forwarded_for</span>;
+    }
+
+
+    <span class="n">ssl_certificate</span> /<span class="n">etc</span>/<span class="n">letsencrypt</span>/<span class="n">live</span>/<span class="n">netlab</span>.<span class="n">isu</span>.<span class="n">edu</span>.<span class="n">tw</span>/<span class="n">fullchain</span>.<span class="n">pem</span>; <span class="c"># managed by Certbot
+</span>    <span class="n">ssl_certificate_key</span> /<span class="n">etc</span>/<span class="n">letsencrypt</span>/<span class="n">live</span>/<span class="n">netlab</span>.<span class="n">isu</span>.<span class="n">edu</span>.<span class="n">tw</span>/<span class="n">privkey</span>.<span class="n">pem</span>; <span class="c"># managed by Certbot
+</span>}
+
+</code></pre></div></div>
 
                 </section>
             </div><div class="search-results">
@@ -331,7 +354,7 @@ MathJax = {
     },
     "gitbook": {
         "version": "3.2.3",
-        "time": "2023-03-06 22:43:04 +0800"
+        "time": "2023-03-07 00:17:27 +0800"
     },
     "basePath": "",
     "book": {
