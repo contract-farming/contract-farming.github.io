@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-03-07T00:17:27+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Home</title><subtitle>Build Jekyll site with the GitBook style.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-03-07T00:28:59+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Home</title><subtitle>Build Jekyll site with the GitBook style.
 </subtitle><author><name>contract-farming</name></author><entry><title type="html">Server 端口清單</title><link href="http://localhost:4000/jekyll/2023-03-02-port-list.html" rel="alternate" type="text/html" title="Server 端口清單" /><published>2023-03-02T00:00:00+08:00</published><updated>2023-03-02T00:00:00+08:00</updated><id>http://localhost:4000/jekyll/port-list</id><content type="html" xml:base="http://localhost:4000/jekyll/2023-03-02-port-list.html"><![CDATA[<p>全部程式都用 Nginx 反向代理出去<br />
 這樣憑證寫在 Nginx 就好，不會髒到 code</p>
 
@@ -72,6 +72,26 @@
 
 </code></pre></div></div>]]></content><author><name>hmes98318</name></author><category term="Jekyll" /><summary type="html"><![CDATA[全部程式都用 Nginx 反向代理出去 這樣憑證寫在 Nginx 就好，不會髒到 code]]></summary></entry><entry><title type="html">資料庫</title><link href="http://localhost:4000/jekyll/2023-03-01-database.html" rel="alternate" type="text/html" title="資料庫" /><published>2023-03-01T00:00:00+08:00</published><updated>2023-03-01T00:00:00+08:00</updated><id>http://localhost:4000/jekyll/database</id><content type="html" xml:base="http://localhost:4000/jekyll/2023-03-01-database.html"><![CDATA[<h3 id="架構圖">架構圖</h3>
 
+<ul>
+  <li><a href="#契作合約">契作合約</a></li>
+  <li>
+    <p><a href="#契作農民">契作農民</a></p>
+  </li>
+  <li>
+    <p><a href="#農地">農地</a></p>
+  </li>
+  <li><a href="#契作農地">契作農地</a>
+    <ul>
+      <li><a href="#作物品種">作物品種</a></li>
+      <li><a href="#農藥種類">農藥種類</a></li>
+      <li><a href="#肥料種類">肥料種類</a></li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h4 id="契作合約">契作合約</h4>
 <pre>
 契作合約 (<span style="color:#00A026;">struct</span>)  
 │  
@@ -82,6 +102,7 @@
 └── 契作農民 (<span style="color:#00A026;">struct</span>) -&gt; 序號 (<span style="color:#A2025F;">DB</span>)  
 </pre>
 
+<h4 id="契作農民">契作農民</h4>
 <pre>
 契作農民 (<span style="color:#00A026;">struct</span>)  
 │  
@@ -94,6 +115,7 @@
 
 <hr />
 
+<h4 id="農地">農地</h4>
 <pre>
 農地 (<span style="color:#00A026;">struct</span>)  
 │  
@@ -113,13 +135,14 @@
 
 <hr />
 
+<h4 id="契作農地">契作農地</h4>
 <pre>
 契作農地 (<span style="color:#00A026;">struct</span>)  
 │  
 ├── 序號 (<span style="color:#A2025F;">DB</span>)  
 ├── 地號 (<span style="color:#3B00F7;">int</span>)  
 ├── 地段 (<span style="color:OrangeRed;">string</span>)  
-├── 作物品種-&gt;序號 (<span style="color:#A2025F;">DB</span>)  
+├── 作物品種 (<span style="color:#00A026;">struct</span>) -&gt;序號 (<span style="color:#A2025F;">DB</span>)  
 │  
 │   <span style="color:DarkGreen;">/*----- 契作農地_流程資訊 -----*/</span>  
 ├── 整地紀錄  
@@ -137,7 +160,7 @@
 ├── 除草紀錄  
 │   ├── 確認  (<span style="color:#BDB200;">Y/N</span>)  
 │   ├── 日期 (<span style="color:OrangeRed;">string</span>)  
-│   ├── 農藥種類-&gt;序號 (<span style="color:#A2025F;">DB</span>)  
+│   ├── 農藥種類 (<span style="color:#00A026;">struct</span>) -&gt;序號 (<span style="color:#A2025F;">DB</span>)  
 │   └── 用量(公升) (<span style="color:#3B00F7;">int</span>)  
 │  
 ├── 曬田紀錄  
@@ -147,19 +170,19 @@
 ├── 穗前肥紀錄
 │   ├── 確認 (<span style="color:#BDB200;">Y/N</span>)  
 │   ├── 日期 (<span style="color:OrangeRed;">string</span>)  
-│   ├── 肥料種類-&gt;序號 (<span style="color:#A2025F;">DB</span>)  
+│   ├── 肥料種類 (<span style="color:#00A026;">struct</span>) -&gt;序號 (<span style="color:#A2025F;">DB</span>)  
 │   └── 用量(公斤) (<span style="color:#3B00F7;">int</span>)  
 │  
 ├── 穗後肥紀錄  
 │   ├── 確認 (<span style="color:#BDB200;">Y/N</span>)  
 │   ├── 日期 (<span style="color:OrangeRed;">string</span>)  
-│   ├── 肥料種類-&gt;序號 (<span style="color:#A2025F;">DB</span>)  
+│   ├── 肥料種類 (<span style="color:#00A026;">struct</span>) -&gt;序號 (<span style="color:#A2025F;">DB</span>)  
 │   └── 用量(公斤) (<span style="color:#3B00F7;">int</span>)  
 │  
 ├── 噴藥紀錄  
 │   ├── 確認 (<span style="color:#BDB200;">Y/N</span>)  
 │   ├── 日期 (<span style="color:OrangeRed;">string</span>)  
-│   ├── 農藥種類-&gt;序號 (<span style="color:#A2025F;">DB</span>)  
+│   ├── 農藥種類 (<span style="color:#00A026;">struct</span>) -&gt;序號 (<span style="color:#A2025F;">DB</span>)  
 │   └── 用量(公升) (<span style="color:#3B00F7;">int</span>)  
 │  
 └── 採收紀錄  
@@ -167,6 +190,7 @@
     └── 日期 (<span style="color:OrangeRed;">string</span>)  
 </pre>
 
+<h4 id="作物品種">作物品種</h4>
 <pre>
 作物品種 (<span style="color:#00A026;">struct</span>)  
 │  
@@ -174,6 +198,7 @@
 └── 名稱 (<span style="color:OrangeRed;">string</span>)  
 </pre>
 
+<h4 id="農藥種類">農藥種類</h4>
 <pre>
 農藥種類 (<span style="color:#00A026;">struct</span>)  
 │  
@@ -181,6 +206,7 @@
 └── 名稱 (<span style="color:OrangeRed;">string</span>)  
 </pre>
 
+<h4 id="肥料種類">肥料種類</h4>
 <pre>
 肥料種類 (<span style="color:#00A026;">struct</span>)  
 │  

@@ -154,6 +154,26 @@
 
                     <h3 id="架構圖">架構圖</h3>
 
+<ul>
+  <li><a href="#契作合約">契作合約</a></li>
+  <li>
+    <p><a href="#契作農民">契作農民</a></p>
+  </li>
+  <li>
+    <p><a href="#農地">農地</a></p>
+  </li>
+  <li><a href="#契作農地">契作農地</a>
+    <ul>
+      <li><a href="#作物品種">作物品種</a></li>
+      <li><a href="#農藥種類">農藥種類</a></li>
+      <li><a href="#肥料種類">肥料種類</a></li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h4 id="契作合約">契作合約</h4>
 <pre>
 契作合約 (<span style="color:#00A026;">struct</span>)  
 │  
@@ -164,6 +184,7 @@
 └── 契作農民 (<span style="color:#00A026;">struct</span>) -&gt; 序號 (<span style="color:#A2025F;">DB</span>)  
 </pre>
 
+<h4 id="契作農民">契作農民</h4>
 <pre>
 契作農民 (<span style="color:#00A026;">struct</span>)  
 │  
@@ -176,6 +197,7 @@
 
 <hr />
 
+<h4 id="農地">農地</h4>
 <pre>
 農地 (<span style="color:#00A026;">struct</span>)  
 │  
@@ -195,13 +217,14 @@
 
 <hr />
 
+<h4 id="契作農地">契作農地</h4>
 <pre>
 契作農地 (<span style="color:#00A026;">struct</span>)  
 │  
 ├── 序號 (<span style="color:#A2025F;">DB</span>)  
 ├── 地號 (<span style="color:#3B00F7;">int</span>)  
 ├── 地段 (<span style="color:OrangeRed;">string</span>)  
-├── 作物品種-&gt;序號 (<span style="color:#A2025F;">DB</span>)  
+├── 作物品種 (<span style="color:#00A026;">struct</span>) -&gt;序號 (<span style="color:#A2025F;">DB</span>)  
 │  
 │   <span style="color:DarkGreen;">/*----- 契作農地_流程資訊 -----*/</span>  
 ├── 整地紀錄  
@@ -219,7 +242,7 @@
 ├── 除草紀錄  
 │   ├── 確認  (<span style="color:#BDB200;">Y/N</span>)  
 │   ├── 日期 (<span style="color:OrangeRed;">string</span>)  
-│   ├── 農藥種類-&gt;序號 (<span style="color:#A2025F;">DB</span>)  
+│   ├── 農藥種類 (<span style="color:#00A026;">struct</span>) -&gt;序號 (<span style="color:#A2025F;">DB</span>)  
 │   └── 用量(公升) (<span style="color:#3B00F7;">int</span>)  
 │  
 ├── 曬田紀錄  
@@ -229,19 +252,19 @@
 ├── 穗前肥紀錄
 │   ├── 確認 (<span style="color:#BDB200;">Y/N</span>)  
 │   ├── 日期 (<span style="color:OrangeRed;">string</span>)  
-│   ├── 肥料種類-&gt;序號 (<span style="color:#A2025F;">DB</span>)  
+│   ├── 肥料種類 (<span style="color:#00A026;">struct</span>) -&gt;序號 (<span style="color:#A2025F;">DB</span>)  
 │   └── 用量(公斤) (<span style="color:#3B00F7;">int</span>)  
 │  
 ├── 穗後肥紀錄  
 │   ├── 確認 (<span style="color:#BDB200;">Y/N</span>)  
 │   ├── 日期 (<span style="color:OrangeRed;">string</span>)  
-│   ├── 肥料種類-&gt;序號 (<span style="color:#A2025F;">DB</span>)  
+│   ├── 肥料種類 (<span style="color:#00A026;">struct</span>) -&gt;序號 (<span style="color:#A2025F;">DB</span>)  
 │   └── 用量(公斤) (<span style="color:#3B00F7;">int</span>)  
 │  
 ├── 噴藥紀錄  
 │   ├── 確認 (<span style="color:#BDB200;">Y/N</span>)  
 │   ├── 日期 (<span style="color:OrangeRed;">string</span>)  
-│   ├── 農藥種類-&gt;序號 (<span style="color:#A2025F;">DB</span>)  
+│   ├── 農藥種類 (<span style="color:#00A026;">struct</span>) -&gt;序號 (<span style="color:#A2025F;">DB</span>)  
 │   └── 用量(公升) (<span style="color:#3B00F7;">int</span>)  
 │  
 └── 採收紀錄  
@@ -249,6 +272,7 @@
     └── 日期 (<span style="color:OrangeRed;">string</span>)  
 </pre>
 
+<h4 id="作物品種">作物品種</h4>
 <pre>
 作物品種 (<span style="color:#00A026;">struct</span>)  
 │  
@@ -256,6 +280,7 @@
 └── 名稱 (<span style="color:OrangeRed;">string</span>)  
 </pre>
 
+<h4 id="農藥種類">農藥種類</h4>
 <pre>
 農藥種類 (<span style="color:#00A026;">struct</span>)  
 │  
@@ -263,6 +288,7 @@
 └── 名稱 (<span style="color:OrangeRed;">string</span>)  
 </pre>
 
+<h4 id="肥料種類">肥料種類</h4>
 <pre>
 肥料種類 (<span style="color:#00A026;">struct</span>)  
 │  
@@ -437,7 +463,7 @@ MathJax = {
     },
     "gitbook": {
         "version": "3.2.3",
-        "time": "2023-03-07 00:17:27 +0800"
+        "time": "2023-03-07 00:28:59 +0800"
     },
     "basePath": "",
     "book": {
