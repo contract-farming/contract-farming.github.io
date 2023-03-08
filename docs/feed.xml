@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-03-07T00:28:59+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Home</title><subtitle>Build Jekyll site with the GitBook style.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-03-08T17:24:47+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Home</title><subtitle>Build Jekyll site with the GitBook style.
 </subtitle><author><name>contract-farming</name></author><entry><title type="html">Server 端口清單</title><link href="http://localhost:4000/jekyll/2023-03-02-port-list.html" rel="alternate" type="text/html" title="Server 端口清單" /><published>2023-03-02T00:00:00+08:00</published><updated>2023-03-02T00:00:00+08:00</updated><id>http://localhost:4000/jekyll/port-list</id><content type="html" xml:base="http://localhost:4000/jekyll/2023-03-02-port-list.html"><![CDATA[<p>全部程式都用 Nginx 反向代理出去<br />
 這樣憑證寫在 Nginx 就好，不會髒到 code</p>
 
@@ -244,7 +244,7 @@ QUIT;
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 第一步：編輯 SSH 設定檔</span>
 <span class="nb">sudo </span>vim /etc/ssh/sshd_config
 
-<span class="c"># 第二步：設置 SSH 連接埠</span>
+<span class="c"># 第二步：更改 SSH 連接埠</span>
 將 <span class="s2">"Port 22"</span> 改為 <span class="s2">"Port 33000"</span> （或您想要使用的端口號）
 
 <span class="c"># 第三步：設置 SELinux 規則</span>
@@ -279,17 +279,20 @@ QUIT;
 <span class="c"># 第四步：編輯 xRDP 設定檔</span>
 <span class="nb">sudo </span>vim /etc/xrdp/xrdp.ini
 
-<span class="c"># 第五步：開啟防火牆的 3389/tcp 連接埠</span>
-<span class="nb">sudo </span>firewall-cmd <span class="nt">--permanent</span> <span class="nt">--add-port</span><span class="o">=</span>3389/tcp
+<span class="c"># 第五步：更改 xRDP 連接埠</span>
+將 <span class="s2">"port=3389"</span> 改為 <span class="s2">"port=30389"</span> （或您想要使用的端口號）
 
-<span class="c"># 第六步：重新載入防火牆設定</span>
+<span class="c"># 第六步：開啟防火牆的 30389/tcp 連接埠</span>
+<span class="nb">sudo </span>firewall-cmd <span class="nt">--permanent</span> <span class="nt">--add-port</span><span class="o">=</span>30389/tcp
+
+<span class="c"># 第七步：重新載入防火牆設定</span>
 <span class="nb">sudo </span>firewall-cmd <span class="nt">--reload</span>
 
-<span class="c"># 第七步：確認防火牆的開放連接埠</span>
+<span class="c"># 第八步：確認防火牆的開放連接埠</span>
 <span class="nb">sudo </span>firewall-cmd <span class="nt">--list-ports</span>
 
-<span class="c"># 第八步：重新啟動系統</span>
-reboot
+<span class="c"># 第九步：重新啟動系統</span>
+<span class="nb">sudo </span>reboot
 </code></pre></div></div>
 
 <h3 id="nvm-nodejs-版本管理">nvm node.js 版本管理</h3>

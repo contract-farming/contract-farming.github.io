@@ -14,7 +14,7 @@ layout: post
 # 第一步：編輯 SSH 設定檔
 sudo vim /etc/ssh/sshd_config
 
-# 第二步：設置 SSH 連接埠
+# 第二步：更改 SSH 連接埠
 將 "Port 22" 改為 "Port 33000" （或您想要使用的端口號）
 
 # 第三步：設置 SELinux 規則
@@ -53,17 +53,20 @@ sudo dnf install xrdp -y
 # 第四步：編輯 xRDP 設定檔
 sudo vim /etc/xrdp/xrdp.ini
 
-# 第五步：開啟防火牆的 3389/tcp 連接埠
-sudo firewall-cmd --permanent --add-port=3389/tcp
+# 第五步：更改 xRDP 連接埠
+將 "port=3389" 改為 "port=30389" （或您想要使用的端口號）
 
-# 第六步：重新載入防火牆設定
+# 第六步：開啟防火牆的 30389/tcp 連接埠
+sudo firewall-cmd --permanent --add-port=30389/tcp
+
+# 第七步：重新載入防火牆設定
 sudo firewall-cmd --reload
 
-# 第七步：確認防火牆的開放連接埠
+# 第八步：確認防火牆的開放連接埠
 sudo firewall-cmd --list-ports
 
-# 第八步：重新啟動系統
-reboot
+# 第九步：重新啟動系統
+sudo reboot
 ```
 
 
