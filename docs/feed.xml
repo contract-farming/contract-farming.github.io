@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-03-12T23:41:53+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Home</title><subtitle>Build Jekyll site with the GitBook style.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-03-13T00:18:44+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Home</title><subtitle>Build Jekyll site with the GitBook style.
 </subtitle><author><name>contract-farming</name></author><entry><title type="html">Server 端口清單</title><link href="http://localhost:4000/jekyll/2023-03-02-port-list.html" rel="alternate" type="text/html" title="Server 端口清單" /><published>2023-03-02T00:00:00+08:00</published><updated>2023-03-02T00:00:00+08:00</updated><id>http://localhost:4000/jekyll/port-list</id><content type="html" xml:base="http://localhost:4000/jekyll/2023-03-02-port-list.html"><![CDATA[<p>全部程式都用 Nginx 反向代理出去<br />
 這樣憑證寫在 Nginx 就好，不會髒到 code</p>
 
@@ -73,9 +73,10 @@
 </code></pre></div></div>]]></content><author><name>hmes98318</name></author><category term="Jekyll" /><summary type="html"><![CDATA[全部程式都用 Nginx 反向代理出去 這樣憑證寫在 Nginx 就好，不會髒到 code]]></summary></entry><entry><title type="html">資料庫</title><link href="http://localhost:4000/jekyll/2023-03-01-database.html" rel="alternate" type="text/html" title="資料庫" /><published>2023-03-01T00:00:00+08:00</published><updated>2023-03-01T00:00:00+08:00</updated><id>http://localhost:4000/jekyll/database</id><content type="html" xml:base="http://localhost:4000/jekyll/2023-03-01-database.html"><![CDATA[<h3 id="架構圖">架構圖</h3>
 
 <ul>
-  <li><a href="#契作合約">契作合約</a></li>
-  <li>
-    <p><a href="#契作農民">契作農民</a></p>
+  <li><a href="#契作合約">契作合約</a>
+    <ul>
+      <li><a href="#契作農民">契作農民</a></li>
+    </ul>
   </li>
   <li>
     <p><a href="#農地">農地</a></p>
@@ -98,7 +99,6 @@
 ├── 序號 (<span style="color:#A2025F;">DB</span>)  
 ├── 年度 (<span style="color:#3B00F7;">int</span>)  
 ├── 期號 (<span style="color:#3B00F7;">int</span>)  
-│  
 └── 契作農民 (<span style="color:#00A026;">struct</span>) -&gt; 序號 (<span style="color:#A2025F;">DB</span>)  
 </pre>
 
