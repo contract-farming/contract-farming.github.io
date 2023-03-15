@@ -84,7 +84,7 @@
                             </a>
                             
                                 
-                                    <ul><li><a href="#架構圖">架構圖</a></li><li><a href="#帳號">帳號</a></li></ul>
+                                    <ul><li><a href="#架構圖">架構圖</a></li><li><a href="#資料型態">資料型態</a></li><li><a href="#帳號">帳號</a></li></ul>
 
                                 
                             
@@ -155,10 +155,147 @@
                     <h3 id="架構圖">架構圖</h3>
 
 <form method="get" target="_blank" action="/assets/database.png">
-   <button type="submit">開啟原尺寸圖片</button>
+    <button type="submit">開啟原尺寸圖片</button>
 </form>
 
 <p><img src="/assets/database.png" alt="db_img" /></p>
+
+<hr />
+
+<h3 id="資料型態">資料型態</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">數值</th>
+      <th style="text-align: center">bytes</th>
+      <th style="text-align: center">範圍</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">TINYINT</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">-128 到 127</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">SMALLINT</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">-32,768 (-2^15) 到 32,767 (2^15 – 1)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">MEDIUMINT</td>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">-8,388,608 到 8,388,607</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">INT</td>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">-2,147,483,648 (-2^31) 到 2,147,483,647 (2^31 – 1)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">BIGINT</td>
+      <td style="text-align: center">8</td>
+      <td style="text-align: center">-9,223,372,036,854,775,808 (-2^63) 到 9,223,372,036,854,775,807(2^63-1)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">TINYINT_UNSIGNED</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0 到 255</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">SMALLINT_UNSIGNED</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">0 到 65535</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">MEDIUMINT_UNSIGNED</td>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">0 到 16,777,215</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">INT_UNSIGNED</td>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">0 到 4,294,967,295</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">BIGINT_UNSIGNED</td>
+      <td style="text-align: center">8</td>
+      <td style="text-align: center">0 到 18,446,744,073,709,551,615</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>日期</td>
+      <td>bytes</td>
+      <td>內容</td>
+    </tr>
+    <tr>
+      <td>DATE</td>
+      <td>3</td>
+      <td>YYYY-MM-DD</td>
+    </tr>
+    <tr>
+      <td>DATETIME</td>
+      <td>8</td>
+      <td>YYYY-MM-DD HH:MI:SS</td>
+    </tr>
+    <tr>
+      <td>TIMESTAMP</td>
+      <td>4</td>
+      <td>YYYY-MM-DD HH:MI:SS</td>
+    </tr>
+    <tr>
+      <td>TIME</td>
+      <td>3</td>
+      <td>HH:MI:SS</td>
+    </tr>
+    <tr>
+      <td>YEAR</td>
+      <td>1</td>
+      <td>YYYY</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>字元</td>
+      <td>類型</td>
+      <td>長度</td>
+    </tr>
+    <tr>
+      <td>CHAR</td>
+      <td>固定長度</td>
+      <td>0 到 255</td>
+    </tr>
+    <tr>
+      <td>VARCHAR</td>
+      <td>可變長度</td>
+      <td>0 到 65,535</td>
+    </tr>
+  </tbody>
+</table>
+
+<details> 
+    <summary>▶點開詳細說明</summary>
+        <pre>
+CHAR 是固定長度的字串類型，你必須在建立表格時設定該欄位的長度，且不論實際存入的字串長度為多少，該欄位始終會保持固定長度。例如，如果你將一個長度為 10 的 CHAR 欄位儲存一個長度為 5 的字串，該欄位實際上會被填充 5 個空格以達到 10 個字元的長度。
+
+VARCHAR 是可變長度的字串類型，你也必須在建立表格時設定該欄位的最大長度，但是當實際存入的字串長度不足最大長度時，該欄位實際儲存的字串長度就會根據實際存入的字串長度而變化。例如，如果你將一個最大長度為 10 的 VARCHAR 欄位儲存一個長度為 5 的字串，該欄位實際上只會儲存這 5 個字元。
+
+總體來說，CHAR 比 VARCHAR 更適合儲存固定長度的字串，而 VARCHAR 更適合儲存可變長度的字串。但是，由於 VARCHAR 需要動態調整儲存空間，因此在某些情況下可能會對性能造成一定的影響，例如當儲存大量的 VARCHAR 欄位時。因此，在設計資料庫時，應該根據實際情況來選擇使用哪種字串類型。
+        </pre>
+</details>
 
 <hr />
 
@@ -327,7 +464,7 @@ MathJax = {
     },
     "gitbook": {
         "version": "3.2.3",
-        "time": "2023-03-15 23:12:15 +0800"
+        "time": "2023-03-15 23:59:28 +0800"
     },
     "basePath": "",
     "book": {
