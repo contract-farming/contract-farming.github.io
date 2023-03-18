@@ -42,3 +42,10 @@ bundle exec jekyll -v
 # 啟動 Jekyll
 bundle exec jekyll serve
 ```
+
+
+</br>
+</br>
+</br>
+  
+`不要靠近Jekyll，否則會變得不幸。`
