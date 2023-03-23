@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-03-18T21:34:43+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Home</title><subtitle>Build Jekyll site with the GitBook style.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-03-24T04:10:36+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Home</title><subtitle>Build Jekyll site with the GitBook style.
 </subtitle><author><name>contract-farming</name></author><entry><title type="html">Server 端口清單</title><link href="http://localhost:4000/jekyll/2023-03-02-port-list.html" rel="alternate" type="text/html" title="Server 端口清單" /><published>2023-03-02T00:00:00+08:00</published><updated>2023-03-02T00:00:00+08:00</updated><id>http://localhost:4000/jekyll/port-list</id><content type="html" xml:base="http://localhost:4000/jekyll/2023-03-02-port-list.html"><![CDATA[<p>全部程式都用 Nginx 反向代理出去<br />
 這樣憑證寫在 Nginx 就好，不會髒到 code</p>
 
@@ -219,18 +219,24 @@ VARCHAR 是可變長度的字串類型，你也必須在建立表格時設定該
 
 <h3 id="帳號">帳號</h3>
 
+<h4 id="資料庫-old_db">資料庫: old_db</h4>
 <pre>
-資料庫: old_db  
 帳號: db-old_db  
 密碼: netlab!db!old_db  
 權限範圍: localhost  
 </pre>
 
+<h4 id="資料庫-test_db">資料庫: test_db</h4>
 <pre>
-資料庫: test_db  
 帳號: db-test_db  
 密碼: netlab!db!test_db  
 權限範圍: localhost  
+</pre>
+
+<pre>
+帳號: db-test_db-2  
+密碼: netlab!db!test_db-2  
+權限範圍: global  
 </pre>
 
 <hr />
