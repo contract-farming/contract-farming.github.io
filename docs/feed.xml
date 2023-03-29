@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-03-24T04:10:36+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Home</title><subtitle>Build Jekyll site with the GitBook style.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-03-30T01:14:06+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Home</title><subtitle>Build Jekyll site with the GitBook style.
 </subtitle><author><name>contract-farming</name></author><entry><title type="html">Server 端口清單</title><link href="http://localhost:4000/jekyll/2023-03-02-port-list.html" rel="alternate" type="text/html" title="Server 端口清單" /><published>2023-03-02T00:00:00+08:00</published><updated>2023-03-02T00:00:00+08:00</updated><id>http://localhost:4000/jekyll/port-list</id><content type="html" xml:base="http://localhost:4000/jekyll/2023-03-02-port-list.html"><![CDATA[<p>全部程式都用 Nginx 反向代理出去<br />
 這樣憑證寫在 Nginx 就好，不會髒到 code</p>
 
@@ -371,6 +371,28 @@ node <span class="nt">-v</span>
 
 <span class="c"># 第七步：檢查MariaDB的版本資訊</span>
 mysqladmin <span class="nt">-u</span> root <span class="nt">-p</span> version
+</code></pre></div></div>
+
+<h5 id="如果您想要在mariadb上使用自定義端口請參照以下步驟">如果您想要在MariaDB上使用自定義端口，請參照以下步驟：</h5>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 第一步：更改預設端口</span>
+<span class="nb">sudo </span>vim /etc/my.cnf.d/mariadb-server.cnf
+
+<span class="o">[</span>server]
+port <span class="o">=</span> 27483
+
+<span class="c"># 第二步：設置 SELinux 規則</span>
+<span class="nb">sudo </span>semanage port <span class="nt">-a</span> <span class="nt">-t</span> mysqld_port_t <span class="nt">-p</span> tcp 27483
+<span class="nb">sudo </span>semanage port <span class="nt">-l</span> | <span class="nb">grep </span>mysqld_port_t
+
+<span class="c"># 第三步：開啟防火牆對應端口以及刪除預設端口</span>
+<span class="nb">sudo </span>firewall-cmd <span class="nt">--permanent</span> <span class="nt">--add-port</span><span class="o">=</span>27483/tcp
+<span class="nb">sudo </span>firewall-cmd <span class="nt">--remove-port</span><span class="o">=</span>3306/tcp <span class="nt">--permanent</span>
+<span class="nb">sudo </span>firewall-cmd <span class="nt">--reload</span>
+<span class="nb">sudo </span>firewall-cmd <span class="nt">--list-ports</span>
+
+<span class="c"># 第四步：重新啟動MariaDB伺服器</span>
+<span class="nb">sudo </span>systemctl restart mariadb
 </code></pre></div></div>
 
 <h3 id="dbeaver-安裝">DBeaver 安裝</h3>

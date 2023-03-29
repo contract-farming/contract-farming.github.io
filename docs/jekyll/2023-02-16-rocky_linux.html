@@ -279,6 +279,28 @@ node <span class="nt">-v</span>
 mysqladmin <span class="nt">-u</span> root <span class="nt">-p</span> version
 </code></pre></div></div>
 
+<h5 id="如果您想要在mariadb上使用自定義端口請參照以下步驟">如果您想要在MariaDB上使用自定義端口，請參照以下步驟：</h5>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 第一步：更改預設端口</span>
+<span class="nb">sudo </span>vim /etc/my.cnf.d/mariadb-server.cnf
+
+<span class="o">[</span>server]
+port <span class="o">=</span> 27483
+
+<span class="c"># 第二步：設置 SELinux 規則</span>
+<span class="nb">sudo </span>semanage port <span class="nt">-a</span> <span class="nt">-t</span> mysqld_port_t <span class="nt">-p</span> tcp 27483
+<span class="nb">sudo </span>semanage port <span class="nt">-l</span> | <span class="nb">grep </span>mysqld_port_t
+
+<span class="c"># 第三步：開啟防火牆對應端口以及刪除預設端口</span>
+<span class="nb">sudo </span>firewall-cmd <span class="nt">--permanent</span> <span class="nt">--add-port</span><span class="o">=</span>27483/tcp
+<span class="nb">sudo </span>firewall-cmd <span class="nt">--remove-port</span><span class="o">=</span>3306/tcp <span class="nt">--permanent</span>
+<span class="nb">sudo </span>firewall-cmd <span class="nt">--reload</span>
+<span class="nb">sudo </span>firewall-cmd <span class="nt">--list-ports</span>
+
+<span class="c"># 第四步：重新啟動MariaDB伺服器</span>
+<span class="nb">sudo </span>systemctl restart mariadb
+</code></pre></div></div>
+
 <h3 id="dbeaver-安裝">DBeaver 安裝</h3>
 <p>以下是在Rocky Linux上安裝DBeaver的指令教學。這份教學將引導您完成必要的步驟以安裝snap和DBeaver。</p>
 
@@ -504,7 +526,7 @@ MathJax = {
     },
     "gitbook": {
         "version": "3.2.3",
-        "time": "2023-03-24 04:10:36 +0800"
+        "time": "2023-03-30 01:14:06 +0800"
     },
     "basePath": "",
     "book": {

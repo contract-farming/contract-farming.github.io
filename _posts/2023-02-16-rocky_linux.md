@@ -152,6 +152,30 @@ sudo mysql_secure_installation
 mysqladmin -u root -p version
 ```
 
+##### 如果您想要在MariaDB上使用自定義端口，請參照以下步驟： 
+
+```bash
+# 第一步：更改預設端口
+sudo vim /etc/my.cnf.d/mariadb-server.cnf
+
+[server]
+port = 27483
+
+# 第二步：設置 SELinux 規則
+sudo semanage port -a -t mysqld_port_t -p tcp 27483
+sudo semanage port -l | grep mysqld_port_t
+
+# 第三步：開啟防火牆對應端口以及刪除預設端口
+sudo firewall-cmd --permanent --add-port=27483/tcp
+sudo firewall-cmd --remove-port=3306/tcp --permanent
+sudo firewall-cmd --reload
+sudo firewall-cmd --list-ports
+
+# 第四步：重新啟動MariaDB伺服器
+sudo systemctl restart mariadb
+```
+
+
 
 
 
