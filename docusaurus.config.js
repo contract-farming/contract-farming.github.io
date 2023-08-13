@@ -46,7 +46,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/contract-farming/contract-farming.github.io/blob/blog/',
+            'https://github.com/contract-farming/contract-farming.github.io/blob/main/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
