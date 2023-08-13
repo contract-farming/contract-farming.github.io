@@ -1,0 +1,43 @@
+# 獲取 Farmer Table
+
+獲取 Farmer 所有內容
+
+PATH: `/api/farmer/get`  
+Method: `POST`
+
+
+### 回傳格式
+
+回傳 data 為陣列內含所有 farmer 資料  
+
+[`StatusCode`](../types.md#statuscode)  
+[`PhoneNumber`](../types.md#phonenumber)  
+
+```js
+{
+    "status": StatusCode,
+    "data": [
+        {
+            "uuid": number,
+            "id": string,
+            "name": string,
+            "phone": PhoneNumber,
+            "address": string
+        },]
+}
+```
+
+### 回傳範例
+```json
+{
+    "status": 200,
+    "data": [
+        {
+            "uuid": 35,
+            "id": "A123456789",
+            "name": "方O洋",
+            "phone": "07-1234567",
+            "address": "大樹區學城路一段1號"
+        }]
+}
+```
