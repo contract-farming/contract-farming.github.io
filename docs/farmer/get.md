@@ -25,7 +25,8 @@ Method: `POST`
             "name": string,
             "phone": PhoneNumber,
             "address": string
-        },]
+        }
+    ]
 }
 ```
 
@@ -41,6 +42,7 @@ Method: `POST`
             "name": "方O洋",
             "phone": "07-1234567",
             "address": "大樹區學城路一段1號"
-        }]
+        }
+    ]
 }
 ```
