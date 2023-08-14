@@ -10,6 +10,11 @@ Method: `POST`
 
 回傳 data 為陣列內含所有 farmer 資料  
 
+* `id`: 身分證
+* `name`: 農民名稱
+* `phone`: 農民電話號碼 (家用或手機)
+* `address`: 農民地址
+
 [`StatusCode`](../types.md#statuscode)  
 [`LoadType`](../types.md#loadtype)  
 [`PhoneNumber`](../types.md#phonenumber)  
