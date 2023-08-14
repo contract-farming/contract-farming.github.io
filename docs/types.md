@@ -10,6 +10,16 @@
 | 500 | Server 錯誤 |
 
 
+### LoadType
+回傳狀態類型
+
+| Type | Description |
+| :------ | :------ |
+| `SUCCEED` | 成功回傳 |
+| `PARAMETER_ERROR` | 參數錯誤 |
+| `QUERY_FAILED` | 資料庫查詢錯誤(內部錯誤) |
+
+
 ### PhoneNumber
 電話號碼
 

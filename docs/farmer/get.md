@@ -11,11 +11,13 @@ Method: `POST`
 回傳 data 為陣列內含所有 farmer 資料  
 
 [`StatusCode`](../types.md#statuscode)  
+[`LoadType`](../types.md#loadtype)  
 [`PhoneNumber`](../types.md#phonenumber)  
 
 ```js
 {
     "status": StatusCode,
+    "loadType": LoadType,
     "data": [
         {
             "uuid": number,
@@ -31,6 +33,7 @@ Method: `POST`
 ```json
 {
     "status": 200,
+    "loadType": "SUCCEED",
     "data": [
         {
             "uuid": 35,
