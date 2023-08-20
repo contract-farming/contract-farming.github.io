@@ -2,8 +2,8 @@
 
 獲取 Farmer 所有內容
 
-PATH: `/api/farmer/get`  
-Method: `POST`
+PATH: `/api/farmer/getAll`  
+Method: `GET`
 
 
 ### 回傳格式

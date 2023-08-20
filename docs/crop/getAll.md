@@ -3,7 +3,7 @@
 獲取 Crop 所有內容
 
 PATH: `/api/crop/getAll`  
-Method: `POST`
+Method: `GET`
 
 
 ### 回傳格式
