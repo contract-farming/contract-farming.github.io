@@ -105,7 +105,7 @@ const config = {
         //     ],
         //   },
         // ],
-        copyright: `Copyright © 2023-${new Date().getFullYear()} netlab.isu.edu.tw, Inc.`,
+        copyright: `Copyright © 2023-${new Date().getFullYear()} contract-farming, Inc.`,
       },
       prism: {
         theme: lightCodeTheme,
