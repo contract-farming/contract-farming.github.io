@@ -6,6 +6,15 @@ PATH: `/api/crop/deleteOne`
 Method: `POST`
 
 
+### 請求格式
+* `name`: 待刪除的 作物品種 名稱
+
+```js
+{
+    "name": string
+}
+```
+
 ### 回傳格式
 
 回傳 data 為陣列內含成功刪除的 作物品種 資料  
