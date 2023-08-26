@@ -1,21 +1,23 @@
-# 獲取 作物品種 所有內容
+# 刪除其中一個 作物品種
 
-獲取作物品種所有內容
+刪除其中一個作物品種
 
-PATH: `/api/crop/getAll`  
-Method: `GET`
+PATH: `/api/crop/deleteOne`  
+Method: `POST`
 
 
 ### 回傳格式
 
-回傳 data 為陣列內含所有 作物品種 資料  
-
-* `name`: 作物品種名稱
-* `unit_yield`: 單位面積預估產量
-* `unit`: 產量單位 (1: 台斤, 2: 公斤)
+回傳 data 為陣列內含成功刪除的 作物品種 資料  
 
 [`StatusCode`](../types.md#statuscode)  
+* 200
+* 400
+
 [`LoadType`](../types.md#loadtype)  
+* `"SUCCEED"`
+* `"PARAMETER_ERROR"`
+* `"DATA_NOT_FOUND"`
 
 ```js
 {
@@ -33,6 +35,7 @@ Method: `GET`
 ```
 
 ### 回傳範例
+成功刪除
 ```json
 {
     "status": 200,
@@ -45,5 +48,23 @@ Method: `GET`
             "unit": 1
         }
     ]
+}
+```
+
+參數錯誤
+```json
+{
+    "status": 400,
+    "loadType": "PARAMETER_ERROR",
+    "data": []
+}
+```
+
+未找到該資料
+```json
+{
+    "status": 200,
+    "loadType": "DATA_NOT_FOUND",
+    "data": []
 }
 ```

@@ -6,7 +6,8 @@
 | Code | Description |
 | :------ | :------ |
 | 200 | ok |
-| 400 | 參數錯誤 |
+| 400 | 請求參數錯誤 |
+| 404 | 請求路徑錯誤 |
 | 500 | Server 錯誤 |
 
 
@@ -15,9 +16,10 @@
 
 | Type | Description |
 | :------ | :------ |
-| `SUCCEED` | 成功回傳 |
-| `PARAMETER_ERROR` | 參數錯誤 |
-| `QUERY_FAILED` | 資料庫查詢錯誤(內部錯誤) |
+| `"SUCCEED"` | 成功回傳 |
+| `"PARAMETER_ERROR"` | 請求參數錯誤 |
+| `"DATA_NOT_FOUND"` | 資料庫未找到該資料 |
+| `"QUERY_FAILED"` | 資料庫查詢錯誤(內部錯誤) |
 
 
 ### PhoneNumber
