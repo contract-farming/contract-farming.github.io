@@ -18,8 +18,12 @@
 | :------ | :------ |
 | `"SUCCEED"` | 成功回傳 |
 | `"PARAMETER_ERROR"` | 請求參數錯誤 |
+| `"PATH_ERROR"` | 請求路徑錯誤 (404) |
+| `"DATA_EXISTED"` | 資料庫已存在該資料 |
 | `"DATA_NOT_FOUND"` | 資料庫未找到該資料 |
-| `"QUERY_FAILED"` | 資料庫查詢錯誤(內部錯誤) |
+| `"SAME_DATA"` | 新資料與舊資料相同 |
+| `"QUERY_FAILED"` | 資料庫查詢錯誤 (內部錯誤) |
+| `"SERVER_ERROR"` | 伺服器錯誤 (內部錯誤) |
 
 
 ### PhoneNumber
