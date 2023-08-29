@@ -13,5 +13,8 @@ sidebar_position: 1
 [`/api/crop/deleteOne`](./crop/deleteOne.md) [**POST**] : 刪除其中一個 作物品種  
 [`/api/crop/updateOne`](./crop/updateOne.md) [**POST**] : 更新一個 作物品種 資料  
 
-[`/api/fert/getAll`](./fert/getAll.md) [**GET**] : 獲取所有 肥料 資料  
+[`/api/fert/getAll`](./fert/getAll.md) [**GET**] : 獲取所有 肥料種類 資料  
+[`/api/fert/addOne`](./fert/addOne.md) [**POST**] : 增加一個 肥料種類  
+[`/api/fert/deleteOne`](./fert/deleteOne.md) [**POST**] : 刪除其中一個 肥料種類  
+
 [`/api/pest/getAll`](./pest/getAll.md) [**GET**] : 獲取所有 農藥 資料  

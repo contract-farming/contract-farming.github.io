@@ -1,6 +1,6 @@
-# 獲取 肥料 所有內容
+# 獲取 肥料種類 所有內容
 
-獲取 肥料 所有內容
+獲取肥料種類所有內容
 
 PATH: `/api/fert/getAll`  
 Method: `GET`
@@ -8,9 +8,9 @@ Method: `GET`
 
 ### 回傳格式
 
-回傳 data 為陣列內含所有 肥料 資料  
+回傳 data 為陣列內含所有 肥料種類 資料  
 
-* `name`: 肥料名稱
+* `name`: 肥料種類名稱
 
 [`StatusCode`](../types.md#statuscode)  
 [`LoadType`](../types.md#loadtype)  
