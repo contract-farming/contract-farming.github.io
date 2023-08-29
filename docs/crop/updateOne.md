@@ -13,9 +13,9 @@ Method: `PUT`
 
 ```js
 {
-    "name": string;
-    "unit_yield": number;
-    "unit": number;
+    "name": string,
+    "unit_yield": number,
+    "unit": number,
 }
 ```
 
