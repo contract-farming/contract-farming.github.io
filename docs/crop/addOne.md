@@ -38,7 +38,6 @@ Method: `POST`
     "loadType": LoadType,
     "data": [
         {
-            "uuid": number,
             "name": string,
             "unit_yield": number,
             "unit": number
@@ -55,7 +54,6 @@ Method: `POST`
     "loadType": "SUCCEED",
     "data": [
         {
-            "uuid": 1,
             "name": "高雄145",
             "unit_yield": 30,
             "unit": 1
@@ -73,7 +71,9 @@ Method: `POST`
 }
 ```
 
-已存在該資料
+已存在該資料  
+待添加的資料已存在資料庫中  
+`data[]` 為已存在資料庫的資料
 ```json
 {
     "status": 200,
