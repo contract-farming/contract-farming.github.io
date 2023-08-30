@@ -7,12 +7,14 @@ Method: `PUT`
 
 
 ### 請求格式
-* `name`: 作物品種名稱
-* `unit_yield`: 單位面積預估產量
-* `unit`: 產量單位 (1: 台斤, 2: 公斤)
+* `uuid`: 作物品種的 uuid (不可更新)
+* `name`: 待更新的作物品種名稱
+* `unit_yield`: 待更新的單位面積預估產量
+* `unit`: 待更新的產量單位 (1: 台斤, 2: 公斤)
 
 ```js
 {
+    "uuid": number,
     "name": string,
     "unit_yield": number,
     "unit": number,
@@ -31,6 +33,7 @@ Method: `PUT`
 * `"SUCCEED"`
 * `"PARAMETER_ERROR"`
 * `"DATA_NOT_FOUND"`
+* `"DATA_CONFLICT"`
 * `"SAME_DATA"`
 
 ```js
@@ -57,6 +60,7 @@ Method: `PUT`
     "loadType": "SUCCEED",
     "data": [
         {
+            "uuid": 12,
             "name": "高雄145",
             "unit_yield": 25,
             "unit": 1
@@ -80,6 +84,23 @@ Method: `PUT`
     "status": 200,
     "loadType": "DATA_NOT_FOUND",
     "data": []
+}
+```
+
+待更新的資料與原有資料庫的其他資料相同  
+`data[]` 為資料庫中相同的資料
+```json
+{
+    "status": 200,
+    "loadType": "DATA_CONFLICT",
+    "data": [
+        {
+            "uuid": 22,
+            "name": "高雄147",
+            "unit_yield": 555,
+            "unit": 2
+        }
+    ]
 }
 ```
 

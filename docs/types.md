@@ -21,6 +21,7 @@
 | `"PATH_ERROR"` | 請求路徑錯誤 (404) |
 | `"DATA_EXISTED"` | 資料庫已存在該資料 |
 | `"DATA_NOT_FOUND"` | 資料庫未找到該資料 |
+| `"DATA_CONFLICT"` | 待更新的資料與原有資料庫的其他資料衝突(相同) |
 | `"SAME_DATA"` | 新資料與舊資料相同 |
 | `"QUERY_FAILED"` | 資料庫查詢錯誤 (內部錯誤) |
 | `"SERVER_ERROR"` | 伺服器錯誤 (內部錯誤) |
