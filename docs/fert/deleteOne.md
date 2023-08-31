@@ -7,11 +7,11 @@ Method: `POST`
 
 
 ### 請求格式
-* `name`: 待刪除的 肥料種類 名稱
+* `name`: 待刪除的 肥料種類 uuid
 
 ```js
 {
-    "name": string
+    "uuid": number
 }
 ```
 
