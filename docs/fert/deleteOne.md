@@ -2,7 +2,7 @@
 
 刪除其中一個肥料種類
 
-PATH: `/api/crop/deleteOne`  
+PATH: `/api/fert/deleteOne`  
 Method: `POST`
 
 

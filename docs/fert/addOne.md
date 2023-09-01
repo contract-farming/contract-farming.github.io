@@ -1,6 +1,6 @@
 # 增加一個 肥料種類
 
-獲取肥料種類所有內容
+增加一個肥料種類
 
 PATH: `/api/fert/addOne`  
 Method: `POST`
@@ -17,9 +17,7 @@ Method: `POST`
 
 ### 回傳格式
 
-回傳 data 為陣列內含所有 肥料種類 資料  
-
-* `name`: 肥料種類名稱
+回傳 data 為陣列內含成功新增的 肥料種類 資料  
 
 [`StatusCode`](../types.md#statuscode)  
 * 200

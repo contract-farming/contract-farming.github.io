@@ -2,7 +2,7 @@
 
 刪除其中一個農藥種類
 
-PATH: `/api/crop/deleteOne`  
+PATH: `/api/pest/deleteOne`  
 Method: `POST`
 
 

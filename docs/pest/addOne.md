@@ -1,8 +1,8 @@
 # 增加一個 農藥種類
 
-獲取農藥種類所有內容
+增加一個農藥種類
 
-PATH: `/api/fert/addOne`  
+PATH: `/api/pest/addOne`  
 Method: `POST`
 
 
@@ -17,7 +17,7 @@ Method: `POST`
 
 ### 回傳格式
 
-回傳 data 為陣列內含所有 農藥種類 資料  
+回傳 data 為陣列內含成功新增的 農藥種類 資料  
 
 * `name`: 農藥種類名稱
 
