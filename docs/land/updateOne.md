@@ -55,7 +55,7 @@ Method: `PUT`
     "loadType": LoadType,
     "data": [
         {
-            uuid?: number;
+            uuid: number;
             no: string;
             lot: string;
             class: "田" | "旱" | null;

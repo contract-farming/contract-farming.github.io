@@ -26,7 +26,7 @@ Method: `GET`
 皆為小數點後六位的值  
 如果看到小於後六位的都是補0被資料庫捨棄掉的  
 
-**權利面積(area_right)**, **可耕面積(area_arable)**, **地目** 有可能是 null  
+**權利面積(area_right)**, **可耕面積(area_arable)**, **地目(class)** 有可能是 null  
 :::
 
 :::note
@@ -45,7 +45,7 @@ Method: `GET`
     "loadType": LoadType,
     "data": [
         {
-            uuid?: number;
+            uuid: number;
             no: string;
             lot: string;
             class: "田" | "旱" | null;

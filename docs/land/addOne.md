@@ -42,7 +42,7 @@ Method: `POST`
 
 ### 回傳格式
 
-回傳 data 為陣列內含成功新增的 肥料種類 資料  
+回傳 data 為陣列內含成功新增的 農地 資料  
 
 [`StatusCode`](../types.md#statuscode)  
 * 200
@@ -59,7 +59,7 @@ Method: `POST`
     "loadType": LoadType,
     "data": [
         {
-            uuid?: number;
+            uuid: number;
             no: string;
             lot: string;
             class: "田" | "旱" | null;
