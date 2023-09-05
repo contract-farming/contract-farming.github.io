@@ -8,7 +8,10 @@ sidebar_position: 1
 
 | Path | Method | Description |
 | :------ | :------ | :------ |
-| [`/api/farmer/getAll`](./farmer/getAll.md) | [**GET**] | 獲取所有 farmer 資料  
+| [`/api/farmer/getAll`](./farmer/getAll.md) | [**GET**] | 獲取所有 契作農民 資料  
+| [`/api/farmer/addOne`](./farmer/addOne.md) | [**POST**] | 增加一個 契作農民  
+| [`/api/farmer/deleteOne`](./farmer/deleteOne.md) | [**POST**] | 刪除其中一個 契作農民  
+| [`/api/farmer/updateOne`](./farmer/updateOne.md) | [**POST**] | 更新一個 契作農民 資料  
 | 作物品種 |  |  |
 | [`/api/crop/getAll`](./crop/getAll.md) | [**GET**] | 獲取所有 作物品種 資料  
 | [`/api/crop/addOne`](./crop/addOne.md) | [**POST**] | 增加一個 作物品種  
