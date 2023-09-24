@@ -12,7 +12,7 @@ Method: `GET`
 
 * `year`: 年度                     [`0-65535`]
 * `no`: 期號 一年有三期             [`0-255`]
-* `farmer`: 引用契作農民的 uuid
+* `farmer`: 引用契作農民的 資料
 * `finish`: 是否結案 (Y/N)          [`0`, `1`]
 
 [`StatusCode`](../types.md#statuscode)  
@@ -27,7 +27,13 @@ Method: `GET`
             "uuid": number,
             "year": number,
             "no": number,
-            "farmer": number,
+            "farmer": {
+                "uuid": number,
+                "id": string,
+                "name": string,
+                "phone": PhoneNumber,
+                "address": string
+            },
             "finish": number
         }
     ]
@@ -44,7 +50,13 @@ Method: `GET`
             "uuid": 2,
             "year": 2023,
             "no": 3,
-            "farmer": 201,
+            "farmer": {
+                "uuid": 35,
+                "id": "A123456789",
+                "name": "方O洋",
+                "phone": "07-1234567",
+                "address": "大樹區學城路一段1號"
+            },
             "finish": 0
         }
     ]
