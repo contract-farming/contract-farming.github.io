@@ -8,14 +8,14 @@ Method: `PUT`
 
 ### 請求格式
 * `year`: 年度                     [`0-65535`]
-* `no`: 期號 一年有三期             [`0-255`]
+* `no`: 期號 一年有三期             [`1`, `2`, `3`]
 * `farmer`: 引用契作農民的 uuid
 * `finish`: 是否結案 (Y/N)          [`0`, `1`]
 
 ```js
 {
     "year": number;     // [`0-65535`]
-    "no": number;       // [`0-255`]
+    "no": number;       // [`1`, `2`, `3`]
     "farmer": number;   // farmer uuid
     "finish": number;   // [0, 1]   (Y/N)
 }
