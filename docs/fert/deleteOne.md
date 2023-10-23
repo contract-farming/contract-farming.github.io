@@ -3,7 +3,7 @@
 刪除其中一個肥料種類
 
 PATH: `/api/fert/deleteOne`  
-Method: `POST`
+Method: `DELETE`
 
 
 ### 請求格式

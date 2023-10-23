@@ -3,7 +3,7 @@
 刪除其中一個契作合約
 
 PATH: `/api/contract/deleteOne`  
-Method: `POST`
+Method: `DELETE`
 
 
 ### 請求格式

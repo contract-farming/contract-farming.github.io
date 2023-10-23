@@ -3,7 +3,7 @@
 刪除其中一個作物品種
 
 PATH: `/api/crop/deleteOne`  
-Method: `POST`
+Method: `DELETE`
 
 
 ### 請求格式

@@ -3,7 +3,7 @@
 刪除其中一塊農地
 
 PATH: `/api/land/deleteOne`  
-Method: `POST`
+Method: `DELETE`
 
 
 ### 請求格式

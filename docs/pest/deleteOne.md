@@ -3,7 +3,7 @@
 刪除其中一個農藥種類
 
 PATH: `/api/pest/deleteOne`  
-Method: `POST`
+Method: `DELETE`
 
 
 ### 請求格式

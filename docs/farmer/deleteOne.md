@@ -3,7 +3,7 @@
 刪除其中一個作契作農民
 
 PATH: `/api/farmer/deleteOne`  
-Method: `POST`
+Method: `DELETE`
 
 
 ### 請求格式
