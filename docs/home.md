@@ -37,4 +37,9 @@ sidebar_position: 1
 | [`/api/contract/addOne`](./contract/addOne.md) | [**POST**] | 增加一個 契作合約  
 | [`/api/contract/deleteOne`](./contract/deleteOne.md) | [**DELETE**] | 刪除其中一個 契作合約  
 | [`/api/contract/updateOne`](./contract/updateOne.md) | [**POST**] | 更新一個 契作合約 資料  
+| 契作農地 |  |  |
+| [`/api/cl/getAll`](./cl/getAll.md) | [**GET**] | 獲取所有 契作農地 資料  
+| [`/api/cl/addOne`](./cl/addOne.md) | [**POST**] | 增加一個 契作農地  
+| [`/api/cl/deleteOne`](./cl/deleteOne.md) | [**DELETE**] | 刪除其中一個 契作農地  
+| [`/api/cl/updateOne`](./cl/updateOne.md) | [**POST**] | 更新一個 契作農地 資料  
 
