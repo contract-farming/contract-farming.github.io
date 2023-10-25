@@ -29,6 +29,20 @@
 | `"SERVER_ERROR"` | 伺服器錯誤 (內部錯誤) |
 
 
+### CLMissingType
+契作農地 引用的外鍵未找到類型
+
+| Type | Description |
+| :------ | :------ |
+| `"CONTRACT_UUID"` | 契作合約 uuid |
+| `"LAND_UUID"` | 農地 uuid |
+| `"CROP_UUID"` | 作物品種 uuid |
+| `"WEED_PEST_UUID"` | 除草的農藥種類 uuid |
+| `"SPRAY_PEST_UUID"` | 噴藥的農藥種類 uuid |
+| `"PRE_FERT_UUID"` | 穗前肥的肥料種類 uuid |
+| `"POST_FERT_UUID"` | 穗後肥的肥料種類 uuid |
+
+
 ### PhoneNumber
 電話號碼
 
