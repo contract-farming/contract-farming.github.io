@@ -15,6 +15,7 @@ Method: `PUT`
 
 ```js
 {
+    "uuid": number,
     "year": number;     // [`0-65535`]
     "no": number;       // [`1`, `2`, `3`]
     "farmer": number;   // farmer uuid

@@ -21,6 +21,7 @@ Method: `PUT`
 
 ```js
 {
+    "uuid": number,
     "no": string;
     "lot": string;
     "class": "田" | "旱" | null;
