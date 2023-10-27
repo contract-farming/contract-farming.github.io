@@ -1,5 +1,14 @@
 # 資料類型
 
+
+### RequestParameterFormat
+請求參數佔位符
+
+| Code | Description |
+| :------ | :------ |
+| `"EMPTY_DATA"` | 表示該參數為 null |
+
+
 ### StatusCode
 回傳狀態碼
 

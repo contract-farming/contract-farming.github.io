@@ -55,6 +55,11 @@ Method: `POST`
 * `harvest_date`: 日期              (`YYYY-MM-DD`)
 
 :::note
+除了確認只能為 [`0`, `1`] 以外其他參數可為空值 (`null`)  
+如果參數要表示空值則需使用 [**空值佔位符** (`'EMPTY_DATA'`)](../types.md#requestparameterformat) 來表示 null
+:::
+
+:::note
 **日期**
     日期須為 YYYY-MM-DD 格式的字串  
     ex: `"2023-10-22"`
@@ -62,52 +67,52 @@ Method: `POST`
 
 ```js
 {
-    "contract": number;           // 引用契作合約的 uuid      (INT)
-    "land": number;               // 引用農地的 uuid          (INT)
-    "crop": number;               // 引用作物品種的 uuid      (INT)
+    "contract": number | 'EMPTY_DATA';          // 引用契作合約的 uuid      (INT)
+    "land": number | 'EMPTY_DATA';              // 引用農地的 uuid          (INT)
+    "crop": number | 'EMPTY_DATA';              // 引用作物品種的 uuid      (INT)
 
     // 整地
-    "prepare_confirm": number;    // 確認                     (Y/N) [0, 1]
-    "prepare_date": string;       // 日期                     Date (YYYY-MM-DD)
+    "prepare_confirm": number;                  // 確認                     (Y/N) [0, 1]
+    "prepare_date": string | 'EMPTY_DATA';      // 日期                     Date (YYYY-MM-DD)
 
     // 插秧
-    "plant_confirm": number;      // 確認                     (Y/N) [0, 1]
-    "plant_recv_date": string;    // 領苗日期                 Date (YYYY-MM-DD)
-    "plant_date": string;         // 插秧日期                 Date (YYYY-MM-DD)
-    "plant_count": number;        // 秧苗數量                 (INT_UNSIGNED)
-    "plant_name": string;         // 秧苗領取人               string(20)
+    "plant_confirm": number;                    // 確認                     (Y/N) [0, 1]
+    "plant_recv_date": string | 'EMPTY_DATA';   // 領苗日期                 Date (YYYY-MM-DD)
+    "plant_date": string | 'EMPTY_DATA';        // 插秧日期                 Date (YYYY-MM-DD)
+    "plant_count": number | 'EMPTY_DATA';       // 秧苗數量                 (INT_UNSIGNED)
+    "plant_name": string | 'EMPTY_DATA';        // 秧苗領取人               string(20)
 
     // 除草
-    "weed_confirm": number;       // 確認                     (Y/N) [0, 1]
-    "weed_date": string;          // 日期                     Date (YYYY-MM-DD)
-    "weed_pest": number;          // 引用農藥種類的 uuid       (INT)
-    "weed_amount": number;        // 用量(公升)               float
+    "weed_confirm": number;                     // 確認                     (Y/N) [0, 1]
+    "weed_date": string | 'EMPTY_DATA';         // 日期                     Date (YYYY-MM-DD)
+    "weed_pest": number | 'EMPTY_DATA';         // 引用農藥種類的 uuid       (INT)
+    "weed_amount": number | 'EMPTY_DATA';       // 用量(公升)               float
 
     // 噴藥
-    "spray_confirm": number;      // 確認                     (Y/N) [0, 1]
-    "spray_date": string;         // 日期                     Date (YYYY-MM-DD)
-    "spray_pest": number;         // 引用農藥種類的 uuid       (INT)
-    "spray_amount": number;       // 用量(公升)               float
+    "spray_confirm": number;                    // 確認                     (Y/N) [0, 1]
+    "spray_date": string | 'EMPTY_DATA';        // 日期                     Date (YYYY-MM-DD)
+    "spray_pest": number | 'EMPTY_DATA';        // 引用農藥種類的 uuid       (INT)
+    "spray_amount": number | 'EMPTY_DATA';      // 用量(公升)               float
 
     // 曬田
-    "bask_confirm": number;       // 確認                     (Y/N) [0, 1]
-    "bask_date": string;          // 日期                     Date (YYYY-MM-DD)
+    "bask_confirm": number;                     // 確認                     (Y/N) [0, 1]
+    "bask_date": string | 'EMPTY_DATA';         // 日期                     Date (YYYY-MM-DD)
 
     // 穗前肥
-    "pre_fert_confirm": number;   // 確認                     (Y/N) [0, 1]
-    "pre_fert_date": string;      // 日期                     Date (YYYY-MM-DD)
-    "pre_fert": number;           // 引用肥料種類的 uuid       (INT)
-    "pre_fert_amount": number;    // 用量(公升)               float
+    "pre_fert_confirm": number;                 // 確認                     (Y/N) [0, 1]
+    "pre_fert_date": string | 'EMPTY_DATA';     // 日期                     Date (YYYY-MM-DD)
+    "pre_fert": number | 'EMPTY_DATA';          // 引用肥料種類的 uuid       (INT)
+    "pre_fert_amount": number | 'EMPTY_DATA';   // 用量(公升)               float
 
     // 穗後肥
-    "post_fert_confirm": number;  // 確認                     (Y/N) [0, 1]
-    "post_fert_date": string;     // 日期                     Date (YYYY-MM-DD)
-    "post_fert": number;          // 引用肥料種類的 uuid       (INT)
-    "post_fert_amount": number;   // 用量(公升)               float
+    "post_fert_confirm": number;                // 確認                     (Y/N) [0, 1]
+    "post_fert_date": string | 'EMPTY_DATA';    // 日期                     Date (YYYY-MM-DD)
+    "post_fert": number | 'EMPTY_DATA';         // 引用肥料種類的 uuid       (INT)
+    "post_fert_amount": number | 'EMPTY_DATA';  // 用量(公升)               float
 
     // 採收
-    "harvest_confirm": number;    // 確認                     (Y/N) [0, 1]
-    "harvest_date": string;       // 日期                     Date (YYYY-MM-DD)
+    "harvest_confirm": number;                  // 確認                     (Y/N) [0, 1]
+    "harvest_date": string | 'EMPTY_DATA';      // 日期                     Date (YYYY-MM-DD)
 }
 ```
 
@@ -130,36 +135,52 @@ Method: `POST`
     "loadType": LoadType,
     "data": [
         {
-            contract: 5,
-            land: 100,
-            crop: 41,
-            prepare_confirm: 0,
-            prepare_date: "2023-09-09",
-            plant_confirm: 0,
-            plant_recv_date: "2023-09-09",
-            plant_date: "2023-09-09",
-            plant_count: 10,
-            plant_name: 莊O城,
-            weed_confirm: 0,
-            weed_date: "2023-09-09",
-            weed_pest: 3,
-            weed_amount: 10,
-            spray_confirm: 0,
-            spray_date: "2023-09-09",
-            spray_pest: 3,
-            spray_amount: 10,
-            bask_confirm: 0,
-            bask_date: "2023-09-09",
-            pre_fert_confirm: 0,
-            pre_fert_date: "2023-09-09",
-            pre_fert: 21,
-            pre_fert_amount: 10,
-            post_fert_confirm: 0,
-            post_fert_date: "2023-09-09",
-            post_fert: 21,
-            post_fert_amount: 10,
-            harvest_confirm: 0,
-            harvest_date: "2023-09-09"
+            contract: number | 'EMPTY_DATA',            // 引用契作合約的 資料
+            land: number | 'EMPTY_DATA',                // 引用農地的 資料
+            crop: number | 'EMPTY_DATA',                // 引用作物品種的 資料
+
+            // 整地
+            prepare_confirm: number,                    // 確認                     (Y/N) [0, 1]
+            prepare_date: string | 'EMPTY_DATA',        // 日期                     Date (YYYY-MM-DD)
+
+            // 插秧
+            plant_confirm: number,                      // 確認                     (Y/N) [0, 1]
+            plant_recv_date: string | 'EMPTY_DATA',     // 領苗日期                 Date (YYYY-MM-DD)
+            plant_date: string | 'EMPTY_DATA',          // 插秧日期                 Date (YYYY-MM-DD)
+            plant_count: number | 'EMPTY_DATA',         // 秧苗數量                 (INT_UNSIGNED)
+            plant_name: string | 'EMPTY_DATA',          // 秧苗領取人               string(20)
+
+            // 除草
+            weed_confirm: number,                       // 確認                     (Y/N) [0, 1]
+            weed_date: string | 'EMPTY_DATA',           // 日期                     Date (YYYY-MM-DD)
+            weed_pest: number | 'EMPTY_DATA',           // 引用農藥種類的 資料
+            weed_amount: number | 'EMPTY_DATA',         // 用量(公升)               float
+
+            // 噴藥
+            spray_confirm: number,                      // 確認                     (Y/N) [0, 1]
+            spray_date: string | 'EMPTY_DATA',          // 日期                     Date (YYYY-MM-DD)
+            spray_pest: number | 'EMPTY_DATA',          // 引用農藥種類的 資料
+            spray_amount: number | 'EMPTY_DATA',        // 用量(公升)               float
+
+            // 曬田
+            bask_confirm: number,                       // 確認                     (Y/N) [0, 1]
+            bask_date: string | 'EMPTY_DATA',           // 日期                     Date (YYYY-MM-DD)
+
+            // 穗前肥
+            pre_fert_confirm: number,                   // 確認                     (Y/N) [0, 1]
+            pre_fert_date: string | 'EMPTY_DATA',       // 日期                     Date (YYYY-MM-DD)
+            pre_fert: number | 'EMPTY_DATA',            // 引用肥料種類的 資料
+            pre_fert_amount: number | 'EMPTY_DATA',     // 用量(公升)               float
+
+            // 穗後肥
+            post_fert_confirm: number,                  // 確認                     (Y/N) [0, 1]
+            post_fert_date: string | 'EMPTY_DATA',      // 日期                     Date (YYYY-MM-DD)
+            post_fert: number | 'EMPTY_DATA',           // 引用肥料種類的 資料
+            post_fert_amount: number | 'EMPTY_DATA',    // 用量(公升)               float
+
+            // 採收
+            harvest_confirm: number,                    // 確認                     (Y/N) [0, 1]
+            harvest_date: string | 'EMPTY_DATA'         // 日期                     Date (YYYY-MM-DD)
         }
     ]
 }
@@ -188,9 +209,9 @@ Method: `POST`
             "weed_pest": 3,
             "weed_amount": 10,
             "spray_confirm": 0,
-            "spray_date": "2023-09-09",
-            "spray_pest": 3,
-            "spray_amount": 10,
+            "spray_date": null,
+            "spray_pest": null,
+            "spray_amount": null,
             "bask_confirm": 0,
             "bask_date": "2023-09-09",
             "pre_fert_confirm": 0,
@@ -202,7 +223,7 @@ Method: `POST`
             "post_fert": 21,
             "post_fert_amount": 10,
             "harvest_confirm": 0,
-            "harvest_date": "2023-09-09"
+            "harvest_date": null
         }
     ]
 }
