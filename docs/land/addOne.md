@@ -25,6 +25,11 @@ Method: `POST`
  * 3：一般地段：不能作產銷履歷的地段
 :::
 
+:::note
+`class`, `area_right`, `area_arable` 可以為空值
+如果參數要表示空值則需使用 [**空值佔位符** (`'EMPTY_DATA'`)](../types.md#requestparameterformat) 來表示 null
+:::
+
 ```js
 {
     "no": string;
