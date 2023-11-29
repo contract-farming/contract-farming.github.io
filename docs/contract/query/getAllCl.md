@@ -63,7 +63,7 @@ Method: `GET`
 
 :::note
 除了確認只能為 [`0`, `1`] 以外其他參數可為空值 (`null`)  
-獲取內容時只會獲得到 null 而非 [**空值佔位符** (`'EMPTY_DATA'`)](../types.md#requestparameterformat)
+獲取內容時只會獲得到 null 而非 [**空值佔位符** (`'EMPTY_DATA'`)](../../types.md#requestparameterformat)
 :::
 
 :::note
@@ -71,8 +71,8 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
 但無法直接對外鍵中的資料進行直接操作修改，只能使用外鍵的 uuid 進行
 :::
 
-[`StatusCode`](../types.md#statuscode)  
-[`LoadType`](../types.md#loadtype)  
+[`StatusCode`](../../types.md#statuscode)  
+[`LoadType`](../../types.md#loadtype)  
 
 ```js
 {
