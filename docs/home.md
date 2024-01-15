@@ -5,6 +5,13 @@ sidebar_position: 1
 
 # API 文檔
 
+:::note
+path: '/api/version';     // API 路徑
+method: 'GET';            // 請求方法
+loginRequired: `false`;     // 此API調用是否需要登入
+allowPermissions: `[1,2]`;     // 用陣列裝 允許的權限帳號 為空則為全都允許
+:::
+
 
 | Path | Method | Description |
 | :------ | :------ | :------ |

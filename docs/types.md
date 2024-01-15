@@ -16,6 +16,8 @@
 | :------ | :------ |
 | 200 | ok |
 | 400 | 請求參數錯誤 |
+| 401 | 請求未授權 |
+| 403 | 請求權限不足 |
 | 404 | 請求路徑錯誤 |
 | 500 | Server 錯誤 |
 
@@ -26,6 +28,9 @@
 | Type | Description |
 | :------ | :------ |
 | `"SUCCEED"` | 成功回傳 |
+| `"UNAUTHORIZED"` | 未登入或請求 header 沒帶 sessionID |
+| `"FORBIDDEN"` | 此 sessionID 沒權限請求 |
+| `"VERIFY_SESSION"` | 此 loadtype 表示為登入相關的狀態, 有多一個 authDetails 狀態碼 |
 | `"PARAMETER_ERROR"` | 請求參數錯誤 |
 | `"PATH_ERROR"` | 請求路徑錯誤 (404) |
 | `"DATA_EXISTED"` | 資料庫已存在該資料 |
@@ -36,6 +41,19 @@
 | `"ROW_IS_REFERENCED"` | 此項資料已被引用 |
 | `"QUERY_FAILED"` | 資料庫查詢錯誤 (內部錯誤) |
 | `"SERVER_ERROR"` | 伺服器錯誤 (內部錯誤) |
+
+
+### AuthDetails
+登入相關的狀態碼
+
+| Type | Description |
+| :------ | :------ |
+| `"SUCCEED_LOGIN"` | 登入成功 |
+| `"SUCCEED_LOGOUT"` | 登出成功 |
+| `"LOGIN_FAILED"` | 登入失敗 (帳號或密碼錯誤) |
+| `"BLOCKED_LOGIN"` | 嘗試登入太多次 鎖定一段時間 |
+| `"SESSION_EXISTS"` | 請求時已帶入有效的 sessionId 跳過登入 |
+| `"SESSION_INVALID"` | 請求時帶入的 sessionId 無效 (可能閒置太久過期了), 可重定向至登入介面 |
 
 
 ### CLMissingType
