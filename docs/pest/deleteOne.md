@@ -3,7 +3,9 @@
 刪除其中一個農藥種類
 
 PATH: `/api/pest/deleteOne`  
-Method: `DELETE`
+Method: `DELETE`  
+LoginRequired: `true`  
+AllowPermissions: `[]`  
 
 
 ### 請求格式
@@ -14,6 +16,7 @@ Method: `DELETE`
     "uuid": number
 }
 ```
+
 
 ### 回傳格式
 
@@ -42,6 +45,7 @@ Method: `DELETE`
     ]
 }
 ```
+
 
 ### 回傳範例
 成功刪除  

@@ -3,7 +3,9 @@
 獲取其中一個 契作合約 下的所有契作農地
 
 PATH: `/api/contract/query/getAllCl`  
-Method: `GET`
+Method: `GET`  
+LoginRequired: `true`  
+AllowPermissions: `[]`  
 
 
 ### 請求格式
@@ -131,6 +133,7 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
     ]
 }
 ```
+
 
 ### 回傳範例
 回傳 契作合約 下的所有契作農地

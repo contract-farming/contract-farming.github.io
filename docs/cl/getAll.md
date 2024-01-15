@@ -3,7 +3,9 @@
 獲取契作農地所有內容
 
 PATH: `/api/cl/getAll`  
-Method: `GET`
+Method: `GET`  
+LoginRequired: `true`  
+AllowPermissions: `[]`  
 
 
 ### 回傳格式
@@ -127,6 +129,7 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
     ]
 }
 ```
+
 
 ### 回傳範例
 ```json

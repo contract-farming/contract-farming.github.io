@@ -3,7 +3,9 @@
 獲取其中一個農藥種類內容
 
 PATH: `/api/pest/getOne`  
-Method: `GET`
+Method: `GET`  
+LoginRequired: `true`  
+AllowPermissions: `[]`  
 
 
 ### 請求格式
@@ -31,6 +33,7 @@ Method: `GET`
     ]
 }
 ```
+
 
 ### 回傳範例
 存在該資料

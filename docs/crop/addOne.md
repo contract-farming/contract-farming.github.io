@@ -3,7 +3,9 @@
 增加一個作物品種
 
 PATH: `/api/crop/addOne`  
-Method: `POST`
+Method: `POST`  
+LoginRequired: `true`  
+AllowPermissions: `[]`  
 
 
 ### 請求格式
@@ -18,6 +20,7 @@ Method: `POST`
     "unit": number
 }
 ```
+
 
 ### 回傳格式
 
@@ -45,6 +48,7 @@ Method: `POST`
     ]
 }
 ```
+
 
 ### 回傳範例
 成功新增

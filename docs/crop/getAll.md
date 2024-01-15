@@ -3,7 +3,9 @@
 獲取作物品種所有內容
 
 PATH: `/api/crop/getAll`  
-Method: `GET`
+Method: `GET`  
+LoginRequired: `true`  
+AllowPermissions: `[]`  
 
 
 ### 回傳格式
@@ -31,6 +33,7 @@ Method: `GET`
     ]
 }
 ```
+
 
 ### 回傳範例
 ```json

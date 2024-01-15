@@ -3,7 +3,9 @@
 更新一個肥料種類資料
 
 PATH: `/api/fert/updateOne`  
-Method: `PUT`
+Method: `PUT`  
+LoginRequired: `true`  
+AllowPermissions: `[]`  
 
 
 ### 請求格式
@@ -16,6 +18,7 @@ Method: `PUT`
     "name": string
 }
 ```
+
 
 ### 回傳格式
 
@@ -44,6 +47,7 @@ Method: `PUT`
     ]
 }
 ```
+
 
 ### 回傳範例
 成功更新  

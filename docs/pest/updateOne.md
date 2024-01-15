@@ -3,7 +3,9 @@
 更新一個農藥種類資料
 
 PATH: `/api/pest/updateOne`  
-Method: `PUT`
+Method: `PUT`  
+LoginRequired: `true`  
+AllowPermissions: `[]`  
 
 
 ### 請求格式
@@ -16,6 +18,7 @@ Method: `PUT`
     "name": string
 }
 ```
+
 
 ### 回傳格式
 
@@ -44,6 +47,7 @@ Method: `PUT`
     ]
 }
 ```
+
 
 ### 回傳範例
 成功更新  

@@ -3,7 +3,9 @@
 獲取農藥種類所有內容
 
 PATH: `/api/pest/getAll`  
-Method: `GET`
+Method: `GET`  
+LoginRequired: `true`  
+AllowPermissions: `[]`  
 
 
 ### 回傳格式
@@ -27,6 +29,7 @@ Method: `GET`
     ]
 }
 ```
+
 
 ### 回傳範例
 ```json

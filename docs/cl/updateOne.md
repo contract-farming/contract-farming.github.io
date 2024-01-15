@@ -3,7 +3,9 @@
 更新一塊契作農地
 
 PATH: `/api/cl/updateOne`  
-Method: `PUT`
+Method: `PUT`  
+LoginRequired: `true`  
+AllowPermissions: `[]`  
 
 
 ### 請求格式
@@ -112,6 +114,7 @@ Method: `PUT`
 }
 ```
 
+
 ### 回傳格式
 
 回傳 data 為陣列內含成功更新的 契作農地 資料  
@@ -183,6 +186,7 @@ Method: `PUT`
     ]
 }
 ```
+
 
 ### 回傳範例
 成功更新  

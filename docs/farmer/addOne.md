@@ -3,7 +3,9 @@
 增加一個契作農民
 
 PATH: `/api/farmer/addOne`  
-Method: `POST`
+Method: `POST`  
+LoginRequired: `true`  
+AllowPermissions: `[]`  
 
 
 ### 請求格式
@@ -20,6 +22,7 @@ Method: `POST`
     "address": string,
 }
 ```
+
 
 ### 回傳格式
 
@@ -48,6 +51,7 @@ Method: `POST`
     ]
 }
 ```
+
 
 ### 回傳範例
 成功新增

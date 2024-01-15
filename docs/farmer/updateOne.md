@@ -3,7 +3,9 @@
 更新一個契作農民資料
 
 PATH: `/api/farmer/updateOne`  
-Method: `PUT`
+Method: `PUT`  
+LoginRequired: `true`  
+AllowPermissions: `[]`  
 
 
 ### 請求格式
@@ -22,6 +24,7 @@ Method: `PUT`
     "address": string,
 }
 ```
+
 
 ### 回傳格式
 
@@ -53,6 +56,7 @@ Method: `PUT`
     ]
 }
 ```
+
 
 ### 回傳範例
 成功更新  

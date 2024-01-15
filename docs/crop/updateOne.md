@@ -3,7 +3,9 @@
 更新一個作物品種資料
 
 PATH: `/api/crop/updateOne`  
-Method: `PUT`
+Method: `PUT`  
+LoginRequired: `true`  
+AllowPermissions: `[]`  
 
 
 ### 請求格式
@@ -20,6 +22,7 @@ Method: `PUT`
     "unit": number,
 }
 ```
+
 
 ### 回傳格式
 
@@ -50,6 +53,7 @@ Method: `PUT`
     ]
 }
 ```
+
 
 ### 回傳範例
 成功更新  

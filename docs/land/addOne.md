@@ -3,7 +3,9 @@
 增加一塊農地
 
 PATH: `/api/land/addOne`  
-Method: `POST`
+Method: `POST`  
+LoginRequired: `true`  
+AllowPermissions: `[]`  
 
 
 ### 請求格式
@@ -45,6 +47,7 @@ Method: `POST`
 }
 ```
 
+
 ### 回傳格式
 
 回傳 data 為陣列內含成功新增的 農地 資料  
@@ -79,6 +82,7 @@ Method: `POST`
     ]
 }
 ```
+
 
 ### 回傳範例
 成功新增

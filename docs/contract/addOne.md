@@ -3,7 +3,9 @@
 增加一個契作合約
 
 PATH: `/api/contract/addOne`  
-Method: `POST`
+Method: `POST`  
+LoginRequired: `true`  
+AllowPermissions: `[]`  
 
 
 ### 請求格式
@@ -20,6 +22,7 @@ Method: `POST`
     "finish": number;   // [0, 1]   (Y/N)
 }
 ```
+
 
 ### 回傳格式
 
@@ -48,6 +51,7 @@ Method: `POST`
     ]
 }
 ```
+
 
 ### 回傳範例
 成功新增

@@ -3,7 +3,9 @@
 增加一個農藥種類
 
 PATH: `/api/pest/addOne`  
-Method: `POST`
+Method: `POST`  
+LoginRequired: `true`  
+AllowPermissions: `[]`  
 
 
 ### 請求格式
@@ -14,6 +16,7 @@ Method: `POST`
     "name": string
 }
 ```
+
 
 ### 回傳格式
 
@@ -41,6 +44,7 @@ Method: `POST`
     ]
 }
 ```
+
 
 ### 回傳範例
 成功新增

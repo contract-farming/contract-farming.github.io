@@ -3,7 +3,9 @@
 獲取農地所有內容
 
 PATH: `/api/land/getAll`  
-Method: `GET`
+Method: `GET`  
+LoginRequired: `true`  
+AllowPermissions: `[]`  
 
 
 ### 回傳格式
@@ -60,6 +62,7 @@ Method: `GET`
     ]
 }
 ```
+
 
 ### 回傳範例
 ```json

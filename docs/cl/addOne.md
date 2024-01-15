@@ -3,7 +3,9 @@
 增加一塊契作農地
 
 PATH: `/api/cl/addOne`  
-Method: `POST`
+Method: `POST`  
+LoginRequired: `true`  
+AllowPermissions: `[]`  
 
 
 ### 請求格式
@@ -116,6 +118,7 @@ Method: `POST`
 }
 ```
 
+
 ### 回傳格式
 
 回傳 data 為陣列內含成功新增的 契作農地 資料  
@@ -185,6 +188,7 @@ Method: `POST`
     ]
 }
 ```
+
 
 ### 回傳範例
 成功新增

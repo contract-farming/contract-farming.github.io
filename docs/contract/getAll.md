@@ -3,7 +3,9 @@
 獲取契作合約所有內容
 
 PATH: `/api/contract/getAll`  
-Method: `GET`
+Method: `GET`  
+LoginRequired: `true`  
+AllowPermissions: `[]`  
 
 
 ### 回傳格式
@@ -39,6 +41,7 @@ Method: `GET`
     ]
 }
 ```
+
 
 ### 回傳範例
 ```json

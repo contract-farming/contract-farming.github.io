@@ -3,7 +3,9 @@
 獲取其中一個契作合約內容
 
 PATH: `/api/contract/getOne`  
-Method: `GET`
+Method: `GET`  
+LoginRequired: `true`  
+AllowPermissions: `[]`  
 
 
 ### 請求格式
@@ -43,6 +45,7 @@ Method: `GET`
     ]
 }
 ```
+
 
 ### 回傳範例
 存在該資料

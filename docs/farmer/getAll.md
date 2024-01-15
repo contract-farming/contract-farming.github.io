@@ -3,7 +3,9 @@
 獲取 Farmer 所有內容
 
 PATH: `/api/farmer/getAll`  
-Method: `GET`
+Method: `GET`  
+LoginRequired: `true`  
+AllowPermissions: `[]`  
 
 
 ### 回傳格式
@@ -34,6 +36,7 @@ Method: `GET`
     ]
 }
 ```
+
 
 ### 回傳範例
 ```json
