@@ -9,7 +9,7 @@ AllowPermissions: `[]`
 
 
 ### 請求格式
-* `username`: 帳號 (`需剛好100個字`)
+* `username`: 帳號 (`最大100個字`)
 * `password`: 密碼 (`最大100個字`)
 
 ```js
