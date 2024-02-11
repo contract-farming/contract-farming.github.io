@@ -17,7 +17,12 @@ AllowPermissions: `[]`
 * `unit`: 產量單位 (1: 台斤, 2: 公斤)
 
 [`StatusCode`](../../types.md#statuscode)  
+* 200
+* 500
+
 [`LoadType`](../../types.md#loadtype)  
+* `"SUCCEED"`
+* `"QUERY_FAILED"`
 
 ```js
 {
@@ -48,5 +53,14 @@ AllowPermissions: `[]`
             "unit": 1
         }
     ]
+}
+```
+
+Server 錯誤  
+```json
+{
+    "status": 500,
+    "loadType": "QUERY_FAILED",
+    "data": []
 }
 ```

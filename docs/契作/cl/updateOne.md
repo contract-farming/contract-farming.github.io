@@ -122,12 +122,13 @@ AllowPermissions: `[]`
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 400
+* 500
 
 [`LoadType`](../../types.md#loadtype)  
 * `"SUCCEED"`
 * `"PARAMETER_ERROR"`
 * `"FK_NOT_FOUND"` [`"CLMissingType"`](../../types.md#clmissingtype)
-* `"SAME_DATA"`
+* `"QUERY_FAILED"`
 
 ```js
 {
@@ -275,46 +276,11 @@ AllowPermissions: `[]`
 }
 ```
 
-待更新的資料與舊有的資料相同  
-`data[]` 為舊有的資料
+Server 錯誤  
 ```json
 {
-    "status": 200,
-    "loadType": "SAME_DATA",
-    "data": [
-        {
-            "uuid": 1,
-            "contract": 5,
-            "land": 100,
-            "crop": 41,
-            "prepare_confirm": 0,
-            "prepare_date": "2023-09-09",
-            "plant_confirm": 0,
-            "plant_recv_date": "2023-09-09",
-            "plant_date": "2023-09-09",
-            "plant_count": 10,
-            "plant_name": "莊O城",
-            "weed_confirm": 0,
-            "weed_date": "2023-09-09",
-            "weed_pest": 3,
-            "weed_amount": 10,
-            "spray_confirm": 0,
-            "spray_date": "2023-09-09",
-            "spray_pest": 3,
-            "spray_amount": 10,
-            "bask_confirm": 0,
-            "bask_date": "2023-09-09",
-            "pre_fert_confirm": 0,
-            "pre_fert_date": "2023-09-09",
-            "pre_fert": 21,
-            "pre_fert_amount": 10,
-            "post_fert_confirm": 0,
-            "post_fert_date": "2023-09-09",
-            "post_fert": 21,
-            "post_fert_amount": 10,
-            "harvest_confirm": 0,
-            "harvest_date": "2023-09-09"
-        }
-    ]
+    "status": 500,
+    "loadType": "QUERY_FAILED",
+    "data": []
 }
 ```

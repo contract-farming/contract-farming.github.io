@@ -36,8 +36,8 @@ AllowPermissions: `[]`
 * `"SUCCEED"`
 * `"PARAMETER_ERROR"`
 * `"DATA_NOT_FOUND"`
-* `"DATA_CONFLICT"`
-* `"SAME_DATA"`
+* `"DATA_EXISTED"`
+* `"QUERY_FAILED"`
 
 ```js
 {
@@ -91,36 +91,28 @@ AllowPermissions: `[]`
 }
 ```
 
-待更新的資料與原有資料庫的其他資料相同  
+在資料庫中已存在與待更新資料相同的資料  
 `data[]` 為資料庫中相同的資料
 ```json
 {
     "status": 200,
-    "loadType": "DATA_CONFLICT",
+    "loadType": "DATA_EXISTED",
     "data": [
         {
             "uuid": 22,
             "name": "高雄147",
-            "unit_yield": 555,
+            "unit_yield": 50,
             "unit": 2
         }
     ]
 }
 ```
 
-待更新的資料與舊有的資料相同  
-`data[]` 為舊有的資料
+Server 錯誤  
 ```json
 {
-    "status": 200,
-    "loadType": "SAME_DATA",
-    "data": [
-        {
-            "uuid": 12,
-            "name": "高雄155",
-            "unit_yield": 30,
-            "unit": 1
-        }
-    ]
+    "status": 500,
+    "loadType": "QUERY_FAILED",
+    "data": []
 }
 ```

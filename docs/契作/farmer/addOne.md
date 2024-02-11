@@ -31,11 +31,13 @@ AllowPermissions: `[]`
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 400
+* 500
 
 [`LoadType`](../../types.md#loadtype)  
 * `"SUCCEED"`
 * `"PARAMETER_ERROR"`
 * `"DATA_EXISTED"`
+* `"QUERY_FAILED"`
 
 ```js
 {
@@ -95,5 +97,14 @@ AllowPermissions: `[]`
             "address": "大樹區學城路一段1號"
         }
     ]
+}
+```
+
+Server 錯誤  
+```json
+{
+    "status": 500,
+    "loadType": "QUERY_FAILED",
+    "data": []
 }
 ```

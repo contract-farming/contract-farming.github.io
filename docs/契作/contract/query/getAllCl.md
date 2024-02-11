@@ -74,7 +74,12 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
 :::
 
 [`StatusCode`](../../../types.md#statuscode)  
+* 200
+* 500
+
 [`LoadType`](../../../types.md#loadtype)  
+* `"SUCCEED"`
+* `"QUERY_FAILED"`
 
 ```js
 {
@@ -259,6 +264,15 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
 {
     "status": 200,
     "loadType": "FK_NOT_FOUND",
+    "data": []
+}
+```
+
+Server 錯誤  
+```json
+{
+    "status": 500,
+    "loadType": "QUERY_FAILED",
     "data": []
 }
 ```

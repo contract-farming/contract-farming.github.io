@@ -15,7 +15,12 @@ AllowPermissions: `[]`
 * `name`: 肥料種類名稱
 
 [`StatusCode`](../../types.md#statuscode)  
+* 200
+* 500
+
 [`LoadType`](../../types.md#loadtype)  
+* `"SUCCEED"`
+* `"QUERY_FAILED"`
 
 ```js
 {
@@ -42,5 +47,14 @@ AllowPermissions: `[]`
             "name": "肥料一號"
         }
     ]
+}
+```
+
+Server 錯誤  
+```json
+{
+    "status": 500,
+    "loadType": "QUERY_FAILED",
+    "data": []
 }
 ```

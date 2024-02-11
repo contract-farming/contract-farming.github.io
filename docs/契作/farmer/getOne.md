@@ -22,7 +22,13 @@ AllowPermissions: `[]`
 * `address`: 農民地址
 
 [`StatusCode`](../../types.md#statuscode)  
+* 200
+* 500
+
 [`LoadType`](../../types.md#loadtype)  
+* `"SUCCEED"`
+* `"QUERY_FAILED"`
+
 [`PhoneNumber`](../../types.md#phonenumber)  
 
 ```js
@@ -74,6 +80,15 @@ AllowPermissions: `[]`
 {
     "status": 200,
     "loadType": "DATA_NOT_FOUND",
+    "data": []
+}
+```
+
+Server 錯誤  
+```json
+{
+    "status": 500,
+    "loadType": "QUERY_FAILED",
     "data": []
 }
 ```

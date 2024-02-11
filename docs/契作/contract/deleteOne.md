@@ -25,11 +25,14 @@ AllowPermissions: `[]`
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 400
+* 500
 
 [`LoadType`](../../types.md#loadtype)  
 * `"SUCCEED"`
 * `"PARAMETER_ERROR"`
 * `"DATA_NOT_FOUND"`
+* `"ROW_IS_REFERENCED"`
+* `"QUERY_FAILED"`
 
 ```js
 {
@@ -81,6 +84,24 @@ AllowPermissions: `[]`
 {
     "status": 200,
     "loadType": "DATA_NOT_FOUND",
+    "data": []
+}
+```
+
+該契作合約已被引用無法刪除
+```json
+{
+    "status": 200,
+    "loadType": "ROW_IS_REFERENCED",
+    "data": []
+}
+```
+
+Server 錯誤  
+```json
+{
+    "status": 500,
+    "loadType": "QUERY_FAILED",
     "data": []
 }
 ```

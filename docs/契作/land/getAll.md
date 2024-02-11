@@ -39,7 +39,12 @@ AllowPermissions: `[]`
 :::
 
 [`StatusCode`](../../types.md#statuscode)  
+* 200
+* 500
+
 [`LoadType`](../../types.md#loadtype)  
+* `"SUCCEED"`
+* `"QUERY_FAILED"`
 
 ```js
 {
@@ -110,5 +115,14 @@ AllowPermissions: `[]`
             "contracting": 0
         }
     ]
+}
+```
+
+Server 錯誤  
+```json
+{
+    "status": 500,
+    "loadType": "QUERY_FAILED",
+    "data": []
 }
 ```

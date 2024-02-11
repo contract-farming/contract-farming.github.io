@@ -31,11 +31,13 @@ AllowPermissions: `[]`
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 400
+* 500
 
 [`LoadType`](../../types.md#loadtype)  
 * `"SUCCEED"`
 * `"PARAMETER_ERROR"`
 * `"FK_NOT_FOUND"`
+* `"QUERY_FAILED"`
 
 ```js
 {
@@ -96,3 +98,12 @@ AllowPermissions: `[]`
 
 已存在該資料  
 **不檢查是否重複新增該資料，因為農民可能會開很多張同樣的合約**
+
+Server 錯誤  
+```json
+{
+    "status": 500,
+    "loadType": "QUERY_FAILED",
+    "data": []
+}
+```

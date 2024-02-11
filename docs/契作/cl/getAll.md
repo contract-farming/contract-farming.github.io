@@ -70,7 +70,12 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
 :::
 
 [`StatusCode`](../../types.md#statuscode)  
+* 200
+* 500
+
 [`LoadType`](../../types.md#loadtype)  
+* `"SUCCEED"`
+* `"QUERY_FAILED"`
 
 ```js
 {
@@ -286,5 +291,14 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
             "harvest_date": "2023-09-09"
         }
     ]
+}
+```
+
+Server 錯誤  
+```json
+{
+    "status": 500,
+    "loadType": "QUERY_FAILED",
+    "data": []
 }
 ```

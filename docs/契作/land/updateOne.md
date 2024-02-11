@@ -57,13 +57,14 @@ AllowPermissions: `[]`
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 400
+* 500
 
 [`LoadType`](../../types.md#loadtype)  
 * `"SUCCEED"`
 * `"PARAMETER_ERROR"`
 * `"DATA_NOT_FOUND"`
-* `"DATA_CONFLICT"`
-* `"SAME_DATA"`
+* `"DATA_EXISTED"`
+* `"QUERY_FAILED"`
 
 ```js
 {
@@ -131,12 +132,12 @@ AllowPermissions: `[]`
 }
 ```
 
-待更新的資料與原有資料庫的其他資料相同  
+在資料庫中已存在與待更新資料相同的資料  
 `data[]` 為資料庫中相同的資料
 ```json
 {
     "status": 200,
-    "loadType": "DATA_CONFLICT",
+    "loadType": "DATA_EXISTED",
     "data": [
         {
             "uuid": 448,
@@ -155,26 +156,11 @@ AllowPermissions: `[]`
 }
 ```
 
-待更新的資料與舊有的資料相同  
-`data[]` 為舊有的資料
+Server 錯誤  
 ```json
 {
-    "status": 200,
-    "loadType": "SAME_DATA",
-    "data": [
-        {
-            "uuid": 801,
-            "no": "112233456545",
-            "lot": "新園仙隆",
-            "class": "田",
-            "owner_name": "簡金璋",
-            "owner_id": "T123456789",
-            "area": 0.335341,
-            "area_right": 0.010061,
-            "area_arable": 0.244786,
-            "type": 1,
-            "contracting": 0
-        }
-    ]
+    "status": 500,
+    "loadType": "QUERY_FAILED",
+    "data": []
 }
 ```

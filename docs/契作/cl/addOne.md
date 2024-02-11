@@ -126,11 +126,13 @@ AllowPermissions: `[]`
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 400
+* 500
 
 [`LoadType`](../../types.md#loadtype)  
 * `"SUCCEED"`
 * `"PARAMETER_ERROR"`
 * `"FK_NOT_FOUND"` [`"CLMissingType"`](../../types.md#clmissingtype)
+* `"QUERY_FAILED"`
 
 ```js
 {
@@ -262,6 +264,15 @@ AllowPermissions: `[]`
     "status": 200,
     "loadType": "FK_NOT_FOUND",
     "missingType": "CROP_UUID",
+    "data": []
+}
+```
+
+Server 錯誤  
+```json
+{
+    "status": 500,
+    "loadType": "QUERY_FAILED",
     "data": []
 }
 ```
