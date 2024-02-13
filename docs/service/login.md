@@ -5,7 +5,8 @@ sidebar_position: 2
 
 # 登入
 
-登入
+登入  
+未驗證註冊使用者無法登入  
 
 PATH: `/api/login`  
 Method: `POST`  
@@ -29,18 +30,18 @@ AllowPermissions: `[]`
 
 回傳 data 為陣列內含登入成功的 sessionId  
 
-[`StatusCode`](./types.md#statuscode)  
+[`StatusCode`](../types.md#statuscode)  
 * 200
 * 400
 * 401
 
-[`LoadType`](./types.md#loadtype)  
+[`LoadType`](../types.md#loadtype)  
 * `"PARAMETER_ERROR"`
-* `"VERIFY_SESSION"`
+* `"TYPE_SESSION"` [`"AuthDetails"`](../types.md#authdetails)
 
-[`AuthDetails`](./types.md#authdetails)  
+[`AuthDetails`](../types.md#authdetails)  
 * `"SUCCEED_LOGIN"`
-* `"LOGIN_FAILED"`
+* `"FAILED_LOGIN"`
 * `"SESSION_EXISTS"`
 * `"BLOCKED_LOGIN"`
 

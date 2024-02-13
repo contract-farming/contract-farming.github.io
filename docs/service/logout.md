@@ -20,23 +20,17 @@ AllowPermissions: `[]`
 ### 回傳格式
 需在登入的狀態下才有用 (cookie 中有 sessionId)  
 
-[`StatusCode`](./types.md#statuscode)  
+[`StatusCode`](../types.md#statuscode)  
 * 200
 * 401
 
-[`LoadType`](./types.md#loadtype)  
-* `"PARAMETER_ERROR"`
-* `"VERIFY_SESSION"`
-
-[`AuthDetails`](./types.md#authdetails)  
-* `"SUCCEED_LOGOUT"`
-* `"UNAUTHORIZED"`
+[`LoadType`](../types.md#loadtype)  
+* `"SUCCEED"`
 
 ```js
 {
     "status": StatusCode,
-    "loadType": LoadType,
-    "authDetails": AuthDetails,
+    "loadType": LoadType
     "data": []
 }
 ```
@@ -47,8 +41,7 @@ AllowPermissions: `[]`
 ```json
 {
     "status": 200,
-    "loadType": "VERIFY_SESSION",
-    "authDetails": "SUCCEED_LOGOUT",
+    "loadType": "SUCCEED",
     "data": []
 }
 ```
