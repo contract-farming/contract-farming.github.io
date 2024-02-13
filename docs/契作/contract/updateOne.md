@@ -27,19 +27,17 @@ AllowPermissions: `[]`
 
 
 ### 回傳格式
-
-回傳 data 為陣列內含成功更新的 契作合約 資料  
-
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 400
+* 500
 
 [`LoadType`](../../types.md#loadtype)  
 * `"SUCCEED"`
 * `"PARAMETER_ERROR"`
 * `"DATA_NOT_FOUND"`
-* `"FK_NOT_FOUND"`
-* `"SAME_DATA"`
+* `"FK_NOT_FOUND"` [`"CLMissingType"`](../../types.md#clmissingtype)
+* `"QUERY_FAILED"`
 
 ```js
 {
@@ -110,20 +108,11 @@ AllowPermissions: `[]`
 }
 ```
 
-待更新的資料與舊有的資料相同  
-`data[]` 為舊有的資料
+Server 錯誤  
 ```json
 {
-    "status": 200,
-    "loadType": "SAME_DATA",
-    "data": [
-        {
-            "uuid": 4,
-            "year": 2020,
-            "no": 2,
-            "farmer": 190,
-            "finish": 1
-        }
-    ]
+    "status": 500,
+    "loadType": "QUERY_FAILED",
+    "data": []
 }
 ```

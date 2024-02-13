@@ -25,12 +25,10 @@ AllowPermissions: `[]`
 
 
 ### 回傳格式
-
-回傳 data 為陣列內含成功更新的 作物品種 資料  
-
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 400
+* 500
 
 [`LoadType`](../../types.md#loadtype)  
 * `"SUCCEED"`

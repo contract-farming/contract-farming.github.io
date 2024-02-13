@@ -19,11 +19,6 @@ AllowPermissions: `[]`
 
 
 ### 回傳格式
-
-回傳 data 為陣列內含成功新增的 農藥種類 資料  
-
-* `name`: 農藥種類名稱
-
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 400
@@ -39,11 +34,7 @@ AllowPermissions: `[]`
 {
     "status": StatusCode,
     "loadType": LoadType,
-    "data": [
-        {
-            "name": string
-        }
-    ]
+    "data": []
 }
 ```
 

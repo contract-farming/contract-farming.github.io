@@ -25,9 +25,6 @@ AllowPermissions: `[]`
 
 
 ### 回傳格式
-
-回傳 data 為陣列內含成功新增的 契作合約 資料  
-
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 400
@@ -36,7 +33,7 @@ AllowPermissions: `[]`
 [`LoadType`](../../types.md#loadtype)  
 * `"SUCCEED"`
 * `"PARAMETER_ERROR"`
-* `"FK_NOT_FOUND"`
+* `"FK_NOT_FOUND"` [`"CLMissingType"`](../../types.md#clmissingtype)
 * `"QUERY_FAILED"`
 
 ```js

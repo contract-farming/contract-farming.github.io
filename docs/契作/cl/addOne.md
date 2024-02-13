@@ -120,9 +120,6 @@ AllowPermissions: `[]`
 
 
 ### 回傳格式
-
-回傳 data 為陣列內含成功新增的 契作農地 資料  
-
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 400

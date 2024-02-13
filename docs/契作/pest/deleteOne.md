@@ -19,9 +19,6 @@ AllowPermissions: `[]`
 
 
 ### 回傳格式
-
-回傳 data 為陣列內含成功刪除的 農藥種類 資料  
-
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 400

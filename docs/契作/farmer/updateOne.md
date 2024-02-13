@@ -27,9 +27,6 @@ AllowPermissions: `[]`
 
 
 ### 回傳格式
-
-回傳 data 為陣列內含成功更新的 契作農民 資料  
-
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 500
