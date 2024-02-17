@@ -8,7 +8,7 @@ sidebar_position: 2
 登入  
 未驗證註冊使用者無法登入  
 
-PATH: `/api/login`  
+PATH: `/api/service/login`  
 Method: `POST`  
 LoginRequired: `false`  
 AllowPermissions: `[]`  

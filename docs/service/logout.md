@@ -7,7 +7,7 @@ sidebar_position: 3
 
 登出
 
-PATH: `/api/logout`  
+PATH: `/api/service/logout`  
 Method: `POST`  
 LoginRequired: `true`  
 AllowPermissions: `[]`  
