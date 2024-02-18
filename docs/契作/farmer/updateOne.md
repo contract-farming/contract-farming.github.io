@@ -8,7 +8,7 @@ LoginRequired: `true`
 AllowPermissions: `[]`  
 
 
-### 請求格式
+## 請求格式
 * `uuid`: 契作農民的 uuid (`不可更新`)
 * `id`: 待更新的身分證 (`需剛好10個字`)
 * `name`: 待更新的農民名稱 (`最大20個字`)
@@ -26,78 +26,53 @@ AllowPermissions: `[]`
 ```
 
 
-### 回傳格式
+## 回傳格式
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 500
 
 [`LoadType`](../../types.md#loadtype)  
-* `"SUCCEED"`
-* `"PARAMETER_ERROR"`
-* `"DATA_NOT_FOUND"`
-* `"DATA_EXISTED"`
-* `"QUERY_FAILED"`
-
-```js
-{
-    "status": StatusCode,
-    "loadType": LoadType,
-    "data": [
-        {
-            "uuid": number,
-            "id": string,
-            "name": string,
-            "phone": string,
-            "address": string,
-        }
-    ]
-}
-```
+* `SUCCEED`
+* `PARAMETER_ERROR`
+* `DATA_NOT_FOUND`
+* `DATA_EXISTED`
+* `QUERY_FAILED`
 
 
-### 回傳範例
-成功更新  
-`data[]` 為成功更新後的資料  
+## 回傳範例
+### 成功更新  
 ```json
 {
     "status": 200,
-    "loadType": "SUCCEED",
-    "data": [
-        {
-            "uuid": 12,
-            "id": "A123456789",
-            "name": "方O洋",
-            "phone": "07-1234567",
-            "address": "大樹區學城路一段1號"
-        }
-    ]
+    "loadType": LoadType.SUCCEED,
+    "data": []
 }
 ```
 
-參數錯誤
+### 參數錯誤
 ```json
 {
     "status": 400,
-    "loadType": "PARAMETER_ERROR",
+    "loadType": LoadType.PARAMETER_ERROR,
     "data": []
 }
 ```
 
-不存在該資料
+### 不存在該資料
 ```json
 {
     "status": 200,
-    "loadType": "DATA_NOT_FOUND",
+    "loadType": LoadType.DATA_NOT_FOUND,
     "data": []
 }
 ```
 
-在資料庫中已存在與待更新資料相同的資料  
+### 在資料庫中已存在與待更新資料相同的資料  
 `data[]` 為資料庫中相同的資料
 ```json
 {
     "status": 200,
-    "loadType": "DATA_EXISTED",
+    "loadType": LoadType.DATA_EXISTED,
     "data": [
         {
             "uuid": 100,
@@ -110,11 +85,11 @@ AllowPermissions: `[]`
 }
 ```
 
-Server 錯誤  
+### Server 錯誤  
 ```json
 {
     "status": 500,
-    "loadType": "QUERY_FAILED",
+    "loadType": LoadType.QUERY_FAILED,
     "data": []
 }
 ```

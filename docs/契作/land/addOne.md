@@ -8,11 +8,11 @@ LoginRequired: `true`
 AllowPermissions: `[]`  
 
 
-### 請求格式
-* `no`: 地號        (`最大長度20`)
-* `lot`: 地段       (`最大長度10`)
+## 請求格式
+* `no`: 地號        (`最大20個字`)
+* `lot`: 地段       (`最大10個字`)
 * `class`: 地目                 [`"田"`, `"旱"`, `null`]
-* `owner_name`: 所有權人_姓名   (`最大長度10`)
+* `owner_name`: 所有權人_姓名   (`最大10個字`)
 * `owner_id`: 所有權人_身分證   (`身分證為10碼字串`)
 * `area`: 本筆面積              (`小數點後六位`)
 * `area_right`: 權利面積        (`小數點後六位或 null`)
@@ -48,80 +48,45 @@ AllowPermissions: `[]`
 ```
 
 
-### 回傳格式
+## 回傳格式
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 400
 * 500
 
 [`LoadType`](../../types.md#loadtype)  
-* `"SUCCEED"`
-* `"PARAMETER_ERROR"`
-* `"DATA_EXISTED"`
-* `"QUERY_FAILED"`
-
-```js
-{
-    "status": StatusCode,
-    "loadType": LoadType,
-    "data": [
-        {
-            uuid: number;
-            no: string;
-            lot: string;
-            class: "田" | "旱" | null;
-            owner_name: string;
-            owner_id: string;
-            area: number;
-            area_right: number | null;
-            area_arable: number | null;
-            type: number;           // [1, 2, 3]
-            contracting: number;    // [0, 1]   (Y/N)
-        }
-    ]
-}
-```
+* `SUCCEED`
+* `PARAMETER_ERROR`
+* `DATA_EXISTED`
+* `QUERY_FAILED`
 
 
-### 回傳範例
-成功新增
+## 回傳範例
+### 成功新增
 ```json
 {
     "status": 200,
-    "loadType": "SUCCEED",
-    "data": [
-        {
-            "no": "112233456545",
-            "lot": "新園仙隆",
-            "class": "田",
-            "owner_name": "簡金璋",
-            "owner_id": "T123456789",
-            "area": 0.335341,
-            "area_right": 0.010061,
-            "area_arable": 0.244786,
-            "type": 1,
-            "contracting": 0
-        }
-    ]
-}
-```
-
-參數錯誤
-```json
-{
-    "status": 400,
-    "loadType": "PARAMETER_ERROR",
+    "loadType": LoadType.SUCCEED,
     "data": []
 }
 ```
 
-已存在該資料  
+### 參數錯誤
+```json
+{
+    "status": 400,
+    "loadType": LoadType.PARAMETER_ERROR,
+    "data": []
+}
+```
+
+### 已存在該資料  
 待添加的資料已存在資料庫中  
 `data[]` 為已存在資料庫的資料
 ```json
 {
     "status": 200,
-    "loadType": "DATA_EXISTED",
+    "loadType": LoadType.DATA_EXISTED,
     "data": [
         {
             "uuid": 226,
@@ -140,11 +105,11 @@ AllowPermissions: `[]`
 }
 ```
 
-Server 錯誤  
+### Server 錯誤  
 ```json
 {
     "status": 500,
-    "loadType": "QUERY_FAILED",
+    "loadType": LoadType.QUERY_FAILED,
     "data": []
 }
 ```

@@ -8,11 +8,17 @@ LoginRequired: `true`
 AllowPermissions: `[]`  
 
 
-### 請求格式
+## 請求格式
 * `uuid`: 農地的 uuid
 
+```js
+{
+    "uuid": number
+}
+```
 
-### 回傳格式
+
+## 回傳格式
 
 回傳 data 為陣列內含指定的 農地 資料  
 
@@ -47,13 +53,17 @@ AllowPermissions: `[]`
 * 500
 
 [`LoadType`](../../types.md#loadtype)  
-* `"SUCCEED"`
-* `"QUERY_FAILED"`
+* `SUCCEED`
+* `QUERY_FAILED`
 
+
+## 回傳範例
+### 成功回傳
+格式
 ```js
 {
     "status": StatusCode,
-    "loadType": LoadType,
+    "loadType": LoadType.SUCCEED,
     "data": [
         {
             uuid: number;
@@ -71,14 +81,11 @@ AllowPermissions: `[]`
     ]
 }
 ```
-
-
-### 回傳範例
-存在該資料
+範例
 ```json
 {
     "status": 200,
-    "loadType": "SUCCEED",
+    "loadType": LoadType.SUCCEED,
     "data": [
         {
             "uuid": 343,
@@ -92,60 +99,34 @@ AllowPermissions: `[]`
             "area_arable": null,
             "type": 1,
             "contracting": 0
-        },
-        {
-            "uuid": 344,
-            "no": "01910000",
-            "lot": "新埤南岸",
-            "class": null,
-            "owner_name": "林方意",
-            "owner_id": "T221521905",
-            "area": 0.6421,
-            "area_right": 0.6421,
-            "area_arable": 0.6421,
-            "type": 1,
-            "contracting": 0
-        },
-        {
-            "uuid": 345,
-            "no": "05000000",
-            "lot": "潮州劉厝庄",
-            "class": "田",
-            "owner_name": "劉穎文",
-            "owner_id": "T123356888",
-            "area": 0.422734,
-            "area_right": null,
-            "area_arable": null,
-            "type": 1,
-            "contracting": 0
         }
     ]
 }
 ```
 
-參數錯誤
+### 參數錯誤
 ```json
 {
     "status": 400,
-    "loadType": "PARAMETER_ERROR",
+    "loadType": LoadType.PARAMETER_ERROR,
     "data": []
 }
 ```
 
-不存在該資料
+### 不存在該資料
 ```json
 {
     "status": 200,
-    "loadType": "DATA_NOT_FOUND",
+    "loadType": LoadType.DATA_NOT_FOUND,
     "data": []
 }
 ```
 
-Server 錯誤  
+### Server 錯誤  
 ```json
 {
     "status": 500,
-    "loadType": "QUERY_FAILED",
+    "loadType": LoadType.QUERY_FAILED,
     "data": []
 }
 ```

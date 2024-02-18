@@ -8,7 +8,7 @@ LoginRequired: `true`
 AllowPermissions: `[]`  
 
 
-### 請求格式
+## 請求格式
 * `year`: 年度                     [`0-65535`]
 * `no`: 期號 一年有三期             [`1`, `2`, `3`]
 * `farmer`: 引用契作農民的 uuid
@@ -24,7 +24,7 @@ AllowPermissions: `[]`
 ```
 
 
-### 回傳格式
+## 回傳格式
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 400
@@ -52,8 +52,8 @@ AllowPermissions: `[]`
 ```
 
 
-### 回傳範例
-成功新增
+## 回傳範例
+### 成功新增
 ```json
 {
     "status": 200,
@@ -69,7 +69,7 @@ AllowPermissions: `[]`
 }
 ```
 
-參數錯誤
+### 參數錯誤
 ```json
 {
     "status": 400,
@@ -78,7 +78,7 @@ AllowPermissions: `[]`
 }
 ```
 
-引用的 farmer 不存在  
+### 引用的 farmer 不存在  
 如果引用的 farmer 不存在於資料庫中則回傳 `FK_NOT_FOUND`  
 `data[]` 為不存在的 farmer uuid
 ```json
@@ -93,10 +93,10 @@ AllowPermissions: `[]`
 }
 ```
 
-已存在該資料  
+### 已存在該資料  
 **不檢查是否重複新增該資料，因為農民可能會開很多張同樣的合約**
 
-Server 錯誤  
+### Server 錯誤  
 ```json
 {
     "status": 500,

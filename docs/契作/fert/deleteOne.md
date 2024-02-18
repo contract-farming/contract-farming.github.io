@@ -8,7 +8,7 @@ LoginRequired: `true`
 AllowPermissions: `[]`  
 
 
-### 請求格式
+## 請求格式
 * `name`: 待刪除的 肥料種類 uuid
 
 ```js
@@ -18,79 +18,58 @@ AllowPermissions: `[]`
 ```
 
 
-### 回傳格式
+## 回傳格式
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 400
 * 500
 
 [`LoadType`](../../types.md#loadtype)  
-* `"SUCCEED"`
-* `"PARAMETER_ERROR"`
-* `"DATA_NOT_FOUND"`
-* `"ROW_IS_REFERENCED"`
-* `"QUERY_FAILED"`
-
-```js
-{
-    "status": StatusCode,
-    "loadType": LoadType,
-    "data": [
-        {
-            "uuid": number,
-            "name": string,
-            "unit_yield": number,
-            "unit": number
-        }
-    ]
-}
-```
+* `SUCCEED`
+* `PARAMETER_ERROR`
+* `DATA_NOT_FOUND`
+* `ROW_IS_REFERENCED`
+* `QUERY_FAILED`
 
 
-### 回傳範例
-成功刪除  
-`data[]` 為成功刪除的資料
+## 回傳範例
+### 成功刪除  
 ```json
 {
     "status": 200,
-    "loadType": "SUCCEED",
-    "data": [
-        {
-            "uuid": 11,
-            "name": "肥料五號"
-        }
-    ]
+    "loadType": LoadType.SUCCEED,
+    "data": []
 }
 ```
 
-參數錯誤
+### 參數錯誤
 ```json
 {
     "status": 400,
-    "loadType": "PARAMETER_ERROR",
+    "loadType": LoadType.PARAMETER_ERROR,
     "data": []
 }
 ```
 
-未找到該資料
+### 未找到該資料
 ```json
 {
     "status": 200,
-    "loadType": "DATA_NOT_FOUND",
+    "loadType": LoadType.DATA_NOT_FOUND,
     "data": []
 }
 ```
 
-該肥料種類已被引用無法刪除
+### 該肥料種類已被引用無法刪除
 ```json
 {
     "status": 200,
-    "loadType": "ROW_IS_REFERENCED",
+    "loadType": LoadType.ROW_IS_REFERENCED,
     "data": []
 }
 ```
 
-Server 錯誤  
+### Server 錯誤  
 ```json
 {
     "status": 500,

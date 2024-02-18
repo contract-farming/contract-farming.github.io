@@ -8,11 +8,17 @@ LoginRequired: `true`
 AllowPermissions: `[]`  
 
 
-### 請求格式
+## 請求格式
 * `uuid`: 契作農民的 uuid
 
+```js
+{
+    "uuid": number
+}
+```
 
-### 回傳格式
+
+## 回傳格式
 
 回傳 data 為陣列內含指定的 farmer 資料  
 
@@ -26,15 +32,20 @@ AllowPermissions: `[]`
 * 500
 
 [`LoadType`](../../types.md#loadtype)  
-* `"SUCCEED"`
-* `"QUERY_FAILED"`
+* `SUCCEED`
+* `QUERY_FAILED`
 
 [`PhoneNumber`](../../types.md#phonenumber)  
 
+
+
+## 回傳範例
+### 成功回傳
+格式
 ```js
 {
     "status": StatusCode,
-    "loadType": LoadType,
+    "loadType": LoadType.SUCCEED,
     "data": [
         {
             "uuid": number,
@@ -46,14 +57,11 @@ AllowPermissions: `[]`
     ]
 }
 ```
-
-
-### 回傳範例
-存在該資料
+範例
 ```json
 {
     "status": 200,
-    "loadType": "SUCCEED",
+    "loadType": LoadType.SUCCEED,
     "data": [
         {
             "uuid": 35,
@@ -66,29 +74,29 @@ AllowPermissions: `[]`
 }
 ```
 
-參數錯誤
+### 參數錯誤
 ```json
 {
     "status": 400,
-    "loadType": "PARAMETER_ERROR",
+    "loadType": LoadType.PARAMETER_ERROR,
     "data": []
 }
 ```
 
-不存在該資料
+### 不存在該資料
 ```json
 {
     "status": 200,
-    "loadType": "DATA_NOT_FOUND",
+    "loadType": LoadType.DATA_NOT_FOUND,
     "data": []
 }
 ```
 
-Server 錯誤  
+### Server 錯誤  
 ```json
 {
     "status": 500,
-    "loadType": "QUERY_FAILED",
+    "loadType": LoadType.QUERY_FAILED,
     "data": []
 }
 ```

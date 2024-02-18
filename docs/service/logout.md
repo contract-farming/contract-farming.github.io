@@ -5,7 +5,8 @@ sidebar_position: 3
 
 # 登出
 
-登出
+登出  
+用 sessionId 獲取資料  
 
 PATH: `/api/service/logout`  
 Method: `POST`  
@@ -25,15 +26,8 @@ AllowPermissions: `[]`
 * 401
 
 [`LoadType`](../types.md#loadtype)  
-* `"SUCCEED"`
-
-```js
-{
-    "status": StatusCode,
-    "loadType": LoadType
-    "data": []
-}
-```
+* `SUCCEED`
+* `UNAUTHORIZED`
 
 
 ### 回傳範例
@@ -41,7 +35,7 @@ AllowPermissions: `[]`
 ```json
 {
     "status": 200,
-    "loadType": "SUCCEED",
+    "loadType": LoadType.SUCCEED,
     "data": []
 }
 ```
@@ -50,7 +44,7 @@ AllowPermissions: `[]`
 ```json
 {
     "status": 401,
-    "loadType": "UNAUTHORIZED",
+    "loadType": LoadType.UNAUTHORIZED,
     "data": []
 }
 ```

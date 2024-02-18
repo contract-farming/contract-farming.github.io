@@ -10,61 +10,57 @@ LoginRequired: `true`
 AllowPermissions: `[]`  
 
 
-### 請求格式
-* `old_passwprd`: 舊密碼
-* `new_password`: 新密碼
+## 請求格式
+* `old_passwprd`: 舊密碼 (`最大100個字`)
+* `new_password`: 新密碼 (`最大100個字`)
 
 忘記密碼要管理員發重設密碼郵件  
 
+```js
+{
+    "old_passwprd": string,
+    "new_password": string
+}
+```
 
-### 回傳格式
+
+## 回傳格式
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 401
 * 500
 
 [`LoadType`](../../types.md#loadtype)  
-* `"SUCCEED"`
-* `"TYPE_ACCOUNT"` [`"AccDetails"`](../../types.md#accdetails)
-* `"QUERY_FAILED"`
-
-[`"AccDetails"`](../../types.md#accdetails)
-* `"ACCOUNT_NOT_EXISTS"`
-
-```js
-{
-    "status": StatusCode,
-    "loadType": LoadType,
-    "data": []
-}
-```
+* `SUCCEED`
+* `ACCOUNT_NOT_EXISTS`
+* `QUERY_FAILED`
 
 
-### 回傳範例
-更新成功
+## 回傳範例
+### 更新成功
 ```json
 {
     "status": 200,
-    "loadType": "SUCCEED",
+    "loadType": LoadType.SUCCEED,
     "data": []
 }
 ```
 
-sessionId 不存在 (未登入或過期)
+### sessionId 不存在 
+(未登入或過期)  
 ```json
 {
     "status": 401,
-    "loadType": "UNAUTHORIZED",
+    "loadType": LoadType.UNAUTHORIZED,
     "data": []
 }
 ```
 
-該 username 不存在
+### 該 username 不存在
 ```json
 {
     "status": 200,
-    "loadType": "TYPE_ACCOUNT",
-    "accDetails": "OLD_PASSWORD_ERROR",
+    "loadType": LoadType.OLD_PASSWORD_ERROR,
     "data": [
         {
             "username": "user10",
@@ -75,11 +71,11 @@ sessionId 不存在 (未登入或過期)
 }
 ```
 
-Server 錯誤  
+### Server 錯誤  
 ```json
 {
     "status": 500,
-    "loadType": "QUERY_FAILED",
+    "loadType": LoadType.QUERY_FAILED,
     "data": []
 }
 ```

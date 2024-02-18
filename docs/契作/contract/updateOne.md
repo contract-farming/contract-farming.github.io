@@ -8,7 +8,7 @@ LoginRequired: `true`
 AllowPermissions: `[]`  
 
 
-### 請求格式
+## 請求格式
 * `uuid`: 契作合約的 uuid (`不可更新`)
 * `year`: 年度                     [`0-65535`]
 * `no`: 期號 一年有三期             [`1`, `2`, `3`]
@@ -26,93 +26,65 @@ AllowPermissions: `[]`
 ```
 
 
-### 回傳格式
+## 回傳格式
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 400
 * 500
 
 [`LoadType`](../../types.md#loadtype)  
-* `"SUCCEED"`
-* `"PARAMETER_ERROR"`
-* `"DATA_NOT_FOUND"`
-* `"FK_NOT_FOUND"` [`"CLMissingType"`](../../types.md#clmissingtype)
-* `"QUERY_FAILED"`
-
-```js
-{
-    "status": StatusCode,
-    "loadType": LoadType,
-    "data": [
-        {
-            "uuid": number,
-            "year": number,
-            "no": number,
-            "farmer": number,
-            "finish": number
-        }
-    ]
-}
-```
+* `SUCCEED`
+* `PARAMETER_ERROR`
+* `DATA_NOT_FOUND`
+* `FK_NOT_FOUND`
+* `QUERY_FAILED`
 
 
-### 回傳範例
-成功更新  
-`data[]` 為成功更新後的資料  
+## 回傳範例
+### 成功更新  
 ```json
 {
     "status": 200,
-    "loadType": "SUCCEED",
-    "data": [
-        {
-            "uuid": 3,
-            "year": 2020,
-            "no": 2,
-            "farmer": 190,
-            "finish": 1
-        }
-    ]
+    "loadType": LoadType.SUCCEED,
+    "data": []
 }
 ```
 
-參數錯誤
+### 參數錯誤
 ```json
 {
     "status": 400,
-    "loadType": "PARAMETER_ERROR",
+    "loadType": LoadType.PARAMETER_ERROR,
     "data": []
 }
 ```
 
-不存在該資料
+### 不存在該資料
 ```json
 {
     "status": 200,
-    "loadType": "DATA_NOT_FOUND",
+    "loadType": LoadType.DATA_NOT_FOUND,
     "data": []
 }
 ```
 
-引用的 farmer 不存在  
+### 引用的 farmer 不存在  
 如果引用的 farmer 不存在於資料庫中則回傳 `FK_NOT_FOUND`  
 `data[]` 為不存在的 farmer uuid
 ```json
 {
     "status": 200,
-    "loadType": "FK_NOT_FOUND",
-    "data": [
-        {
-            "uuid": 1000,
-        }
-    ]
+    "loadType": LoadType.FK_NOT_FOUND,
+    "missingFK": MissingFK.FARMER_UUID,
+    "data": [{ "uuid": 1000 }]
 }
 ```
 
-Server 錯誤  
+### Server 錯誤  
 ```json
 {
     "status": 500,
-    "loadType": "QUERY_FAILED",
+    "loadType": LoadType.QUERY_FAILED,
     "data": []
 }
 ```

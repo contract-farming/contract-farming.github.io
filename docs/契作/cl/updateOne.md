@@ -8,7 +8,7 @@ LoginRequired: `true`
 AllowPermissions: `[]`  
 
 
-### 請求格式
+## 請求格式
 * `uuid`: 契作農地的 uuid (`不可更新`)
 * `contract`: 引用契作合約的 uuid   
 * `land`: 引用農地的 uuid           
@@ -115,169 +115,76 @@ AllowPermissions: `[]`
 ```
 
 
-### 回傳格式
+## 回傳格式
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 400
 * 500
 
 [`LoadType`](../../types.md#loadtype)  
-* `"SUCCEED"`
-* `"PARAMETER_ERROR"`
-* `"FK_NOT_FOUND"` [`"CLMissingType"`](../../types.md#clmissingtype)
-* `"QUERY_FAILED"`
-
-```js
-{
-    "status": StatusCode,
-    "loadType": LoadType,
-    "data": [
-        {
-            uuid: number,
-            contract: number | 'EMPTY_DATA',            // 引用契作合約的 資料
-            land: number | 'EMPTY_DATA',                // 引用農地的 資料
-            crop: number | 'EMPTY_DATA',                // 引用作物品種的 資料
-
-            // 整地
-            prepare_confirm: number,                    // 確認                     (Y/N) [0, 1]
-            prepare_date: string | 'EMPTY_DATA',        // 日期                     Date (YYYY-MM-DD)
-
-            // 插秧
-            plant_confirm: number,                      // 確認                     (Y/N) [0, 1]
-            plant_recv_date: string | 'EMPTY_DATA',     // 領苗日期                 Date (YYYY-MM-DD)
-            plant_date: string | 'EMPTY_DATA',          // 插秧日期                 Date (YYYY-MM-DD)
-            plant_count: number | 'EMPTY_DATA',         // 秧苗數量                 (INT_UNSIGNED)
-            plant_name: string | 'EMPTY_DATA',          // 秧苗領取人               string(20)
-
-            // 除草
-            weed_confirm: number,                       // 確認                     (Y/N) [0, 1]
-            weed_date: string | 'EMPTY_DATA',           // 日期                     Date (YYYY-MM-DD)
-            weed_pest: number | 'EMPTY_DATA',           // 引用農藥種類的 資料
-            weed_amount: number | 'EMPTY_DATA',         // 用量(公升)               float
-
-            // 噴藥
-            spray_confirm: number,                      // 確認                     (Y/N) [0, 1]
-            spray_date: string | 'EMPTY_DATA',          // 日期                     Date (YYYY-MM-DD)
-            spray_pest: number | 'EMPTY_DATA',          // 引用農藥種類的 資料
-            spray_amount: number | 'EMPTY_DATA',        // 用量(公升)               float
-
-            // 曬田
-            bask_confirm: number,                       // 確認                     (Y/N) [0, 1]
-            bask_date: string | 'EMPTY_DATA',           // 日期                     Date (YYYY-MM-DD)
-
-            // 穗前肥
-            pre_fert_confirm: number,                   // 確認                     (Y/N) [0, 1]
-            pre_fert_date: string | 'EMPTY_DATA',       // 日期                     Date (YYYY-MM-DD)
-            pre_fert: number | 'EMPTY_DATA',            // 引用肥料種類的 資料
-            pre_fert_amount: number | 'EMPTY_DATA',     // 用量(公升)               float
-
-            // 穗後肥
-            post_fert_confirm: number,                  // 確認                     (Y/N) [0, 1]
-            post_fert_date: string | 'EMPTY_DATA',      // 日期                     Date (YYYY-MM-DD)
-            post_fert: number | 'EMPTY_DATA',           // 引用肥料種類的 資料
-            post_fert_amount: number | 'EMPTY_DATA',    // 用量(公升)               float
-
-            // 採收
-            harvest_confirm: number,                    // 確認                     (Y/N) [0, 1]
-            harvest_date: string | 'EMPTY_DATA'         // 日期                     Date (YYYY-MM-DD)
-        }
-    ]
-}
-```
+* `SUCCEED`
+* `PARAMETER_ERROR`
+* `FK_NOT_FOUND`
+* `QUERY_FAILED`
 
 
-### 回傳範例
-成功更新  
-`data[]` 為成功更新後的資料  
+## 回傳範例
+### 成功更新  
 ```json
 {
     "status": 200,
-    "loadType": "SUCCEED",
-    "data": [
-        {
-            "uuid": 1,
-            "contract": 5,
-            "land": 100,
-            "crop": 41,
-            "prepare_confirm": 0,
-            "prepare_date": "2023-09-10",
-            "plant_confirm": 0,
-            "plant_recv_date": "2023-09-09",
-            "plant_date": "2023-09-09",
-            "plant_count": 10,
-            "plant_name": "莊O城",
-            "weed_confirm": 0,
-            "weed_date": "2023-09-09",
-            "weed_pest": 3,
-            "weed_amount": 10,
-            "spray_confirm": 0,
-            "spray_date": "2023-09-09",
-            "spray_pest": 3,
-            "spray_amount": 10,
-            "bask_confirm": 0,
-            "bask_date": "2023-09-09",
-            "pre_fert_confirm": 0,
-            "pre_fert_date": "2023-09-09",
-            "pre_fert": 21,
-            "pre_fert_amount": 10,
-            "post_fert_confirm": 0,
-            "post_fert_date": "2023-09-09",
-            "post_fert": 21,
-            "post_fert_amount": 10,
-            "harvest_confirm": 0,
-            "harvest_date": "2023-09-09"
-        }
-    ]
+    "loadType": LoadType.SUCCEED,
+    "data": []
 }
 ```
 
-參數錯誤
+### 參數錯誤
 ```json
 {
     "status": 400,
-    "loadType": "PARAMETER_ERROR",
+    "loadType": LoadType.PARAMETER_ERROR,
     "data": []
 }
 ```
 
-不存在該資料
+### 不存在該資料
 ```json
 {
     "status": 200,
-    "loadType": "DATA_NOT_FOUND",
+    "loadType": LoadType.DATA_NOT_FOUND,
     "data": []
 }
 ```
 
-引用的 外鍵 不存在  
+### 引用的 外鍵 不存在  
 如果引用的 外鍵 不存在於資料庫中則依照缺失的外鍵回傳以下不同類型值  
 
-[CLMissingType](../../types.md#clmissingtype)  
-`'CONTRACT_UUID'`  
-`'LAND_UUID'`  
-`'CROP_UUID'`  
-`'WEED_PEST_UUID'`  
-`'SPRAY_PEST_UUID'`  
-`'PRE_FERT_UUID'`  
-`'POST_FERT_UUID'`  
+[MissingFK](../../types.md#missingfk)  
+`CONTRACT_UUID`  
+`LAND_UUID`  
+`CROP_UUID`  
+`WEED_PEST_UUID`  
+`SPRAY_PEST_UUID`  
+`PRE_FERT_UUID`  
+`POST_FERT_UUID`  
 
 `loadType` 為 `"FK_NOT_FOUND"`  
-`missingType` 為 缺失的外鍵類型  
+`missingFK` 為 缺失的外鍵類型  
 
 ```json
 {
     "status": 200,
-    "loadType": "FK_NOT_FOUND",
-    "missingType": "CROP_UUID",
+    "loadType": LoadType.FK_NOT_FOUND,
+    "missingType": MissingFK.CROP_UUID,
     "data": []
 }
 ```
 
-Server 錯誤  
+### Server 錯誤  
 ```json
 {
     "status": 500,
-    "loadType": "QUERY_FAILED",
+    "loadType": LoadType.QUERY_FAILED,
     "data": []
 }
 ```

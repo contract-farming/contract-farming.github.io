@@ -40,69 +40,37 @@ sidebar_position: 4
 
 | Type | Description |
 | :------ | :------ |
-| `"SUCCEED"` | 成功回傳 |
-| `"UNAUTHORIZED"` | 未登入或請求 header 沒帶 sessionID |
-| `"FORBIDDEN"` | 此 sessionID 沒權限請求 |
-| `"TYPE_ACCOUNT"` | 此 loadtype 表示為帳號註冊相關的狀態, 有多一個 accDetails 值 |
-| `"TYPE_SESSION"` | 此 loadtype 表示為登入相關的狀態, 有多一個 authDetails 狀態碼 |
-| `"TYPE_MAIL"` | 此 loadtype 表示為 mail 發送相關的狀態, 有多一個 mailDetails 值 |
-| `"PARAMETER_ERROR"` | 請求參數錯誤 |
-| `"PATH_ERROR"` | 請求路徑錯誤 (404) |
-| `"DATA_EXISTED"` | 資料庫已存在該資料 |
-| `"DATA_NOT_FOUND"` | 資料庫未找到該資料 |
-| `"DATA_CONFLICT"` | 待更新的資料與原有資料庫的其他資料衝突(相同) |
-| `"SAME_DATA"` | 新資料與舊資料相同 |
-| `"FK_NOT_FOUND"` | 引用的外鍵未找到 |
-| `"ROW_IS_REFERENCED"` | 此項資料已被引用 |
-| `"QUERY_FAILED"` | 資料庫查詢錯誤 (內部錯誤) |
-| `"SERVER_ERROR"` | 伺服器錯誤 (內部錯誤) |
+| `SUCCEED` | 成功回傳 |
+| `UNAUTHORIZED` | 未登入或請求 header 沒帶 sessionID |
+| `FORBIDDEN` | 此 sessionID 沒權限請求 |
+| `TYPE_ACCOUNT` | 此 loadtype 表示為帳號註冊相關的狀態, 有多一個 accDetails 值 |
+| `TYPE_SESSION` | 此 loadtype 表示為登入相關的狀態, 有多一個 authDetails 狀態碼 |
+| `TYPE_MAIL` | 此 loadtype 表示為 mail 發送相關的狀態, 有多一個 mailDetails 值 |
+| `PARAMETER_ERROR` | 請求參數錯誤 |
+| `PATH_ERROR` | 請求路徑錯誤 (404) |
+| `DATA_EXISTED` | 資料庫已存在該資料 |
+| `DATA_NOT_FOUND` | 資料庫未找到該資料 |
+| `DATA_CONFLICT` | 待更新的資料與原有資料庫的其他資料衝突(相同) |
+| `SAME_DATA` | 新資料與舊資料相同 |
+| `FK_NOT_FOUND` | 引用的外鍵未找到 |
+| `ROW_IS_REFERENCED` | 此項資料已被引用 |
+| `QUERY_FAILED` | 資料庫查詢錯誤 (內部錯誤) |
+| `SERVER_ERROR` | 伺服器錯誤 (內部錯誤) |
 
 
-### AuthDetails
-登入相關的狀態碼 (`"TYPE_SESSION"`)  
+### MissingFK
+引用的外鍵未找到類型
 
-| Type | Description |
+| FK | Description |
 | :------ | :------ |
-| `"SUCCEED_LOGIN"` | 登入成功 |
-| `"SUCCEED_LOGOUT"` | 登出成功 |
-| `"LOGIN_FAILED"` | 登入失敗 (帳號或密碼錯誤) |
-| `"BLOCKED_LOGIN"` | 嘗試登入太多次 鎖定一段時間 |
-| `"SESSION_EXISTS"` | 請求時已帶入有效的 sessionId 跳過登入 |
-| `"SESSION_INVALID"` | 請求時帶入的 sessionId 無效 (可能閒置太久過期了), 可重定向至登入介面 |
-
-
-### AccDetails
-帳號註冊相關的狀態碼 (`"TYPE_ACCOUNT"`)  
-
-| Type | Description |
-| :------ | :------ |
-| `"ACCOUNT_EXISTS"` | 帳號已存在 |
-| `"ACCOUNT_NOT_EXISTS"` | 帳號不存在 |
-| `"DISABLE"` | 註冊 api 已被停用 |
-| `"OLD_PASSWORD_ERROR"` | 舊密碼錯誤  (更改密碼 api 會出現) |
-
-
-### MailDetails
-mail 發送相關的狀態碼 (`"TYPE_MAIL"`)  
-
-| Type | Description |
-| :------ | :------ |
-| `"DISABLE"` | mail api 已被停用 |
-| `"SEND_FAIL"` | 發送信件失敗 |
-
-
-### CLMissingType
-契作農地 引用的外鍵未找到類型
-
-| Type | Description |
-| :------ | :------ |
-| `"CONTRACT_UUID"` | 契作合約 uuid |
-| `"LAND_UUID"` | 農地 uuid |
-| `"CROP_UUID"` | 作物品種 uuid |
-| `"WEED_PEST_UUID"` | 除草的農藥種類 uuid |
-| `"SPRAY_PEST_UUID"` | 噴藥的農藥種類 uuid |
-| `"PRE_FERT_UUID"` | 穗前肥的肥料種類 uuid |
-| `"POST_FERT_UUID"` | 穗後肥的肥料種類 uuid |
+| `CONTRACT_UUID` | 契作合約 uuid |
+| `FARMER_UUID` | 農民 uuid |
+| `LAND_UUID` | 農地 uuid |
+| `CROP_UUID` | 作物品種 uuid |
+| `WEED_PEST_UUID` | 除草的農藥種類 uuid |
+| `SPRAY_PEST_UUID` | 噴藥的農藥種類 uuid |
+| `PRE_FERT_UUID` | 穗前肥的肥料種類 uuid |
+| `POST_FERT_UUID` | 穗後肥的肥料種類 uuid |
 
 
 ### PhoneNumber

@@ -8,7 +8,7 @@ LoginRequired: `true`
 AllowPermissions: `[]`  
 
 
-### 請求格式
+## 請求格式
 * `uuid`: 農地的 uuid (`不可更新`)
 * `no`: 待更新的地號        (`最大長度20`)
 * `lot`: 待更新的地段       (`最大長度10`)
@@ -50,91 +50,54 @@ AllowPermissions: `[]`
 ```
 
 
-### 回傳格式
+## 回傳格式
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 400
 * 500
 
 [`LoadType`](../../types.md#loadtype)  
-* `"SUCCEED"`
-* `"PARAMETER_ERROR"`
-* `"DATA_NOT_FOUND"`
-* `"DATA_EXISTED"`
-* `"QUERY_FAILED"`
-
-```js
-{
-    "status": StatusCode,
-    "loadType": LoadType,
-    "data": [
-        {
-            uuid: number;
-            no: string;
-            lot: string;
-            class: "田" | "旱" | null;
-            owner_name: string;
-            owner_id: string;
-            area: number;
-            area_right: number | null;
-            area_arable: number | null;
-            type: number;           // [1, 2, 3]
-            contracting: number;    // [0, 1]   (Y/N)
-        }
-    ]
-}
-```
+* `SUCCEED`
+* `PARAMETER_ERROR`
+* `DATA_NOT_FOUND`
+* `DATA_EXISTED`
+* `QUERY_FAILED`
 
 
-### 回傳範例
-成功更新  
-`data[]` 為成功更新後的資料  
+## 回傳範例
+### 成功更新  
 ```json
 {
     "status": 200,
-    "loadType": "SUCCEED",
-    "data": [
-        {
-            "uuid": 800,
-            "no": "03400002",
-            "lot": "東港",
-            "class": "田",
-            "owner_name": "莊劉",
-            "owner_id": "A445684523",
-            "area": 0.401871,
-            "area_right": 0.100468,
-            "area_arable": 0.100468,
-            "type": 1,
-            "contracting": 0
-        }
-    ]
+    "loadType": LoadType.SUCCEED,
+    "data": []
 }
 ```
 
-參數錯誤
+### 參數錯誤
 ```json
 {
     "status": 400,
-    "loadType": "PARAMETER_ERROR",
+    "loadType": LoadType.PARAMETER_ERROR,
     "data": []
 }
 ```
 
-不存在該資料
+### 不存在該資料
 ```json
 {
     "status": 200,
-    "loadType": "DATA_NOT_FOUND",
+    "loadType": LoadType.DATA_NOT_FOUND,
     "data": []
 }
 ```
 
-在資料庫中已存在與待更新資料相同的資料  
+### 在資料庫中已存在與待更新資料相同的資料  
 `data[]` 為資料庫中相同的資料
 ```json
 {
     "status": 200,
-    "loadType": "DATA_EXISTED",
+    "loadType": LoadType.DATA_EXISTED,
     "data": [
         {
             "uuid": 448,
@@ -153,11 +116,11 @@ AllowPermissions: `[]`
 }
 ```
 
-Server 錯誤  
+### Server 錯誤  
 ```json
 {
     "status": 500,
-    "loadType": "QUERY_FAILED",
+    "loadType": LoadType.QUERY_FAILED,
     "data": []
 }
 ```

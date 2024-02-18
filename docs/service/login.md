@@ -36,27 +36,11 @@ AllowPermissions: `[]`
 * 401
 
 [`LoadType`](../types.md#loadtype)  
-* `"PARAMETER_ERROR"`
-* `"TYPE_SESSION"` [`"AuthDetails"`](../types.md#authdetails)
-
-[`AuthDetails`](../types.md#authdetails)  
-* `"SUCCEED_LOGIN"`
-* `"FAILED_LOGIN"`
-* `"SESSION_EXISTS"`
-* `"BLOCKED_LOGIN"`
-
-```js
-{
-    "status": StatusCode,
-    "loadType": LoadType,
-    "authDetails": AuthDetails,
-    "data": [
-        {
-            "sessionId": "string"
-        }
-    ]
-}
-```
+* `SUCCEED`
+* `PARAMETER_ERROR`
+* `FAILED_LOGIN`
+* `SESSION_EXISTS`
+* `BLOCKED_LOGIN`
 
 
 ### 回傳範例
@@ -64,8 +48,7 @@ AllowPermissions: `[]`
 ```json
 {
     "status": 200,
-    "loadType": "VERIFY_SESSION",
-    "authDetails": "SUCCEED_LOGIN",
+    "loadType": LoadType.SUCCEED,
     "data": [
         {
             "sessionId": "d88cb8d7fd367b7ddd66d00990c4f068f67f30b3fee3bcd7c07867a78b41e0ec"
@@ -78,7 +61,7 @@ AllowPermissions: `[]`
 ```json
 {
     "status": 400,
-    "loadType": "PARAMETER_ERROR",
+    "loadType": LoadType.PARAMETER_ERROR,
     "data": []
 }
 ```
@@ -87,8 +70,7 @@ AllowPermissions: `[]`
 ```json
 {
     "status": 401,
-    "loadType": "VERIFY_SESSION",
-    "authDetails": "LOGIN_FAILED",
+    "loadType": LoadType.FAILED_LOGIN,
     "data": []
 }
 ```
@@ -98,8 +80,7 @@ AllowPermissions: `[]`
 ```json
 {
     "status": 200,
-    "loadType": "VERIFY_SESSION",
-    "authDetails": "SESSION_EXISTS",
+    "loadType": LoadType.SESSION_EXISTS,
     "data": [
         {
             "sessionId": "3151828716ac1b548564df436fedddaa153bafa8927292647d0fe345dbaf0e85"
@@ -113,8 +94,7 @@ AllowPermissions: `[]`
 ```json
 {
     "status": 401,
-    "loadType": "VERIFY_SESSION",
-    "authDetails": "BLOCKED_LOGIN",
+    "loadType": LoadType.BLOCKED_LOGIN,
     "data": []
 }
 ```

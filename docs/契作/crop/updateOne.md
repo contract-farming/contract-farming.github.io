@@ -8,10 +8,10 @@ LoginRequired: `true`
 AllowPermissions: `[]`  
 
 
-### 請求格式
+## 請求格式
 * `uuid`: 作物品種的 uuid (`不可更新`)
-* `name`: 待更新的作物品種名稱
-* `unit_yield`: 待更新的單位面積預估產量
+* `name`: 待更新的作物品種名稱 (`最大100個字`)
+* `unit_yield`: 待更新的單位面積預估產量 (`INT`)
 * `unit`: 待更新的產量單位 (`1: 台斤, 2: 公斤`)
 
 ```js
@@ -24,77 +24,54 @@ AllowPermissions: `[]`
 ```
 
 
-### 回傳格式
+## 回傳格式
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 400
 * 500
 
 [`LoadType`](../../types.md#loadtype)  
-* `"SUCCEED"`
-* `"PARAMETER_ERROR"`
-* `"DATA_NOT_FOUND"`
-* `"DATA_EXISTED"`
-* `"QUERY_FAILED"`
-
-```js
-{
-    "status": StatusCode,
-    "loadType": LoadType,
-    "data": [
-        {
-            "uuid": number,
-            "name": string,
-            "unit_yield": number,
-            "unit": number
-        }
-    ]
-}
-```
+* `SUCCEED`
+* `PARAMETER_ERROR`
+* `DATA_NOT_FOUND`
+* `DATA_EXISTED`
+* `QUERY_FAILED`
 
 
-### 回傳範例
-成功更新  
-`data[]` 為成功更新後的資料  
+## 回傳範例
+### 成功更新
 ```json
 {
     "status": 200,
-    "loadType": "SUCCEED",
-    "data": [
-        {
-            "uuid": 12,
-            "name": "高雄145",
-            "unit_yield": 25,
-            "unit": 1
-        }
-    ]
+    "loadType": LoadType.SUCCEED,
+    "data": []
 }
 ```
 
-參數錯誤
+### 參數錯誤
 ```json
 {
     "status": 400,
-    "loadType": "PARAMETER_ERROR",
+    "loadType": LoadType.PARAMETER_ERROR,
     "data": []
 }
 ```
 
-不存在該資料
+### 不存在該資料
 ```json
 {
     "status": 200,
-    "loadType": "DATA_NOT_FOUND",
+    "loadType": LoadType.DATA_NOT_FOUND,
     "data": []
 }
 ```
 
-在資料庫中已存在與待更新資料相同的資料  
+### 在資料庫中已存在與待更新資料相同的資料  
 `data[]` 為資料庫中相同的資料
 ```json
 {
     "status": 200,
-    "loadType": "DATA_EXISTED",
+    "loadType": LoadType.DATA_EXISTED,
     "data": [
         {
             "uuid": 22,
@@ -106,11 +83,11 @@ AllowPermissions: `[]`
 }
 ```
 
-Server 錯誤  
+### Server 錯誤  
 ```json
 {
     "status": 500,
-    "loadType": "QUERY_FAILED",
+    "loadType": LoadType.QUERY_FAILED,
     "data": []
 }
 ```

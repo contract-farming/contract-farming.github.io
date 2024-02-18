@@ -12,11 +12,17 @@ LoginRequired: `true`
 AllowPermissions: `[Admin]`  
 
 
-### 請求格式
+## 請求格式
 * `type`: 選擇獲取的使用者內容 (0: 未驗證註冊, 1: 已驗證註冊, 2: 全部)
 
+```js
+{
+    "type": number  // 0, 1, 2
+}
+```
 
-### 回傳格式
+
+## 回傳格式
 
 回傳 data 為陣列內含指定使用者個人資料  
 
@@ -38,13 +44,18 @@ AllowPermissions: `[Admin]`
 * 500
 
 [`LoadType`](../../types.md#loadtype)  
-* `"SUCCEED"`
-* `"QUERY_FAILED"`
+* `SUCCEED`
+* `QUERY_FAILED`
 
+
+
+## 回傳範例
+### 成功回傳
+格式
 ```js
 {
     "status": StatusCode,
-    "loadType": LoadType,
+    "loadType": LoadType.SUCCEED,
     "data": [
         {
             "username": string,
@@ -59,13 +70,11 @@ AllowPermissions: `[Admin]`
     ]
 }
 ```
-
-
-### 回傳範例
+範例
 ```json
 {
     "status": 200,
-    "loadType": "SUCCEED",
+    "loadType": LoadType.SUCCEED,
     "data": [
         {
             "username": "admin",
@@ -105,7 +114,7 @@ Server 錯誤
 ```json
 {
     "status": 500,
-    "loadType": "QUERY_FAILED",
+    "loadType": LoadType.QUERY_FAILED,
     "data": []
 }
 ```

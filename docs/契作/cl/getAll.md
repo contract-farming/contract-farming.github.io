@@ -8,7 +8,11 @@ LoginRequired: `true`
 AllowPermissions: `[]`  
 
 
-### 回傳格式
+## 請求格式
+無參數  
+
+
+## 回傳格式
 
 回傳 data 為陣列內含所有 契作農地 資料  
 
@@ -74,13 +78,17 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
 * 500
 
 [`LoadType`](../../types.md#loadtype)  
-* `"SUCCEED"`
-* `"QUERY_FAILED"`
+* `SUCCEED`
+* `QUERY_FAILED`
 
+
+## 回傳範例
+### 成功獲取
+格式
 ```js
 {
     "status": StatusCode,
-    "loadType": LoadType,
+    "loadType": LoadType.SUCCEED,
     "data": [
         {
             uuid: number,
@@ -130,17 +138,16 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
             // 採收
             harvest_confirm: number,            // 確認                     (Y/N) [0, 1]
             harvest_date: string | null         // 日期                     Date (YYYY-MM-DD)
-        }
+        },
+        { ... }
     ]
 }
 ```
-
-
-### 回傳範例
+範例  
 ```json
 {
     "status": 200,
-    "loadType": "SUCCEED",
+    "loadType": LoadType.SUCCEED,
     "data": [
         {
             "uuid": 1,
@@ -216,89 +223,16 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
             "harvest_confirm": 0,
             "harvest_date": "2023-09-09"
         },
-        {
-            "uuid": 6,
-            "contract": {
-                "uuid": null,
-                "year": null,
-                "no": null,
-                "farmer": {
-                    "uuid": null,
-                    "id": null,
-                    "name": null,
-                    "phone": null,
-                    "address": null
-                },
-                "finish": null
-            },
-            "land": {
-                "uuid": 100,
-                "no": "22670000",
-                "lot": "新園新吉",
-                "class": "旱",
-                "owner_name": "余坤庭",
-                "owner_id": "T121660334",
-                "area": 0.0682,
-                "area_right": 0.0682,
-                "area_arable": 0.0682,
-                "type": 1,
-                "contracting": 0
-            },
-            "crop": {
-                "uuid": 41,
-                "name": "紅豆2",
-                "unit_yield": 65,
-                "unit": 1
-            },
-            "prepare_confirm": 0,
-            "prepare_date": null,
-            "plant_confirm": 0,
-            "plant_recv_date": null,
-            "plant_date": null,
-            "plant_count": 10,
-            "plant_name": "莊O城",
-            "weed_confirm": 0,
-            "weed_date": null,
-            "weed_pest": {
-                "uuid": 3,
-                "name": "農藥三十號"
-            },
-            "weed_amount": null,
-            "spray_confirm": 0,
-            "spray_date": "2023-09-09",
-            "spray_pest": {
-                "uuid": 3,
-                "name": "農藥三十號"
-            },
-            "spray_amount": 10,
-            "bask_confirm": 0,
-            "bask_date": "2023-09-09",
-            "pre_fert_confirm": 0,
-            "pre_fert_date": "2023-09-09",
-            "pre_fert": {
-                "uuid": 21,
-                "name": "金坷拉"
-            },
-            "pre_fert_amount": 10,
-            "post_fert_confirm": 0,
-            "post_fert_date": "2023-09-09",
-            "post_fert": {
-                "uuid": 21,
-                "name": "金坷拉"
-            },
-            "post_fert_amount": 10,
-            "harvest_confirm": 0,
-            "harvest_date": "2023-09-09"
-        }
+        { ... }
     ]
 }
 ```
 
-Server 錯誤  
+### Server 錯誤  
 ```json
 {
     "status": 500,
-    "loadType": "QUERY_FAILED",
+    "loadType": LoadType.QUERY_FAILED,
     "data": []
 }
 ```

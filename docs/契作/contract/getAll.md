@@ -8,7 +8,11 @@ LoginRequired: `true`
 AllowPermissions: `[]`  
 
 
-### 回傳格式
+## 請求格式
+無參數  
+
+
+## 回傳格式
 
 回傳 data 為陣列內含所有 契作合約 資料  
 
@@ -22,13 +26,18 @@ AllowPermissions: `[]`
 * 500
 
 [`LoadType`](../../types.md#loadtype)  
-* `"SUCCEED"`
-* `"QUERY_FAILED"`
+* `SUCCEED`
+* `QUERY_FAILED`
 
+
+
+## 回傳範例
+### 成功獲取
+格式
 ```js
 {
     "status": StatusCode,
-    "loadType": LoadType,
+    "loadType": LoadType.SUCCEED,
     "data": [
         {
             "uuid": number,
@@ -42,17 +51,16 @@ AllowPermissions: `[]`
                 "address": string
             },
             "finish": number
-        }
+        },
+        { ... }
     ]
 }
 ```
-
-
-### 回傳範例
+範例  
 ```json
 {
     "status": 200,
-    "loadType": "SUCCEED",
+    "loadType": LoadType.SUCCEED,
     "data": [
         {
             "uuid": 2,
@@ -66,16 +74,17 @@ AllowPermissions: `[]`
                 "address": "大樹區學城路一段1號"
             },
             "finish": 0
-        }
+        },
+        { ... }
     ]
 }
 ```
 
-Server 錯誤  
+### Server 錯誤  
 ```json
 {
     "status": 500,
-    "loadType": "QUERY_FAILED",
+    "loadType": LoadType.QUERY_FAILED,
     "data": []
 }
 ```

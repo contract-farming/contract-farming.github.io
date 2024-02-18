@@ -11,6 +11,12 @@ AllowPermissions: `[]`
 ### 請求格式
 * `uuid`: 契作農地的 uuid
 
+```js
+{
+    "uuid": number
+}
+```
+
 
 ### 回傳格式
 
@@ -78,13 +84,18 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
 * 500
 
 [`LoadType`](../../types.md#loadtype)  
-* `"SUCCEED"`
-* `"QUERY_FAILED"`
+* `SUCCEED`
+* `QUERY_FAILED`
 
+
+
+## 回傳範例
+### 成功獲取
+格式
 ```js
 {
     "status": StatusCode,
-    "loadType": LoadType,
+    "loadType": LoadType.SUCCEED,
     "data": [
         {
             uuid: number,
@@ -139,9 +150,7 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
 }
 ```
 
-
-### 回傳範例
-存在該資料
+範例
 ```json
 {
     "status": 200,

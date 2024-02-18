@@ -8,11 +8,17 @@ LoginRequired: `true`
 AllowPermissions: `[]`  
 
 
-### 請求格式
+## 請求格式
 * `uuid`: 契作合約的 uuid
 
+```js
+{
+    "uuid": number
+}
+```
 
-### 回傳格式
+
+## 回傳格式
 
 回傳 data 為陣列內含該 契作合約 下的所有 契作農地 資料  
 
@@ -75,16 +81,26 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
 
 [`StatusCode`](../../../types.md#statuscode)  
 * 200
+* 400
 * 500
 
 [`LoadType`](../../../types.md#loadtype)  
-* `"SUCCEED"`
-* `"QUERY_FAILED"`
+* `SUCCEED`
+* `PARAMETER_ERROR`
+* `DATA_NOT_FOUND`
+* `FK_NOT_FOUND`
+* `QUERY_FAILED`
 
+
+
+## 回傳範例
+### 成功獲取
+回傳 契作合約 下的所有契作農地  
+格式  
 ```js
 {
     "status": StatusCode,
-    "loadType": LoadType,
+    "loadType": LoadType.SUCCEED,
     "data": [
         {
             uuid: number,
@@ -134,18 +150,16 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
             // 採收
             harvest_confirm: number,            // 確認                     (Y/N) [0, 1]
             harvest_date: string | null         // 日期                     Date (YYYY-MM-DD)
-        }
+        },
+        { ... }
     ]
 }
 ```
-
-
-### 回傳範例
-回傳 契作合約 下的所有契作農地
+範例  
 ```json
 {
     "status": 200,
-    "loadType": "SUCCEED",
+    "loadType": LoadType.SUCCEED,
     "data": [
         {
             "uuid": 3,
@@ -237,42 +251,45 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
             "harvest_confirm": 0,
             "harvest_date": "2023-09-09"
         },
+        { ... }
     ]
 }
 ```
 
-參數錯誤
+### 參數錯誤
 ```json
 {
     "status": 400,
-    "loadType": "PARAMETER_ERROR",
+    "loadType": LoadType.PARAMETER_ERROR,
     "data": []
 }
 ```
 
-該契作合約底下無契作農地
+### 該契作合約底下無契作農地
 ```json
 {
     "status": 200,
-    "loadType": "DATA_NOT_FOUND",
+    "loadType": LoadType.DATA_NOT_FOUND,
     "data": []
 }
 ```
 
-該契作合約不存在
+### 該契作合約不存在
+回傳不存在的 contract uuid  
 ```json
 {
     "status": 200,
-    "loadType": "FK_NOT_FOUND",
-    "data": []
+    "loadType": LoadType.FK_NOT_FOUND,
+    "missingFK": MissingFK.CONTRACT_UUID,
+    "data": [{ "uuid": 30 }]
 }
 ```
 
-Server 錯誤  
+### Server 錯誤  
 ```json
 {
     "status": 500,
-    "loadType": "QUERY_FAILED",
+    "loadType": LoadType.QUERY_FAILED,
     "data": []
 }
 ```

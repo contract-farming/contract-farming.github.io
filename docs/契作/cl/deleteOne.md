@@ -8,7 +8,7 @@ LoginRequired: `true`
 AllowPermissions: `[]`  
 
 
-### 請求格式
+## 請求格式
 * `name`: 待刪除的 契作農地 uuid
 
 ```js
@@ -18,108 +18,52 @@ AllowPermissions: `[]`
 ```
 
 
-### 回傳格式
+## 回傳格式
 [`StatusCode`](../../types.md#statuscode)  
 * 200
 * 400
 * 500
 
 [`LoadType`](../../types.md#loadtype)  
-* `"SUCCEED"`
-* `"PARAMETER_ERROR"`
-* `"DATA_NOT_FOUND"`
-* `"QUERY_FAILED"`
-
-```js
-{
-    "status": StatusCode,
-    "loadType": LoadType,
-    "data": [
-        {
-            no: string;
-            lot: string;
-            class: "田" | "旱" | null;
-            owner_name: string;
-            owner_id: string;
-            area: number;
-            area_right: number | null;
-            area_arable: number | null;
-            type: number;           // [1, 2, 3]
-            contracting: number;    // [0, 1]   (Y/N)
-        }
-    ]
-}
-```
+* `SUCCEED`
+* `PARAMETER_ERROR`
+* `DATA_NOT_FOUND`
+* `QUERY_FAILED`
 
 
-### 回傳範例
-成功刪除  
-`data[]` 為成功刪除的資料
+## 回傳範例
+### 成功刪除  
 ```json
 {
     "status": 200,
-    "loadType": "SUCCEED",
-    "data": [
-        {
-            "uuid": 3,
-            "contract": 5,
-            "land": 100,
-            "prepare_confirm": 0,
-            "prepare_date": "2023-09-08",
-            "plant_confirm": 0,
-            "plant_recv_date": "2023-09-08",
-            "plant_date": "2023-09-08",
-            "plant_count": 10,
-            "plant_name": "莊O城",
-            "weed_confirm": 0,
-            "weed_date": "2023-09-08",
-            "weed_pest": 3,
-            "weed_amount": 10,
-            "bask_confirm": 0,
-            "bask_date": "2023-09-08",
-            "pre_fert_confirm": 0,
-            "pre_fert_date": "2023-09-08",
-            "pre_fert": 21,
-            "pre_fert_amount": 10,
-            "post_fert_confirm": 0,
-            "post_fert_date": "2023-09-08",
-            "post_fert": 21,
-            "post_fert_amount": 10,
-            "spray_confirm": 0,
-            "spray_date": "2023-09-08",
-            "spray_pest": 3,
-            "spray_amount": 10,
-            "harvest_confirm": 0,
-            "harvest_date": "2023-09-08",
-            "crop": 41
-        }
-    ]
+    "loadType": LoadType.SUCCEED,
+    "data": []
 }
 ```
 
-參數錯誤
+### 參數錯誤
 ```json
 {
     "status": 400,
-    "loadType": "PARAMETER_ERROR",
+    "loadType": LoadType.PARAMETER_ERROR,
     "data": []
 }
 ```
 
-未找到該資料
+### 未找到該資料
 ```json
 {
     "status": 200,
-    "loadType": "DATA_NOT_FOUND",
+    "loadType": LoadType.DATA_NOT_FOUND,
     "data": []
 }
 ```
 
-Server 錯誤  
+### Server 錯誤  
 ```json
 {
     "status": 500,
-    "loadType": "QUERY_FAILED",
+    "loadType": LoadType.QUERY_FAILED,
     "data": []
 }
 ```
