@@ -45,6 +45,7 @@ AllowPermissions: `[Admin]`
 
 [`LoadType`](../../types.md#loadtype)  
 * `SUCCEED`
+* `PARAMETER_ERROR`
 * `QUERY_FAILED`
 
 
@@ -110,7 +111,16 @@ AllowPermissions: `[Admin]`
 }
 ```
 
-Server 錯誤  
+### 參數錯誤
+```json
+{
+    "status": 400,
+    "loadType": LoadType.PARAMETER_ERROR,
+    "data": []
+}
+```
+
+### Server 錯誤  
 ```json
 {
     "status": 500,
