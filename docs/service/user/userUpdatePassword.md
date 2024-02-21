@@ -56,7 +56,7 @@ AllowPermissions: `[]`
 }
 ```
 
-### 該 username 不存在
+### 舊密碼錯誤
 ```json
 {
     "status": 200,
