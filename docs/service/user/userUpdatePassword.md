@@ -11,14 +11,14 @@ AllowPermissions: `[]`
 
 
 ## 請求格式
-* `old_passwprd`: 舊密碼 (`最大100個字`)
+* `old_password`: 舊密碼 (`最大100個字`)
 * `new_password`: 新密碼 (`最大100個字`)
 
 忘記密碼要管理員發重設密碼郵件  
 
 ```js
 {
-    "old_passwprd": string,
+    "old_password": string,
     "new_password": string
 }
 ```
@@ -64,7 +64,7 @@ AllowPermissions: `[]`
     "data": [
         {
             "username": "user10",
-            "old_passwprd": "00123",
+            "old_password": "00123",
             "new_passwprd": "789789"
         }
     ]
