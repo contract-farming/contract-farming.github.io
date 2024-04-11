@@ -1,6 +1,6 @@
-# 檢查 server API 模快是否啟用
+# 檢查 server API 模塊是否啟用
 
-檢查 server API 模快是否啟用  
+檢查 server API 模塊是否啟用  
 API: { 0: All, 1: NLSC, 2: 註冊, 3: Mail }  
 
 PATH: `/api/service/status/apiModule`  
@@ -10,7 +10,7 @@ AllowPermissions: `[]`
 
 
 ## 請求格式
-* `type`: 選擇獲取的 API 模快狀態 (0: All, 1: NLSC, 2: 註冊, 3: Mail)
+* `type`: 選擇獲取的 API 模塊狀態 (0: All, 1: NLSC, 2: 註冊, 3: Mail)
 
 ```js
 {
