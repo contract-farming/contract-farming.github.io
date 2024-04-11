@@ -20,6 +20,7 @@ AllowPermissions: `[]`
 * `no`: 期號 一年有三期             [`1`, `2`, `3`]
 * `farmer`: 引用契作農民的 資料
 * `finish`: 是否結案 (Y/N)          [`0`, `1`]
+* `clCount`: 此合約的契作農地數量
 
 [`StatusCode`](../../types.md#statuscode)  
 * 200
@@ -50,7 +51,8 @@ AllowPermissions: `[]`
                 "phone": PhoneNumber,
                 "address": string
             },
-            "finish": number
+            "finish": number,
+            "clCount": number
         },
         { ... }
     ]
@@ -73,7 +75,8 @@ AllowPermissions: `[]`
                 "phone": "07-1234567",
                 "address": "大樹區學城路一段1號"
             },
-            "finish": 0
+            "finish": 0,
+            "clCount": 25
         },
         { ... }
     ]
