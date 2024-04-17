@@ -11,7 +11,13 @@ AllowPermissions: `[Admin]`
 
 
 ## 請求格式
-無參數  
+* `username`: 使用者帳號 (`最大100個字`)
+
+```js
+{
+    "username": string
+}
+```
 
 
 ## 回傳格式
