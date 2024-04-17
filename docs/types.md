@@ -9,6 +9,7 @@ sidebar_position: 4
 ### UserPermissions
 | Code | value |
 | :------ | :------ |
+| None | 0 |
 | Admin | 1 |
 | Employee | 2 |
 | Farmer | 3 |
