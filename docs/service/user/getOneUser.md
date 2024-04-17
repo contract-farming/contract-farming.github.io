@@ -1,25 +1,17 @@
-# 獲取 User table 的使用者列表 (Admin)
+# 獲取指定使用者個人資料 (Admin)
 
-管理員後台用  
-參數可選擇 registered  boolean    (是否已驗證註冊, 0: 未驗證, 1: 已驗證)  
-來決定是 使用者列表 頁面  
-還是 註冊確認頁面  
-或全部顯示  
+獲取 User table 的一名使用者個人資料  
+給管理員用的  
+後台管理使用者  
 
-PATH: `/api/service/user/getUsers`  
+PATH: `/api/service/user/getOneUser`  
 Method: `GET`  
 LoginRequired: `true`  
 AllowPermissions: `[Admin]`  
 
 
 ## 請求格式
-* `type`: 選擇獲取的使用者內容 (0: 未驗證註冊, 1: 已驗證註冊, 2: 全部)
-
-```js
-{
-    "type": number  // 0, 1, 2
-}
-```
+無參數  
 
 
 ## 回傳格式
@@ -29,7 +21,7 @@ AllowPermissions: `[Admin]`
 * `username`: 使用者帳號
 * `email`: 電子郵件
 * `name`: 使用者姓名
-* `user_permissions`: 使用者權限
+* `user_permissions`: 使用者權限 (只有註冊未驗證為 null) (之後會改?)
 * `telephone`: 家用電話 (可留空)
 * `cellphone`: 手機號碼 (可留空)
 * `address`: 地址 (可留空)
@@ -40,18 +32,17 @@ AllowPermissions: `[Admin]`
 
 [`StatusCode`](../../types.md#statuscode)  
 * 200
-* 400
 * 500
 
 [`LoadType`](../../types.md#loadtype)  
 * `SUCCEED`
 * `PARAMETER_ERROR`
+* `ACCOUNT_NOT_EXISTS`
 * `QUERY_FAILED`
 
 
-
 ## 回傳範例
-### 成功回傳
+### 成功獲取
 格式
 ```js
 {
@@ -62,7 +53,7 @@ AllowPermissions: `[Admin]`
             "username": string,
             "email": string,
             "name": string,
-            "user_permissions": number,
+            "user_permissions": number | null,
             "telephone": string | null,
             "cellphone": string | null,
             "address": string | null,
@@ -86,26 +77,6 @@ AllowPermissions: `[Admin]`
             "cellphone": "0981786780",
             "address": "新園鄉田南路143路\n",
             "registered": 1
-        },
-        {
-            "username": "user",
-            "email": "test1233@gmail.com",
-            "name": "使用者",
-            "user_permissions": 2,
-            "telephone": "07-123456789",
-            "cellphone": "0987654123",
-            "address": "萬丹鄉大勇路299巷8號",
-            "registered": 1
-        },
-        {
-            "username": "user2",
-            "email": "user1@gmail.com",
-            "name": "使用者2",
-            "user_permissions": 3,
-            "telephone": "07-123456789",
-            "cellphone": "0987654123",
-            "address": "萬丹鄉大勇路299巷8號",
-            "registered": 0
         }
     ]
 }
@@ -117,6 +88,19 @@ AllowPermissions: `[Admin]`
     "status": 400,
     "loadType": LoadType.PARAMETER_ERROR,
     "data": []
+}
+```
+
+### 該 username 不存在
+```json
+{
+    "status": 200,
+    "loadType": LoadType.ACCOUNT_NOT_EXISTS,
+    "data": [
+        {
+            "username": "user10"
+        }
+    ]
 }
 ```
 

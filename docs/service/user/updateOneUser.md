@@ -1,4 +1,4 @@
-# 更新 User table 的 一名使用者
+# 更新 User table 的一名使用者 (Admin)
 
 更新 User table 的 一名使用者  
 給管理員用的 (後台更新使用者)  
