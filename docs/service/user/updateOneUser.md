@@ -5,7 +5,7 @@
 未註冊驗證帳號也能更改  
 
 PATH: `/api/service/user/updateOneUser`  
-Method: `POST`  
+Method: `PUT`  
 LoginRequired: `true`  
 AllowPermissions: `[Admin]`  
 

@@ -5,7 +5,7 @@
 後台確認註冊使用者並發放權限或修改  
 
 PATH: `/api/service/user/updateOneUserPermissions`  
-Method: `POST`  
+Method: `PUT`  
 LoginRequired: `true`  
 AllowPermissions: `[Admin]`  
 
