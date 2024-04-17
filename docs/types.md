@@ -11,7 +11,7 @@ sidebar_position: 4
 | :------ | :------ |
 | Admin | 1 |
 | Employee | 2 |
-| Developer | 3 |
+| Farmer | 3 |
 
 
 ### RequestParameterFormat
