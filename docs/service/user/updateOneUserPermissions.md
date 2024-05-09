@@ -28,11 +28,6 @@ AllowPermissions: `[Admin]`
 [`UserPermissions`](../../types.md#userpermissions)  
 * Admin
 
-[`StatusCode`](../../types.md#statuscode)  
-* 200
-* 400
-* 500
-
 [`LoadType`](../../types.md#loadtype)  
 * `SUCCEED`
 * `PARAMETER_ERROR`
@@ -44,7 +39,6 @@ AllowPermissions: `[Admin]`
 ### 成功更新
 ```json
 {
-    "status": 200,
     "loadType": LoadType.SUCCEED,
     "data": []
 }
@@ -53,7 +47,6 @@ AllowPermissions: `[Admin]`
 ### 參數錯誤
 ```json
 {
-    "status": 400,
     "loadType": LoadType.PARAMETER_ERROR,
     "data": []
 }
@@ -62,7 +55,6 @@ AllowPermissions: `[Admin]`
 ### 該 username 不存在
 ```json
 {
-    "status": 200,
     "loadType": LoadType.ACCOUNT_NOT_EXISTS,
     "data": [
         {
@@ -75,7 +67,6 @@ AllowPermissions: `[Admin]`
 ### Server 錯誤  
 ```json
 {
-    "status": 500,
     "loadType": LoadType.QUERY_FAILED,
     "data": []
 }

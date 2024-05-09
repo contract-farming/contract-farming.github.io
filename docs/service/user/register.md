@@ -33,11 +33,6 @@ AllowPermissions: `[]`
 
 
 ## 回傳格式
-[`StatusCode`](../../types.md#statuscode)  
-* 200
-* 400
-* 500
-
 [`LoadType`](../../types.md#loadtype)  
 * `SUCCEED`
 * `PARAMETER_ERROR`
@@ -50,7 +45,6 @@ AllowPermissions: `[]`
 ### 成功回傳
 ```json
 {
-    "status": 200,
     "loadType": LoadType.SUCCEED,
     "data": []
 }
@@ -59,7 +53,6 @@ AllowPermissions: `[]`
 ### 參數錯誤
 ```json
 {
-    "status": 400,
     "loadType": LoadType.PARAMETER_ERROR,
     "data": []
 }
@@ -68,7 +61,6 @@ AllowPermissions: `[]`
 ### 註冊 API 已被禁用
 ```json
 {
-    "status": 200,
     "loadType": LoadType.DISABLE,
     "data": []
 }
@@ -77,7 +69,6 @@ AllowPermissions: `[]`
 ### username 已被使用, 換其他 username 註冊
 ```json
 {
-    "status": 200,
     "loadType": LoadType.ACCOUNT_EXISTS,
     "data": []
 }
@@ -86,7 +77,6 @@ AllowPermissions: `[]`
 ### Server 錯誤  
 ```json
 {
-    "status": 500,
     "loadType": LoadType.QUERY_FAILED,
     "data": []
 }

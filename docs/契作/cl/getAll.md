@@ -73,10 +73,6 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
 但無法直接對外鍵中的資料進行直接操作修改，只能使用外鍵的 uuid 進行
 :::
 
-[`StatusCode`](../../types.md#statuscode)  
-* 200
-* 500
-
 [`LoadType`](../../types.md#loadtype)  
 * `SUCCEED`
 * `QUERY_FAILED`
@@ -87,7 +83,6 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
 格式
 ```js
 {
-    "status": StatusCode,
     "loadType": LoadType.SUCCEED,
     "data": [
         {
@@ -146,7 +141,6 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
 範例  
 ```json
 {
-    "status": 200,
     "loadType": LoadType.SUCCEED,
     "data": [
         {
@@ -231,7 +225,6 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
 ### Server 錯誤  
 ```json
 {
-    "status": 500,
     "loadType": LoadType.QUERY_FAILED,
     "data": []
 }

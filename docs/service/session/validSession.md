@@ -14,10 +14,6 @@ AllowPermissions: `[]`
 
 
 ## 回傳格式
-[`StatusCode`](../../types.md#statuscode)  
-* 200
-* 401
-
 [`LoadType`](../../types.md#loadtype)  
 * `SUCCEED`
 * `UNAUTHORIZED`
@@ -27,7 +23,6 @@ AllowPermissions: `[]`
 ### Session 有效
 ```json
 {
-    "status": 200,
     "loadType": LoadType.SUCCEED,
     "data": []
 }
@@ -36,7 +31,6 @@ AllowPermissions: `[]`
 ### Session 無效
 ```json
 {
-    "status": 401,
     "loadType": LoadType.UNAUTHORIZED,
     "data": []
 }

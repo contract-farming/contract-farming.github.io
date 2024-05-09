@@ -38,11 +38,6 @@ AllowPermissions: `[Admin]`
 [`UserPermissions`](../../types.md#userpermissions)  
 * Admin
 
-[`StatusCode`](../../types.md#statuscode)  
-* 200
-* 400
-* 500
-
 [`LoadType`](../../types.md#loadtype)  
 * `SUCCEED`
 * `PARAMETER_ERROR`
@@ -55,7 +50,6 @@ AllowPermissions: `[Admin]`
 格式
 ```js
 {
-    "status": StatusCode,
     "loadType": LoadType.SUCCEED,
     "data": [
         {
@@ -74,7 +68,6 @@ AllowPermissions: `[Admin]`
 範例
 ```json
 {
-    "status": 200,
     "loadType": LoadType.SUCCEED,
     "data": [
         {
@@ -114,7 +107,6 @@ AllowPermissions: `[Admin]`
 ### 參數錯誤
 ```json
 {
-    "status": 400,
     "loadType": LoadType.PARAMETER_ERROR,
     "data": []
 }
@@ -123,7 +115,6 @@ AllowPermissions: `[Admin]`
 ### Server 錯誤  
 ```json
 {
-    "status": 500,
     "loadType": LoadType.QUERY_FAILED,
     "data": []
 }

@@ -79,11 +79,6 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
 但無法直接對外鍵中的資料進行直接操作修改，只能使用外鍵的 uuid 進行
 :::
 
-[`StatusCode`](../../../types.md#statuscode)  
-* 200
-* 400
-* 500
-
 [`LoadType`](../../../types.md#loadtype)  
 * `SUCCEED`
 * `PARAMETER_ERROR`
@@ -99,7 +94,6 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
 格式  
 ```js
 {
-    "status": StatusCode,
     "loadType": LoadType.SUCCEED,
     "data": [
         {
@@ -158,7 +152,6 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
 範例  
 ```json
 {
-    "status": 200,
     "loadType": LoadType.SUCCEED,
     "data": [
         {
@@ -259,7 +252,6 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
 ### 參數錯誤
 ```json
 {
-    "status": 400,
     "loadType": LoadType.PARAMETER_ERROR,
     "data": []
 }
@@ -268,7 +260,6 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
 ### 該契作合約底下無契作農地
 ```json
 {
-    "status": 200,
     "loadType": LoadType.DATA_NOT_FOUND,
     "data": []
 }
@@ -278,7 +269,6 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
 回傳不存在的 contract uuid  
 ```json
 {
-    "status": 200,
     "loadType": LoadType.FK_NOT_FOUND,
     "missingFK": MissingFK.CONTRACT_UUID,
     "data": [{ "uuid": 30 }]
@@ -288,7 +278,6 @@ getAll 會把有引用外鍵(uuid)的部分，一併把外鍵資料抽取出來�
 ### Server 錯誤  
 ```json
 {
-    "status": 500,
     "loadType": LoadType.QUERY_FAILED,
     "data": []
 }

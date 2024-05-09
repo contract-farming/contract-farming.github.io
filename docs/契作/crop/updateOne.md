@@ -25,11 +25,6 @@ AllowPermissions: `[]`
 
 
 ## 回傳格式
-[`StatusCode`](../../types.md#statuscode)  
-* 200
-* 400
-* 500
-
 [`LoadType`](../../types.md#loadtype)  
 * `SUCCEED`
 * `PARAMETER_ERROR`
@@ -42,7 +37,6 @@ AllowPermissions: `[]`
 ### 成功更新
 ```json
 {
-    "status": 200,
     "loadType": LoadType.SUCCEED,
     "data": []
 }
@@ -51,7 +45,6 @@ AllowPermissions: `[]`
 ### 參數錯誤
 ```json
 {
-    "status": 400,
     "loadType": LoadType.PARAMETER_ERROR,
     "data": []
 }
@@ -60,7 +53,6 @@ AllowPermissions: `[]`
 ### 不存在該資料
 ```json
 {
-    "status": 200,
     "loadType": LoadType.DATA_NOT_FOUND,
     "data": []
 }
@@ -70,7 +62,6 @@ AllowPermissions: `[]`
 `data[]` 為資料庫中相同的資料
 ```json
 {
-    "status": 200,
     "loadType": LoadType.DATA_EXISTED,
     "data": [
         {
@@ -86,7 +77,6 @@ AllowPermissions: `[]`
 ### Server 錯誤  
 ```json
 {
-    "status": 500,
     "loadType": LoadType.QUERY_FAILED,
     "data": []
 }

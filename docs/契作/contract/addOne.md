@@ -25,11 +25,6 @@ AllowPermissions: `[]`
 
 
 ## 回傳格式
-[`StatusCode`](../../types.md#statuscode)  
-* 200
-* 400
-* 500
-
 [`LoadType`](../../types.md#loadtype)  
 * `"SUCCEED"`
 * `"PARAMETER_ERROR"`
@@ -38,7 +33,6 @@ AllowPermissions: `[]`
 
 ```js
 {
-    "status": StatusCode,
     "loadType": LoadType,
     "data": [
         {
@@ -56,7 +50,6 @@ AllowPermissions: `[]`
 ### 成功新增
 ```json
 {
-    "status": 200,
     "loadType": "SUCCEED",
     "data": [
         {
@@ -72,7 +65,6 @@ AllowPermissions: `[]`
 ### 參數錯誤
 ```json
 {
-    "status": 400,
     "loadType": "PARAMETER_ERROR",
     "data": []
 }
@@ -83,7 +75,6 @@ AllowPermissions: `[]`
 `data[]` 為不存在的 farmer uuid
 ```json
 {
-    "status": 200,
     "loadType": "FK_NOT_FOUND",
     "data": [
         {
@@ -99,7 +90,6 @@ AllowPermissions: `[]`
 ### Server 錯誤  
 ```json
 {
-    "status": 500,
     "loadType": "QUERY_FAILED",
     "data": []
 }

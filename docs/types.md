@@ -23,19 +23,6 @@ sidebar_position: 4
 | `"EMPTY_DATA"` | 表示該參數為 null |
 
 
-### StatusCode
-回傳狀態碼
-
-| Code | Description |
-| :------ | :------ |
-| 200 | ok |
-| 400 | 請求參數錯誤 |
-| 401 | 請求未授權 |
-| 403 | 請求權限不足 |
-| 404 | 請求路徑錯誤 |
-| 500 | Server 錯誤 |
-
-
 ### LoadType
 回傳狀態類型
 

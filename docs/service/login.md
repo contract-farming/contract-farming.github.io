@@ -14,7 +14,7 @@ LoginRequired: `false`
 AllowPermissions: `[]`  
 
 
-### 請求格式
+## 請求格式
 * `username`: 帳號 (`最大100個字`)
 * `password`: 密碼 (`最大100個字`)
 
@@ -26,14 +26,9 @@ AllowPermissions: `[]`
 ```
 
 
-### 回傳格式
+## 回傳格式
 
 回傳 data 為陣列內含登入成功的 sessionId  
-
-[`StatusCode`](../types.md#statuscode)  
-* 200
-* 400
-* 401
 
 [`LoadType`](../types.md#loadtype)  
 * `SUCCEED`
@@ -43,11 +38,10 @@ AllowPermissions: `[]`
 * `BLOCKED_LOGIN`
 
 
-### 回傳範例
-成功新增
+## 回傳範例
+### 成功新增
 ```json
 {
-    "status": 200,
     "loadType": LoadType.SUCCEED,
     "data": [
         {
@@ -57,29 +51,26 @@ AllowPermissions: `[]`
 }
 ```
 
-參數錯誤
+### 參數錯誤
 ```json
 {
-    "status": 400,
     "loadType": LoadType.PARAMETER_ERROR,
     "data": []
 }
 ```
 
-帳號或密碼錯誤
+### 帳號或密碼錯誤
 ```json
 {
-    "status": 401,
     "loadType": LoadType.FAILED_LOGIN,
     "data": []
 }
 ```
 
-請求時代入的 sessionId 已存在  
+### 請求時代入的 sessionId 已存在  
 (可能是已登入後又請求 `/login` 頁面之類的)
 ```json
 {
-    "status": 200,
     "loadType": LoadType.SESSION_EXISTS,
     "data": [
         {
@@ -89,11 +80,10 @@ AllowPermissions: `[]`
 }
 ```
 
-嘗試登入時帳號或密碼錯誤太多次  
+### 嘗試登入時帳號或密碼錯誤太多次  
 鎖定一段時間 (時間由後端設定)
 ```json
 {
-    "status": 401,
     "loadType": LoadType.BLOCKED_LOGIN,
     "data": []
 }

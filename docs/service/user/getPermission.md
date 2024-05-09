@@ -20,10 +20,6 @@ AllowPermissions: `[]`
 
 * `user_permissions`: 使用者權限
 
-[`StatusCode`](../../types.md#statuscode)  
-* 200
-* 401
-
 [`LoadType`](../../types.md#loadtype)  
 * `SUCCEED`
 * `UNAUTHORIZED`
@@ -35,7 +31,6 @@ AllowPermissions: `[]`
 格式
 ```js
 {
-    "status": StatusCode,
     "loadType": LoadType.SUCCEED,
     "data": [
         {
@@ -47,7 +42,6 @@ AllowPermissions: `[]`
 範例
 ```json
 {
-    "status": 200,
     "loadType": LoadType.SUCCEED,
     "data": [
         {
@@ -61,7 +55,6 @@ AllowPermissions: `[]`
 (未登入或過期)  
 ```json
 {
-    "status": 401,
     "loadType": LoadType.UNAUTHORIZED,
     "data": []
 }
@@ -70,7 +63,6 @@ AllowPermissions: `[]`
 ### Server 錯誤  
 ```json
 {
-    "status": 500,
     "loadType": LoadType.QUERY_FAILED,
     "data": []
 }

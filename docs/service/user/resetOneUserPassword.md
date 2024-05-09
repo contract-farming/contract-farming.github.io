@@ -24,11 +24,6 @@ AllowPermissions: `[Admin]`
 [`UserPermissions`](../../types.md#userpermissions)  
 * Admin
 
-[`StatusCode`](../../types.md#statuscode)  
-* 200
-* 400
-* 500
-
 [`LoadType`](../../types.md#loadtype)  
 * `SUCCEED`
 * `PARAMETER_ERROR`
@@ -43,7 +38,6 @@ AllowPermissions: `[Admin]`
 使用者信箱會收到新密碼
 ```json
 {
-    "status": 200,
     "loadType": LoadType.SUCCEED,
     "data": []
 }
@@ -52,7 +46,6 @@ AllowPermissions: `[Admin]`
 ### 參數錯誤
 ```json
 {
-    "status": 400,
     "loadType": LoadType.PARAMETER_ERROR,
     "data": []
 }
@@ -61,7 +54,6 @@ AllowPermissions: `[Admin]`
 ### 該 username 不存在
 ```json
 {
-    "status": 200,
     "loadType": LoadType.ACCOUNT_NOT_EXISTS,
     "data": [
         {
@@ -74,7 +66,6 @@ AllowPermissions: `[Admin]`
 ### mail API 已被禁用
 ```json
 {
-    "status": 200,
     "loadType": LoadType.DISABLE,
     "data": []
 }
@@ -83,7 +74,6 @@ AllowPermissions: `[Admin]`
 ### mail 發送失敗 (mail server 錯誤)
 ```json
 {
-    "status": 200,
     "loadType": LoadType.SEND_FAIL,
     "data": []
 }
@@ -92,7 +82,6 @@ AllowPermissions: `[Admin]`
 ### Server 錯誤  
 ```json
 {
-    "status": 500,
     "loadType": LoadType.QUERY_FAILED,
     "data": []
 }

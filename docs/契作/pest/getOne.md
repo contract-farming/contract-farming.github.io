@@ -24,10 +24,6 @@ AllowPermissions: `[]`
 
 * `name`: 農藥種類名稱
 
-[`StatusCode`](../../types.md#statuscode)  
-* 200
-* 500
-
 [`LoadType`](../../types.md#loadtype)  
 * `SUCCEED`
 * `PARAMETER_ERROR`
@@ -40,7 +36,6 @@ AllowPermissions: `[]`
 格式
 ```js
 {
-    "status": StatusCode,
     "loadType": LoadType.SUCCEED,
     "data": [
         {
@@ -53,7 +48,6 @@ AllowPermissions: `[]`
 範例
 ```json
 {
-    "status": 200,
     "loadType": LoadType.SUCCEED,
     "data": [
         {
@@ -67,7 +61,6 @@ AllowPermissions: `[]`
 ### 參數錯誤
 ```json
 {
-    "status": 400,
     "loadType": LoadType.PARAMETER_ERROR,
     "data": []
 }
@@ -76,7 +69,6 @@ AllowPermissions: `[]`
 ### 不存在該資料
 ```json
 {
-    "status": 200,
     "loadType": LoadType.DATA_NOT_FOUND,
     "data": []
 }
@@ -85,7 +77,6 @@ AllowPermissions: `[]`
 ### Server 錯誤  
 ```json
 {
-    "status": 500,
     "loadType": LoadType.QUERY_FAILED,
     "data": []
 }

@@ -18,10 +18,6 @@ AllowPermissions: `[]`
 
 * `name`: 肥料種類名稱
 
-[`StatusCode`](../../types.md#statuscode)  
-* 200
-* 500
-
 [`LoadType`](../../types.md#loadtype)  
 * `SUCCEED`
 * `QUERY_FAILED`
@@ -33,7 +29,6 @@ AllowPermissions: `[]`
 格式
 ```js
 {
-    "status": StatusCode,
     "loadType": LoadType.SUCCEED,
     "data": [
         {
@@ -46,7 +41,6 @@ AllowPermissions: `[]`
 範例
 ```json
 {
-    "status": 200,
     "loadType": LoadType.SUCCEED,
     "data": [
         {
@@ -60,7 +54,6 @@ AllowPermissions: `[]`
 ### Server 錯誤  
 ```json
 {
-    "status": 500,
     "loadType": LoadType.QUERY_FAILED,
     "data": []
 }

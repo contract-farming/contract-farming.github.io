@@ -25,11 +25,6 @@ AllowPermissions: `[]`
 
 
 ## 回傳格式
-[`StatusCode`](../../types.md#statuscode)  
-* 200
-* 401
-* 500
-
 [`LoadType`](../../types.md#loadtype)  
 * `SUCCEED`
 * `ACCOUNT_NOT_EXISTS`
@@ -40,7 +35,6 @@ AllowPermissions: `[]`
 ### 更新成功
 ```json
 {
-    "status": 200,
     "loadType": LoadType.SUCCEED,
     "data": []
 }
@@ -50,7 +44,6 @@ AllowPermissions: `[]`
 (未登入或過期)  
 ```json
 {
-    "status": 401,
     "loadType": LoadType.UNAUTHORIZED,
     "data": []
 }
@@ -59,7 +52,6 @@ AllowPermissions: `[]`
 ### 舊密碼錯誤
 ```json
 {
-    "status": 200,
     "loadType": LoadType.OLD_PASSWORD_ERROR,
     "data": [
         {
@@ -74,7 +66,6 @@ AllowPermissions: `[]`
 ### Server 錯誤  
 ```json
 {
-    "status": 500,
     "loadType": LoadType.QUERY_FAILED,
     "data": []
 }

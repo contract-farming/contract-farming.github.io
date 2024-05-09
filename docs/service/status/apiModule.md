@@ -20,10 +20,6 @@ AllowPermissions: `[]`
 
 
 ## 回傳格式
-[`StatusCode`](../../types.md#statuscode)  
-* 200
-* 400
-
 [`LoadType`](../../types.md#loadtype)  
 * `SUCCEED`
 * `PARAMETER_ERROR`
@@ -35,7 +31,6 @@ AllowPermissions: `[]`
 ```js
 // 參數為 0 (All) 的回傳格式
 {
-    "status": 200,
     "loadType": LoadType.SUCCEED,
     "data": [
         {
@@ -49,7 +44,6 @@ AllowPermissions: `[]`
 // 其他的回傳格式
 // enable 值為該 API 模塊是否啟用
 {
-    "status": 200,
     "loadType": LoadType.SUCCEED,
     "data": [
         {
@@ -61,7 +55,6 @@ AllowPermissions: `[]`
 範例
 ```json
 {
-    "status": 200,
     "loadType": LoadType.SUCCEED,
     "data": [{ "enable": true }]
 }
@@ -70,7 +63,6 @@ AllowPermissions: `[]`
 ### 參數錯誤
 ```json
 {
-    "status": 400,
     "loadType": LoadType.PARAMETER_ERROR,
     "data": []
 }
