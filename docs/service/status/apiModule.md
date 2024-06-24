@@ -1,7 +1,7 @@
 # 檢查 server API 模塊是否啟用
 
 檢查 server API 模塊是否啟用  
-API: { 0: All, 1: NLSC, 2: 註冊, 3: Mail }  
+API: { 0: All, 1: 註冊, 3: Mail }  
 
 PATH: `/api/service/status/apiModule`  
 Method: `GET`  
@@ -10,11 +10,11 @@ AllowPermissions: `[]`
 
 
 ## 請求格式
-* `type`: 選擇獲取的 API 模塊狀態 (0: All, 1: NLSC, 2: 註冊, 3: Mail)
+* `type`: 選擇獲取的 API 模塊狀態 (0: All, 1: 註冊, 2: Mail)
 
 ```js
 {
-    "type": number  // 0, 1, 2, 3
+    "type": number  // 0, 1, 2
 }
 ```
 
@@ -34,7 +34,6 @@ AllowPermissions: `[]`
     "loadType": LoadType.SUCCEED,
     "data": [
         {
-            "nlsc": boolean,
             "register": boolean,
             "mailer": boolean
         }
