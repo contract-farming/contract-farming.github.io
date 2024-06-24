@@ -4,7 +4,7 @@
 給管理員用的  
 後台刪除使用者  
 
-PATH: `/api/service/user/deleteOneUser`  
+PATH: `/api/service/admin/deleteOneUser`  
 Method: `DELETE`  
 LoginRequired: `true`  
 AllowPermissions: `[Admin]`  

@@ -4,7 +4,7 @@
 給管理員用的  
 後台管理使用者  
 
-PATH: `/api/service/user/getOneUser`  
+PATH: `/api/service/admin/getOneUser`  
 Method: `GET`  
 LoginRequired: `true`  
 AllowPermissions: `[Admin]`  

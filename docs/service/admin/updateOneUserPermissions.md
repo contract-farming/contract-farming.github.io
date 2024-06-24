@@ -1,10 +1,10 @@
-# 更新 User table 的一名使用者 (Admin)
+# 更新 User table 的一名使用者的權限 (Admin)
 
-更新 User table 的 一名使用者  
+更新 User table 的 一名使用者的權限  
 給管理員用的 (後台更新使用者)  
-未註冊驗證帳號也能更改  
+後台確認註冊使用者並發放權限或修改  
 
-PATH: `/api/service/user/updateOneUser`  
+PATH: `/api/service/admin/updateOneUserPermissions`  
 Method: `PUT`  
 LoginRequired: `true`  
 AllowPermissions: `[Admin]`  
@@ -13,23 +13,13 @@ AllowPermissions: `[Admin]`
 ## 請求格式
 * `username`: 使用者帳號 (`最大100個字`)
 * `user_permissions`: 使用者權限
-* `email`: 電子郵件 (`最大100個字`)
-* `name`: 使用者姓名 (`最大100個字`)
-* `telephone`: 家用電話 (可留空) (`最大50個字`)
-* `cellphone`: 手機號碼 (可留空) (`最大50個字`)
-* `address`: 地址 (可留空) (`最大100個字`)
-
-空值需用 `'EMPTY_DATA'`  
+* `registered`: 是否已驗證註冊, (0: 未驗證, 1: 已驗證)
 
 ```js
 {
     "username": string,
     "user_permissions": number,
-    "email": string,
-    "name": string,
-    "telephone": string | 'EMPTY_DATA',
-    "cellphone": string | 'EMPTY_DATA',
-    "address": string | 'EMPTY_DATA'
+    "registered": number        // 0, 1
 }
 ```
 

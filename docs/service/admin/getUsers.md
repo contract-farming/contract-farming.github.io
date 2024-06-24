@@ -6,7 +6,7 @@
 還是 註冊確認頁面  
 或全部顯示  
 
-PATH: `/api/service/user/getUsers`  
+PATH: `/api/service/admin/getUsers`  
 Method: `GET`  
 LoginRequired: `true`  
 AllowPermissions: `[Admin]`  

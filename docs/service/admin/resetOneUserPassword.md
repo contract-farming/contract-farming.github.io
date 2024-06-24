@@ -4,7 +4,7 @@
 給管理員用的 (後台更新使用者)  
 自動發送重置後的密碼到使用者郵箱  
 
-PATH: `/api/service/user/resetOneUserPassword`  
+PATH: `/api/service/admin/resetOneUserPassword`  
 Method: `POST`  
 LoginRequired: `true`  
 AllowPermissions: `[Admin]`  
