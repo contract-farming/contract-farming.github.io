@@ -48,6 +48,8 @@ sidebar_position: 4
 | `SESSION_EXISTS` | 請求時已帶入有效的 sessionId 跳過登入 |
 | `SESSION_INVALID` | 請求時帶入的 sessionId 無效 (可能閒置太久過期了), 可重定向至登入介面 |
 | `SEND_FAIL` | 發送信件失敗 |
+| - | - |
+| `PERMISSION_DENIED` | 請求的 API 路徑沒被國土測繪授權或路徑錯誤或授權過期 |
 
 
 ### MissingFK
