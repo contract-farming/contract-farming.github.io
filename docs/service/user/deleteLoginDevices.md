@@ -1,6 +1,6 @@
-# 刪除已登入的所有裝置
+# 刪除已登入的裝置
 
-刪除該名使用者已登入的所有裝置  
+刪除該名使用者已登入的裝置  
 用 sessionId 刪除資料  
 
 PATH: `/api/service/user/deleteLoginDevices`  
