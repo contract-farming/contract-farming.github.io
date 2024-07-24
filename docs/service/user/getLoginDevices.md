@@ -1,11 +1,9 @@
-# 獲取指定使用者權限
+# 獲取已登入的所有裝置
 
-獲取指定使用者權限值  
-前端用來檢查使用者是否有 api 訪問權限  
-網頁屏蔽沒有權限的功能  
+獲取該名使用者已登入的所有裝置  
 用 sessionId 獲取資料  
 
-PATH: `/api/service/user/getPermission`  
+PATH: `/api/service/user/getLoginDevices`  
 Method: `GET`  
 LoginRequired: `true`  
 AllowPermissions: `[]`  
@@ -17,9 +15,11 @@ AllowPermissions: `[]`
 
 ## 回傳格式
 
-回傳 data 為陣列內含指定使用者權限  
+回傳 data 為陣列內含指定使用者個人資料  
 
-* `user_permissions`: 使用者權限
+* `id`: Session 編號
+* `device`: 裝置名稱 (User-Agent)
+* `last_refresh`: 最後刷新時間 (使用時間)
 
 [`LoadType`](../../types.md#loadtype)  
 * `SUCCEED`
@@ -35,7 +35,9 @@ AllowPermissions: `[]`
     "loadType": LoadType.SUCCEED,
     "data": [
         {
-            "user_permissions": number
+            "id": number,
+            "device": string,
+            "last_refresh": string  // YYYY/MM/DD HH:mm:ss
         }
     ]
 }
@@ -46,7 +48,9 @@ AllowPermissions: `[]`
     "loadType": LoadType.SUCCEED,
     "data": [
         {
-            "user_permissions": 2
+            "id": 137,
+            "device": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+            "last_refresh": "2024/06/24 21:50:50"
         }
     ]
 }
