@@ -1,6 +1,7 @@
 # 增加一個 契作合約
 
-增加一個契作合約
+增加一個契作合約  
+在合約下創建多個契作農地  
 
 PATH: `/api/contract/addOne`  
 Method: `POST`  
@@ -9,16 +10,16 @@ AllowPermissions: `[]`
 
 
 ## 請求格式
-* `year`: 年度                     [`0-65535`]
+* `year`: 年度                     (`SMALLINT_UNSIGNED`)
 * `no`: 期號 一年有三期             [`1`, `2`, `3`]
-* `farmer`: 引用契作農民的 uuid
-* `finish`: 是否結案 (Y/N)          [`0`, `1`]
+* `farmer_id`: 引用契作農民的 id    (`INT_UNSIGNED`)
+* `is_closed`: 是否結案 (Y/N)       [`0`, `1`]
 
 ```js
 {
-    "year": number;     // [`0-65535`]
+    "year": number;
     "no": number;       // [`1`, `2`, `3`]
-    "farmer": number;   // farmer uuid
+    "farmer_id": number;
     "finish": number;   // [0, 1]   (Y/N)
 }
 ```
@@ -31,34 +32,13 @@ AllowPermissions: `[]`
 * `"FK_NOT_FOUND"` [`"CLMissingType"`](../../types.md#clmissingtype)
 * `"QUERY_FAILED"`
 
-```js
-{
-    "loadType": LoadType,
-    "data": [
-        {
-            "year": number,
-            "no": number,
-            "farmer": number,
-            "finish": number
-        }
-    ]
-}
-```
-
 
 ## 回傳範例
 ### 成功新增
 ```json
 {
     "loadType": "SUCCEED",
-    "data": [
-        {
-            "year": 2023,
-            "no": 2,
-            "farmer": 190,
-            "finish": 0
-        }
-    ]
+    "data": []
 }
 ```
 
@@ -72,13 +52,14 @@ AllowPermissions: `[]`
 
 ### 引用的 farmer 不存在  
 如果引用的 farmer 不存在於資料庫中則回傳 `FK_NOT_FOUND`  
-`data[]` 為不存在的 farmer uuid
+`data[]` 為不存在的 farmer id
 ```json
 {
-    "loadType": "FK_NOT_FOUND",
+    "loadType": LoadType.FK_NOT_FOUND,
+    "missingFK": MissingFK.FARMER_ID,
     "data": [
         {
-            "uuid": 1000,
+            "id": 1000,
         }
     ]
 }
@@ -86,6 +67,7 @@ AllowPermissions: `[]`
 
 ### 已存在該資料  
 **不檢查是否重複新增該資料，因為農民可能會開很多張同樣的合約**
+(不確定是否需檢查重複合約)  
 
 ### Server 錯誤  
 ```json

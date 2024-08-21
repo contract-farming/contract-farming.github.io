@@ -16,7 +16,8 @@ AllowPermissions: `[]`
 
 回傳 data 為陣列內含所有 肥料種類 資料  
 
-* `name`: 肥料種類名稱
+* `name`: 肥料種類名稱 (`VARCHAR(255)`)
+* `weight`: 肥料重量 (KG) (`SMALLINT_UNSIGNED`)
 
 [`LoadType`](../../types.md#loadtype)  
 * `SUCCEED`
@@ -32,8 +33,9 @@ AllowPermissions: `[]`
     "loadType": LoadType.SUCCEED,
     "data": [
         {
-            "uuid": number,
-            "name": string
+            "id": number,
+            "name": string,
+            "weight": number
         }
     ]
 }
@@ -44,8 +46,9 @@ AllowPermissions: `[]`
     "loadType": LoadType.SUCCEED,
     "data": [
         {
-            "uuid": 1,
-            "name": "肥料一號"
+            "id": 1,
+            "name": "農友牌台肥43號",
+            "weight": 500   // KG
         }
     ]
 }

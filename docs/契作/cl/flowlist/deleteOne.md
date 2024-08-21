@@ -1,15 +1,15 @@
-# 刪除其中一個 契作合約
+# 刪除流程清單中的其中一個內容
 
-刪除其中一個契作合約
+刪除其中一個 契作農地 的流程清單中的一個內容
 
-PATH: `/api/contract/deleteOne`  
+PATH: `/api/cl/flowlist/deleteOne`  
 Method: `DELETE`  
 LoginRequired: `true`  
 AllowPermissions: `[]`  
 
 
 ## 請求格式
-* `id`: 待刪除的 契作合約 id
+* `name`: 待刪除的 流程清單 id
 
 ```js
 {
@@ -19,13 +19,11 @@ AllowPermissions: `[]`
 
 
 ## 回傳格式
-[`LoadType`](../../types.md#loadtype)  
+[`LoadType`](../../../types.md#loadtype)  
 * `SUCCEED`
 * `PARAMETER_ERROR`
 * `DATA_NOT_FOUND`
-* `ROW_IS_REFERENCED`
 * `QUERY_FAILED`
-
 
 
 ## 回傳範例
@@ -49,14 +47,6 @@ AllowPermissions: `[]`
 ```json
 {
     "loadType": LoadType.DATA_NOT_FOUND,
-    "data": []
-}
-```
-
-### 該契作合約已被引用無法刪除
-```json
-{
-    "loadType": LoadType.ROW_IS_REFERENCED,
     "data": []
 }
 ```

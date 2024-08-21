@@ -9,11 +9,11 @@ AllowPermissions: `[]`
 
 
 ## 請求格式
-* `name`: 待刪除的 農地 uuid
+* `name`: 待刪除的 農地 id
 
 ```js
 {
-    "uuid": number
+    "id": number
 }
 ```
 

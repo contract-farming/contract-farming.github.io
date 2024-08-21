@@ -9,11 +9,11 @@ AllowPermissions: `[]`
 
 
 ## 請求格式
-* `uuid`: 農藥種類的 uuid
+* `id`: 農藥種類的 id
 
 ```js
 {
-    "uuid": number
+    "id": number
 }
 ```
 
@@ -39,8 +39,18 @@ AllowPermissions: `[]`
     "loadType": LoadType.SUCCEED,
     "data": [
         {
-            "uuid": number,
-            "name": string
+            "id": number,
+            "target_pest": string,
+            "common_name": string,
+            "product_name": string,
+            "specification": number,
+            "specification_unit": number,
+            "dosage_pre_hectare": string,
+            "safe_limit": number,
+            "japan_limit": number,
+            "safe_harvest_period": number,
+            "dilution_ratio": number,
+            "manufacturer": string
         }
     ]
 }
@@ -51,8 +61,18 @@ AllowPermissions: `[]`
     "loadType": LoadType.SUCCEED,
     "data": [
         {
-            "uuid": 1,
-            "name": "農藥一號"
+            "id": 1,
+            "target_pest": "稻熱病",
+            "common_name": "芬諾尼",
+            "product_name": "稻輝(20%水懸劑)",
+            "specification": 250,
+            "specification_unit": 1,
+            "dosage_pre_hectare": "0.67公升",
+            "safe_limit": 1,
+            "japan_limit": 1,
+            "safe_harvest_period": 21,
+            "dilution_ratio": 1500,
+            "manufacturer": "詣榮"
         }
     ]
 }

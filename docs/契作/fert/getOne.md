@@ -9,11 +9,11 @@ AllowPermissions: `[]`
 
 
 ## 請求格式
-* `uuid`: 肥料種類的 uuid 
+* `id`: 肥料種類的 id 
 
 ```js
 {
-    "uuid": number
+    "id": number
 }
 ```
 
@@ -37,8 +37,9 @@ AllowPermissions: `[]`
     "loadType": LoadType.SUCCEED,
     "data": [
         {
-            "uuid": number,
-            "name": string
+            "id": number,
+            "name": string,
+            "weight": number
         }
     ]
 }
@@ -49,8 +50,9 @@ AllowPermissions: `[]`
     "loadType": LoadType.SUCCEED,
     "data": [
         {
-            "uuid": 1,
-            "name": "肥料一號"
+            "id": 1,
+            "name": "農友牌台肥43號",
+            "weight": 500   // KG
         }
     ]
 }

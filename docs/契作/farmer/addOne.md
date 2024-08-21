@@ -9,14 +9,14 @@ AllowPermissions: `[]`
 
 
 ## 請求格式
-* `id`: 身分證 (`需剛好10個字`)
-* `name`: 農民名稱 (`最大20個字`)
-* `phone`: 農民電話號碼 (家用或手機) (`最大20個字`)
-* `address`: 農民地址 (`最大100個字`)
+* `identity_number`: 身分證 (`需剛好10個字`) (`VARCHAR(10)`)
+* `name`: 農民名稱 (`VARCHAR(32)`)
+* `phone`: 農民電話號碼 (家用或手機) (`VARCHAR(32)`)
+* `address`: 農民地址 (`VARCHAR(255)`)
 
 ```js
 {
-    "id": string,
+    "identity_number": string,
     "name": string,
     "phone": string,
     "address": string,
@@ -57,8 +57,8 @@ AllowPermissions: `[]`
     "loadType": LoadType.DATA_EXISTED,
     "data": [
         {
-            "uuid": 206,
-            "id": "A123457896",
+            "id": 206,
+            "identity_number": "A123457896",
             "name": "莊O城",
             "phone": "07-1234567",
             "address": "大樹區學城路一段1號"

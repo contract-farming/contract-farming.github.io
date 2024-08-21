@@ -9,11 +9,11 @@ AllowPermissions: `[]`
 
 
 ## 請求格式
-* `name`: 待刪除的 肥料種類 uuid
+* `name`: 待刪除的 肥料種類 id
 
 ```js
 {
-    "uuid": number
+    "id": number
 }
 ```
 

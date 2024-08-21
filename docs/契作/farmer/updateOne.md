@@ -9,16 +9,16 @@ AllowPermissions: `[]`
 
 
 ## 請求格式
-* `uuid`: 契作農民的 uuid (`不可更新`)
-* `id`: 待更新的身分證 (`需剛好10個字`)
-* `name`: 待更新的農民名稱 (`最大20個字`)
-* `phone`: 待更新的農民電話號碼 (家用或手機) (`最大20個字`)
-* `address`: 待更新的農民地址 (`最大100個字`)
+* `id`: 契作農民的 id (`不可更新`) (`INT_UNSIGNED`)
+* `identity_number`: 身分證 (`需剛好10個字`) (`VARCHAR(10)`)
+* `name`: 農民名稱 (`VARCHAR(32)`)
+* `phone`: 農民電話號碼 (家用或手機) (`VARCHAR(32)`)
+* `address`: 農民地址 (`VARCHAR(255)`)
 
 ```js
 {
-    "uuid": number,
-    "id": string,
+    "id": number,
+    "identity_number": string,
     "name": string,
     "phone": string,
     "address": string,
@@ -67,8 +67,8 @@ AllowPermissions: `[]`
     "loadType": LoadType.DATA_EXISTED,
     "data": [
         {
-            "uuid": 100,
-            "id": "T100424178",
+            "id": 100,
+            "identity_number": "T100424178",
             "name": "莊O城",
             "phone": "07-1234567",
             "address": "大樹區學城路一段1號"

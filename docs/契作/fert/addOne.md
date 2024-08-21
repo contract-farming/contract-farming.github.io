@@ -9,11 +9,13 @@ AllowPermissions: `[]`
 
 
 ## 請求格式
-* `name`: 肥料種類名稱 (`最大100個字`)
+* `name`: 肥料種類名稱 (`VARCHAR(255)`)
+* `weight`: 肥料重量 (KG) (`SMALLINT_UNSIGNED`)
 
 ```js
 {
-    "name": string
+    "name": string,
+    "weight": number
 }
 ```
 
@@ -51,8 +53,9 @@ AllowPermissions: `[]`
     "loadType": LoadType.DATA_EXISTED,
     "data": [
         {
-            "uuid": 11,
-            "name": "肥料五號"
+            "id": 11,
+            "name": "肥料五號",
+            "weight": 500
         }
     ]
 }

@@ -9,19 +9,19 @@ AllowPermissions: `[]`
 
 
 ## 請求格式
-* `uuid`: 契作合約的 uuid (`不可更新`)
-* `year`: 年度                     [`0-65535`]
+* `id`: 契作合約的 id (`不可更新`)
+* `year`: 年度                     (`SMALLINT_UNSIGNED`)
 * `no`: 期號 一年有三期             [`1`, `2`, `3`]
-* `farmer`: 引用契作農民的 uuid
-* `finish`: 是否結案 (Y/N)          [`0`, `1`]
+* `farmer_id`: 引用契作農民的 id    (`INT_UNSIGNED`)
+* `is_closed`: 是否結案 (Y/N)       [`0`, `1`]
 
 ```js
 {
-    "uuid": number,
-    "year": number;     // [`0-65535`]
-    "no": number;       // [`1`, `2`, `3`]
-    "farmer": number;   // farmer uuid
-    "finish": number;   // [0, 1]   (Y/N)
+    "id": number,
+    "year": number;         // [`0-65535`]
+    "no": number;           // [`1`, `2`, `3`]
+    "farmer_id": number;    // farmer id
+    "is_closed": number;    // [0, 1]   (Y/N)
 }
 ```
 
@@ -62,12 +62,16 @@ AllowPermissions: `[]`
 
 ### 引用的 farmer 不存在  
 如果引用的 farmer 不存在於資料庫中則回傳 `FK_NOT_FOUND`  
-`data[]` 為不存在的 farmer uuid
+`data[]` 為不存在的 farmer id
 ```json
 {
     "loadType": LoadType.FK_NOT_FOUND,
-    "missingFK": MissingFK.FARMER_UUID,
-    "data": [{ "uuid": 1000 }]
+    "missingFK": MissingFK.FARMER_ID,
+    "data": [
+        { 
+            "id": 1000 
+        }
+    ]
 }
 ```
 

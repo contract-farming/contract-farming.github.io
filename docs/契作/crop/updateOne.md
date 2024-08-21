@@ -9,17 +9,21 @@ AllowPermissions: `[]`
 
 
 ## 請求格式
-* `uuid`: 作物品種的 uuid (`不可更新`)
-* `name`: 待更新的作物品種名稱 (`最大100個字`)
-* `unit_yield`: 待更新的單位面積預估產量 (`INT`)
-* `unit`: 待更新的產量單位 (`1: 台斤, 2: 公斤`)
+* `id`: 作物品種的 id (`不可更新`) (`INT_UNSIGNED`)
+* `name`: 作物品種名稱 (`VARCHAR(255)`)
+* `unit_yield`: 單位面積預估產量 (`INT_UNSIGNED`)
+* `unit`: 產量單位 (1: 台斤, 2: 公斤)
+* `contract_order_list`: 該作物預設流程順序 (`VARCHAR(255)`)
+* `estimated_time`: 每個流程順序的預估時間 (`VARCHAR(255)`)
 
 ```js
 {
-    "uuid": number,
+    "id": number,
     "name": string,
     "unit_yield": number,
     "unit": number,
+    "contract_order_list": string,
+    "estimated_time": string
 }
 ```
 
@@ -65,10 +69,12 @@ AllowPermissions: `[]`
     "loadType": LoadType.DATA_EXISTED,
     "data": [
         {
-            "uuid": 22,
+            "id": 22,
             "name": "高雄147",
             "unit_yield": 50,
-            "unit": 2
+            "unit": 2,
+            "contract_order_list": "200,100,101,102,202,301,203,103,302,201,303,304,104",
+            "estimated_time": "0,0,3,0,15,15,0,15,0,20,10,15,0"
         }
     ]
 }

@@ -16,10 +16,10 @@ AllowPermissions: `[]`
 
 回傳 data 為陣列內含所有 farmer 資料  
 
-* `id`: 身分證
-* `name`: 農民名稱
-* `phone`: 農民電話號碼 (家用或手機)
-* `address`: 農民地址
+* `identity_number`: 身分證 (`VARCHAR(10)`)
+* `name`: 農民名稱 (`VARCHAR(32)`)
+* `phone`: 農民電話號碼 (家用或手機) (`VARCHAR(32)`)
+* `address`: 農民地址 (`VARCHAR(255)`)
 
 [`LoadType`](../../types.md#loadtype)  
 * `SUCCEED`
@@ -37,8 +37,8 @@ AllowPermissions: `[]`
     "loadType": LoadType.SUCCEED,
     "data": [
         {
-            "uuid": number,
-            "id": string,
+            "id": number,
+            "identity_number": string,
             "name": string,
             "phone": PhoneNumber,
             "address": string
@@ -52,8 +52,8 @@ AllowPermissions: `[]`
     "loadType": LoadType.SUCCEED,
     "data": [
         {
-            "uuid": 35,
-            "id": "A123456789",
+            "id": 35,
+            "identity_number": "A123456789",
             "name": "方O洋",
             "phone": "07-1234567",
             "address": "大樹區學城路一段1號"

@@ -9,13 +9,15 @@ AllowPermissions: `[]`
 
 
 ## 請求格式
-* `uuid`: 肥料種類的 uuid (`不可更新`)
-* `name`: 待更新的肥料種類名稱 (`最大100個字`)
+* `id`: 肥料種類的 id (`不可更新`) (`INT_UNSIGNED`)
+* `name`: 肥料種類名稱 (`VARCHAR(255)`)
+* `weight`: 肥料重量 (KG) (`SMALLINT_UNSIGNED`)
 
 ```js
 {
-    "uuid": number,
-    "name": string
+    "id": number,
+    "name": string,
+    "weight": number
 }
 ```
 
@@ -61,8 +63,9 @@ AllowPermissions: `[]`
     "loadType": LoadType.DATA_EXISTED,
     "data": [
         {
-            "uuid": 3,
-            "name": "肥料三號"
+            "id": 15,
+            "name": "農友牌台肥43號",
+            "weight": 500
         }
     ]
 }
