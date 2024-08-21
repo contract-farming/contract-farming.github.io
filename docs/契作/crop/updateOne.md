@@ -16,6 +16,12 @@ AllowPermissions: `[]`
 * `contract_order_list`: 該作物預設流程順序 (`VARCHAR(255)`)
 * `estimated_time`: 每個流程順序的預估時間 (`VARCHAR(255)`)
 
+:::note
+`contract_order_list` 使用 **CLTypes** 數值 (創建契作農地時會讀取該數值進行預設流程創建)，
+`estimated_time` 長度需與 `contract_order_list` 相同  
+兩者中間都由 `,` 間隔。  
+:::
+
 ```js
 {
     "id": number,
