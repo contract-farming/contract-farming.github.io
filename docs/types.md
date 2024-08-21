@@ -7,20 +7,12 @@ sidebar_position: 4
 
 
 ### UserPermissions
-| Code | value |
-| :------ | :------ |
-| None | 0 |
-| Admin | 1 |
-| Employee | 2 |
-| Farmer | 3 |
-
-
-### RequestParameterFormat
-請求參數佔位符
-
 | Code | Description |
 | :------ | :------ |
-| `"EMPTY_DATA"` | 表示該參數為 null |
+| Guest | Temporary session 用, 只能訪問不須登入的 API (loginRequired = false) |
+| Admin | 管理員 (所有都能訪問) |
+| Employee | 員工 (未定) |
+| Farmer | 農民 (未定) |
 
 
 ### LoadType
@@ -53,18 +45,19 @@ sidebar_position: 4
 
 
 ### MissingFK
-引用的外鍵未找到類型
+引用的外鍵未找到類型  
+請求時帶入的 id 不存在  
 
 | FK | Description |
 | :------ | :------ |
-| `CONTRACT_UUID` | 契作合約 uuid |
-| `FARMER_UUID` | 農民 uuid |
-| `LAND_UUID` | 農地 uuid |
-| `CROP_UUID` | 作物品種 uuid |
-| `WEED_PEST_UUID` | 除草的農藥種類 uuid |
-| `SPRAY_PEST_UUID` | 噴藥的農藥種類 uuid |
-| `PRE_FERT_UUID` | 穗前肥的肥料種類 uuid |
-| `POST_FERT_UUID` | 穗後肥的肥料種類 uuid |
+| `CONTRACT_ID` | 契作合約 id |
+| `FARMER_ID` | 農民 id |
+| `LAND_ID` | 農地 id |
+| `CROP_ID` | 作物品種 id |
+| `FERT_ID` | 肥料種類 id |
+| `PEST_ID` | 農藥種類 id |
+| `CL_ID` | 契作農地 id |
+| `MR_ID` | 契作流程紀錄 id |
 
 
 ### PhoneNumber
@@ -77,3 +70,27 @@ sidebar_position: 4
 ```
 "07-1234567" | "0987654321"
 ```
+
+
+### CLTypes
+契作流程型態  
+用於契作流程紀錄的流程類型  
+
+| Type | Description |
+| :------ | :------ |
+| `LAND_PREPARATION` | 整地 |
+| `LAND_IRRIGATION` | 灌溉 |
+| `LAND_PLANT` | 插秧 |
+| `LAND_BASK` | 曬田 |
+| `LAND_HARVEST` | 採收 |
+| - | - |
+| `FERT_BASE` | 基肥 |
+| `FERT_SPROUT` | 穗肥 |
+| `FERT_TOP_ONE` | 追肥(一) |
+| `FERT_TOP_TOW` | 追肥(二) |
+| - | - |
+| `PEST_WEED` | 除草 |
+| `PEST_SPRAY_ONE` | 噴藥(一) |
+| `PEST_SPRAY_TWO` | 噴藥(二) |
+| `PEST_SPRAY_THREE` | 噴藥(三) |
+| `PEST_SPRAY_FOUR` | 噴藥(四) |
