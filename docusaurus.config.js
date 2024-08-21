@@ -1,8 +1,25 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
+const fs = require('fs');
+
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+
+const versionList = JSON.parse(fs.readFileSync('./versions.json', 'utf-8'));
+const lastVersion = versionList[0];
+
+
+const versionListConversion = (/** @type {String[]} */ list) => {
+    const versions = {};
+
+    for (const version of list) {
+        versions[version] = { label: `v${version}` };
+    }
+
+    return versions;
+};
+
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -40,6 +57,9 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/contract-farming/contract-farming.github.io/blob/main/',
+            lastVersion: lastVersion,
+            // onlyIncludeVersions: versionList,
+            versions: versionListConversion(versionList),
         },
         blog: {
           showReadingTime: true,
@@ -84,6 +104,12 @@ const config = {
             label: 'Docs',
           },
           {to: '/blog', label: 'Blog', position: 'left'},
+          {
+              type: 'docsVersionDropdown',
+              position: 'right',
+              // dropdownItemsAfter: [{to: '/versions', label: 'All versions'}],
+              dropdownActiveClassDisabled: false,
+          },
           {
             href: 'https://github.com/contract-farming/contract-farming.github.io',
             position: 'right',
