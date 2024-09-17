@@ -44,7 +44,7 @@ AllowPermissions: `[]`
     "data": [
         {
             "id": number,
-            "id": string,
+            "identity_number": string,
             "name": string,
             "phone": PhoneNumber,
             "address": string
@@ -59,7 +59,7 @@ AllowPermissions: `[]`
     "data": [
         {
             "id": 35,
-            "id": "A123456789",
+            "identity_number": "A123456789",
             "name": "方O洋",
             "phone": "07-1234567",
             "address": "大樹區學城路一段1號"
