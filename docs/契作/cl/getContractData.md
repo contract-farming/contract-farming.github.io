@@ -26,7 +26,7 @@ AllowPermissions: `[]`
 * `crop`: 該合約的作物品種資料
 
 
-[`LoadType`](../../../types.md#loadtype)  
+[`LoadType`](../../types.md#loadtype)  
 * `SUCCEED`
 * `PARAMETER_ERROR`
 * `DATA_NOT_FOUND`
