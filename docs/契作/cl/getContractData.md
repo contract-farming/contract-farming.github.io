@@ -22,8 +22,9 @@ AllowPermissions: `[]`
 
 回傳 data 為陣列內含該 契作合約 下的所有 契作農地 資料  
 
-* `farmer`: 該合約的農民資料
-* `crop`: 該合約的作物品種資料
+* `farmer`: 該契作農地的農民資料
+* `crop`: 該契作農地種植的作物品種資料
+* `land`: 該契作農地所使用的農地資料
 
 
 [`LoadType`](../../types.md#loadtype)  
@@ -61,6 +62,18 @@ AllowPermissions: `[]`
                 "unit": 1 | 2,
                 "contract_order_list": string,  // "CLTypes,CLTypes, ..."
                 "estimated_time": string        // "number,number, ..."
+            },
+            "land": {
+                "id": number,
+                "no": string;
+                "lot": string;
+                "owner_name": string;
+                "owner_id": string;
+                "area": number;
+                "area_right": number | null;
+                "area_arable": number | null;
+                "type": number;                 // [1, 2, 3]
+                "is_contracting": number;       // [0, 1]   (Y/N)
             }
         }
     ]
@@ -90,6 +103,18 @@ AllowPermissions: `[]`
                 "unit": 2,
                 "contract_order_list": "200,100,101,102,202,301,203,103,302,201,303,304,104",
                 "estimated_time": "0,0,3,0,15,15,0,15,0,20,10,15,0"
+            },
+            "land": {
+                "id": 1,
+                "no": "19620006",
+                "lot": "新園新吉",
+                "owner_name": "李O雲",
+                "owner_id": "T125896357",
+                "area": "0.250000",
+                "area_right": "0.250000",
+                "area_arable": null,
+                "type": 1,
+                "is_contracting": 0
             }
         }
     ]
