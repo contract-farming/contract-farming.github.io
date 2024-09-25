@@ -1,9 +1,9 @@
 ---
-sidebar_position: 5
+title: 契作架構介紹
+date: 2024-09-25
 ---
 
 
-## 說明
 我們採用前後端分離架構，前端使用 vue 作為開發框架，Nginx 作為網頁伺服器。  
 後端使用 Node.js 及 TypeScript 開發 API，資料庫使用 MariaDB。  
 前後端透過 RESTful API 架構進行溝通。
@@ -15,6 +15,8 @@ sidebar_position: 5
 Server: `RockyLinux9`, `Certbot`  
 文檔: `React`, `Docusaurus v2`  
 
+
+## 架構說明
 ![contract-structure](./imgs/contract-structure.png)
 
 ### 前端
