@@ -62,35 +62,10 @@ VARCHAR 是可變長度的字串類型，你也必須在建立表格時設定該
 
 ### 帳號
 
-#### 資料庫: old_db
-```
-帳號: db-old_db  
-密碼: netlab!db!old_db  
-權限範圍: localhost  
-```
-
-#### 資料庫: test_db  
-```
-帳號: db-test_db  
-密碼: netlab!db!test_db  
-權限範圍: localhost  
-```
-
-```
-帳號: db-test_db-2  
-密碼: netlab!db!test_db-2  
-權限範圍: global  
-```
-
-
-------------------------------  
-
 權限設置語句
 
-```
-CREATE DATABASE test_db;
-CREATE USER 'db-test_db'@'localhost' IDENTIFIED BY 'netlab!db!test_db';
-GRANT ALL PRIVILEGES ON test_db.* TO 'db-test_db'@'localhost';
+```sql
+CREATE USER 'test_user'@'localhost' IDENTIFIED BY 'your_password';
+GRANT ALL PRIVILEGES ON test_db.* TO 'test_user'@'localhost';
 FLUSH PRIVILEGES;
-QUIT;
 ```
