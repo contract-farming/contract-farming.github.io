@@ -1,9 +1,7 @@
-# 文檔
+# 農地契作管理平台文檔
 
-這邊主要拿來放前後端安裝教學  
-跟一些 DB 架構, 端口清單  
-還有 API 文檔  
-頁面連結: https://contract-farming.github.io/
+這邊主要拿來放 API 文檔、 DB 架構跟一些前後端安裝教學  
+頁面連結: https://contract-farming.github.io/  
 
 ----------  
 
@@ -12,7 +10,7 @@
 
 ----------  
 
-## 包管理是用 [yarn](https://yarnpkg.com/getting-started/install) 非 npm  
+## 包管理器使用 [yarn](https://yarnpkg.com/getting-started/install)   
 
 ### 安裝依賴
 ```
