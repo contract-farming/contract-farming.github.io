@@ -27,5 +27,5 @@ jobs:
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_dir: ./build
-          user_name: isu-contract-farming
+          user_name: isu-netlab
           user_email: isu.netlab.git@gmail.com
