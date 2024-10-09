@@ -10,7 +10,7 @@ AllowPermissions: `[]`
 
 ## 請求格式
 * `id`: 流程清單的 id   (`不可更新`) (`INT_UNSIGNED`)
-* `contract_order`: 契作流程順序 (只有 cl_type 相同才可重複，ex: 噴藥在同個順序噴了多種藥) (`TINYINT_UNSIGNED`)
+* `contract_order`: 契作流程順序 (`TINYINT_UNSIGNED`)
 * `estimated_time`: (目前還沒做(記得提醒我 :D))此流程順序的預估時間 (`TINYINT_UNSIGNED`)
 * `cl_type`: 契作流程類型 (`CLTypes`)
 * `is_completed`: 是否已完成此流程 (Y/N) [`0`, `1`]
@@ -28,6 +28,13 @@ AllowPermissions: `[]`
 農藥相關 (農藥的 CLTypes 才能成功帶入以下值)
 * `pesticide_id`: 農藥的 id ，可為 null (`INT_UNSIGNED`)
 * `amount`: 農藥的用量 (毫升(ML)) (`INT_UNSIGNED`)
+
+:::note
+流程清單新增狀態判斷  
+參數`contract_order`已存在並且`cl_type`與已存在的相同，則表示為同一種工作流程 (ex: 噴藥在同個順序噴了多種藥)  
+參數`contract_order`已存在並且`cl_type`與已存在的不同，則表示為要插入到該順序的流程，原本流程以及往後流程的`contract_order`值會被 +1 往後排序  
+參數`contract_order`不存在則直接填入該順序 (目前還未判斷新增的`contract_order`是否與原本流程連續)  
+:::
 
 ```js
 {
