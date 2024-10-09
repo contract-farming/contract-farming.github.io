@@ -33,7 +33,7 @@ AllowPermissions: `[]`
 流程清單新增狀態判斷  
 參數`contract_order`已存在並且`cl_type`與已存在的相同，則表示為同一種工作流程 (ex: 噴藥在同個順序噴了多種藥)  
 參數`contract_order`已存在並且`cl_type`與已存在的不同，則表示為要插入到該順序的流程，原本流程以及往後流程的`contract_order`值會被 +1 往後排序  
-參數`contract_order`不存在則直接填入該順序 (目前還未判斷新增的`contract_order`是否與原本流程連續)  
+參數`contract_order`不存在則直接填入該順序 (參數`contract_order`比原本流程最大`contract_order`值還大，後端會自動修改參數到 原本流程最大`contract_order`值 +1 來保證流程順序連續性)  
 :::
 
 ```js
