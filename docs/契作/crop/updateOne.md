@@ -14,11 +14,11 @@ AllowPermissions: `[]`
 * `unit_yield`: 單位面積預估產量 (`INT_UNSIGNED`)
 * `unit`: 產量單位 (1: 台斤, 2: 公斤)
 * `contract_order_list`: 該作物預設流程順序 (`VARCHAR(255)`)
-* `estimated_time`: 每個流程順序的預估時間 (`VARCHAR(255)`)
+* `estimated_time_list`: 每個流程順序的預估時間 (`VARCHAR(255)`)
 
 :::note
 `contract_order_list` 使用 **CLTypes** 數值 (創建契作農地時會讀取該數值進行預設流程創建)，
-`estimated_time` 長度需與 `contract_order_list` 相同  
+`estimated_time_list` 長度需與 `contract_order_list` 相同  
 兩者中間都由 `,` 間隔。  
 :::
 
@@ -29,7 +29,7 @@ AllowPermissions: `[]`
     "unit_yield": number,
     "unit": number,
     "contract_order_list": string,
-    "estimated_time": string
+    "estimated_time_list": string
 }
 ```
 
@@ -80,7 +80,7 @@ AllowPermissions: `[]`
             "unit_yield": 50,
             "unit": 2,
             "contract_order_list": "200,100,101,102,202,301,203,103,302,201,303,304,104",
-            "estimated_time": "0,0,3,0,15,15,0,15,0,20,10,15,0"
+            "estimated_time_list": "0,0,3,0,15,15,0,15,0,20,10,15,0"
         }
     ]
 }

@@ -11,6 +11,7 @@ AllowPermissions: `[]`
 ## 請求格式
 * `id`: 流程清單的 id   (`不可更新`) (`INT_UNSIGNED`)
 * `contract_order`: 契作流程順序 (只有 cl_type 相同才可重複，ex: 噴藥在同個順序噴了多種藥) (`TINYINT_UNSIGNED`)
+* `estimated_time`: (目前還沒做(記得提醒我 :D))此流程順序的預估時間 (`TINYINT_UNSIGNED`)
 * `cl_type`: 契作流程類型 (`CLTypes`)
 * `is_completed`: 是否已完成此流程 (Y/N) [`0`, `1`]
 * `completion_date`: 完成時間 (`YYYY-MM-DD`)    (`DATE`)

@@ -11,6 +11,7 @@ AllowPermissions: `[]`
 ## 請求格式
 * `cl_id`: 契作農地的 id (`INT_UNSIGNED`)
 * `contract_order`: 契作流程順序 (只有 cl_type 相同才可重複，ex: 噴藥在同個順序噴了多種藥) (`TINYINT_UNSIGNED`)
+* `estimated_time`: 此流程順序的預估時間 (`TINYINT_UNSIGNED`)
 * `cl_type`: 契作流程類型 (`CLTypes`)
 * `is_completed`: 是否已完成此流程 (Y/N) [`0`, `1`]
 * `completion_date`: 完成時間 (`YYYY-MM-DD`)    (`DATE`)
@@ -31,10 +32,11 @@ AllowPermissions: `[]`
 ```js
 {
     "contract_order": number,           // 契作流程順序
+    "estimated_time": number,           // 契作流程預估時間
     "cl_type": CLTypes,                 // 契作流程類型
     "is_completed": number,
     "completion_date": string | null,   // YYYY-MM-DD
-            
+
     // 插秧相關
     "recv_name"?: string;
     "recv_date"?: string | null;           // YYYY-MM-DD
