@@ -24,7 +24,7 @@ AllowPermissions: `[]`
 
 * `name`: 作物品種名稱 (`VARCHAR(255)`)
 * `unit_yield`: 單位面積預估產量 (`INT_UNSIGNED`)
-* `unit`: 產量單位 (1: 台斤, 2: 公斤)
+* `unit`: 產量單位 (1: 台斤, 2: 公斤, 3: 分)
 * `contract_order_list`: 該作物預設流程順序 (`VARCHAR(255)`)
 * `estimated_time_list`: 每個流程順序的預估時間 (`VARCHAR(255)`)
 

@@ -14,6 +14,8 @@ AllowPermissions: `[]`
 * `contract_id`: 引用契作合約的 id    (`INT_UNSIGNED`)
 * `land_id`: 引用農地的 id            (`INT_UNSIGNED`)
 * `crop_id`: 引用作物品種的 id        (`INT_UNSIGNED`)
+* `actual_yield`: 實際產量 (使用 string 紀錄)   (`VARCHAR(32)`)
+* `actual_yield_unit`: 實際產量單位 (1: 台斤, 2: 公斤, 3: 分)
 
 ```js
 {
@@ -21,6 +23,8 @@ AllowPermissions: `[]`
     "contract_id": number;
     "land_id": number;
     "crop_id": number;
+    "actual_yield": string,
+    "actual_yield_unit": number,
 }
 ```
 

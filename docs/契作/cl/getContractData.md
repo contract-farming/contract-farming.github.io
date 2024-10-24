@@ -25,6 +25,8 @@ AllowPermissions: `[]`
 * `farmer`: 該契作農地的農民資料
 * `crop`: 該契作農地種植的作物品種資料
 * `land`: 該契作農地所使用的農地資料
+* `actual_yield`: 實際產量 (使用 string 紀錄)
+* `actual_yield_unit`: 實際產量單位 (1: 台斤, 2: 公斤, 3: 分)
 
 
 [`LoadType`](../../types.md#loadtype)  
@@ -48,6 +50,8 @@ AllowPermissions: `[]`
             "contract_id": number,
             "year": number,
             "no": number,
+            "actual_yield": string,
+            "actual_yield_unit": number,
             "farmer": {
                 "id": number,
                 "identity_number": string,
@@ -89,6 +93,8 @@ AllowPermissions: `[]`
             "contract_id": 1,
             "year": 2024,
             "no": 1,
+            "actual_yield": "1004.32",
+            "actual_yield_unit": 2,
             "farmer": {
                 "id": 15,
                 "identity_number": "A123456789",
