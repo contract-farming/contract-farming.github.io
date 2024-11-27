@@ -81,7 +81,7 @@ AllowPermissions: `[]`
     "loadType": LoadType.DATA_EXISTED,
     "data": [
         {
-            "uuid": 226,
+            "id": 226,
             "no": "01080000",
             "lot": "新園仙隆",
             "class": "田",
