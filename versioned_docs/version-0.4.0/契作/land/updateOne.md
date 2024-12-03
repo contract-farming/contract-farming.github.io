@@ -9,10 +9,12 @@ AllowPermissions: `[]`
 
 
 ## 請求格式
-* `uuid`: 農地的 uuid (`不可更新`)
+* `id`: 農地的 id (`不可更新`)
 * `no`: 待更新的地號        (`最大長度20`)
-* `lot`: 待更新的地段       (`最大長度10`)
-* `class`: 待更新的地目                 [`"田"`, `"旱"`, `null`]
+* `city`: 待更新的縣市       (`最大10個字`)
+* `town`: 待更新的區域       (`最大10個字`)
+* `section`: 待更新的路段       (`最大10個字`)
+* `subsection`: 待更新的小段       (`最大10個字或 null`)
 * `owner_name`: 待更新的所有權人_姓名   (`最大長度10`)
 * `owner_id`: 待更新的所有權人_身分證   (`身分證為10碼字串`)
 * `area`: 待更新的本筆面積              (`小數點後六位`)
@@ -35,10 +37,12 @@ AllowPermissions: `[]`
 
 ```js
 {
-    "uuid": number,
+    "id": number,
     "no": string;
-    "lot": string;
-    "class": "田" | "旱" | null;
+    "city": string;
+    "town": string;
+    "section": string;
+    "subsection": string | null;
     "owner_name": string;
     "owner_id": string;
     "area": number;
@@ -91,10 +95,12 @@ AllowPermissions: `[]`
     "loadType": LoadType.DATA_EXISTED,
     "data": [
         {
-            "uuid": 448,
+            "id": 448,
             "no": "18320000",
-            "lot": "新園新吉",
-            "class": "田",
+            "city": "屏東縣",
+            "town": "新園",
+            "section": "新吉",
+            "subsection": null,
             "owner_name": "楊順欽",
             "owner_id": "E102863920",
             "area": 0.219,
