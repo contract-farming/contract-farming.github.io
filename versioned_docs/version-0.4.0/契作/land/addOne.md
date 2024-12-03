@@ -10,7 +10,10 @@ AllowPermissions: `[]`
 
 ## 請求格式
 * `no`: 地號        (`最大20個字`)
-* `lot`: 地段       (`最大10個字`)
+* `city`: 縣市       (`最大10個字`)
+* `town`: 區域       (`最大10個字`)
+* `section`: 路段       (`最大10個字`)
+* `subsection`: 小段       (`最大10個字或 null`)
 * `class`: 地目                 [`"田"`, `"旱"`, `null`]
 * `owner_name`: 所有權人_姓名   (`最大10個字`)
 * `owner_id`: 所有權人_身分證   (`身分證為10碼字串`)
@@ -35,7 +38,10 @@ AllowPermissions: `[]`
 ```js
 {
     "no": string;
-    "lot": string;
+    "city": string;
+    "town": string;
+    "section": string;
+    "subsection": string | null;
     "class": "田" | "旱" | null;
     "owner_name": string;
     "owner_id": string;
@@ -83,7 +89,10 @@ AllowPermissions: `[]`
         {
             "id": 226,
             "no": "01080000",
-            "lot": "新園仙隆",
+            "city": "屏東縣",
+            "town": "新園",
+            "section": "新隆",
+            "subsection": null,
             "class": "田",
             "owner_name": "林月秋",
             "owner_id": "T221962219",
