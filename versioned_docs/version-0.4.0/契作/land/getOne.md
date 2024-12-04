@@ -23,10 +23,6 @@ AllowPermissions: `[]`
 回傳 data 為陣列內含指定的 農地 資料  
 
 * `no`: 地號
-* `city`: 縣市       (`最大10個字`)
-* `town`: 區域       (`最大10個字`)
-* `section`: 路段       (`最大10個字`)
-* `subsection`: 小段       (`最大10個字或 null`)
 * `owner_name`: 所有權人_姓名
 * `owner_id`: 所有權人_身分證
 * `area`: 本筆面積              [`number`]
@@ -65,10 +61,6 @@ AllowPermissions: `[]`
         {
             id: number;
             no: string;
-            city: string;
-            town: string;
-            section: string;
-            subsection: string | null;
             owner_name: string;
             owner_id: string;
             area: number;
@@ -88,10 +80,6 @@ AllowPermissions: `[]`
         {
             "uuid": 343,
             "no": "05000000",
-            "city": "屏東縣",
-            "town": "潮州",
-            "section": "劉厝庄",
-            "subsection": null,
             "owner_name": "劉穎仁",
             "owner_id": "T123958060",
             "area": 0.422734,

@@ -11,10 +11,6 @@ AllowPermissions: `[]`
 ## 請求格式
 * `id`: 農地的 id (`不可更新`)
 * `no`: 待更新的地號        (`最大長度20`)
-* `city`: 待更新的縣市       (`最大10個字`)
-* `town`: 待更新的區域       (`最大10個字`)
-* `section`: 待更新的路段       (`最大10個字`)
-* `subsection`: 待更新的小段       (`最大10個字或 null`)
 * `owner_name`: 待更新的所有權人_姓名   (`最大長度10`)
 * `owner_id`: 待更新的所有權人_身分證   (`身分證為10碼字串`)
 * `area`: 待更新的本筆面積              (`小數點後六位`)
@@ -39,10 +35,6 @@ AllowPermissions: `[]`
 {
     "id": number,
     "no": string;
-    "city": string;
-    "town": string;
-    "section": string;
-    "subsection": string | null;
     "owner_name": string;
     "owner_id": string;
     "area": number;
@@ -97,10 +89,6 @@ AllowPermissions: `[]`
         {
             "id": 448,
             "no": "18320000",
-            "city": "屏東縣",
-            "town": "新園",
-            "section": "新吉",
-            "subsection": null,
             "owner_name": "楊順欽",
             "owner_id": "E102863920",
             "area": 0.219,
