@@ -17,7 +17,10 @@ AllowPermissions: `[]`
 回傳 data 為陣列內含所有 農地 資料  
 
 * `no`: 地號 (`VARCHAR(20)`)
-* `lot`: 地段 (`VARCHAR(20)`)
+* `city`: 縣市       (`最大10個字`)
+* `town`: 區域       (`最大10個字`)
+* `section`: 路段       (`最大10個字`)
+* `subsection`: 小段       (`最大10個字或 null`)
 * `owner_name`: 所有權人_姓名   (`VARCHAR(20)`)
 * `owner_id`: 所有權人_身分證   (`需剛好10個字`) (`VARCHAR(10)`)
 * `area`: 本筆面積              (`小數點後六位`) (`DECIMAL(7, 6)`)
@@ -53,7 +56,10 @@ AllowPermissions: `[]`
         {
             "id": number,
             "no": string;
-            "lot": string;
+            "city": string;
+            "town": string;
+            "section": string;
+            "subsection": string | null;
             "owner_name": string;
             "owner_id": string;
             "area": number;
@@ -74,7 +80,10 @@ AllowPermissions: `[]`
         {
             "id": 1,
             "no": "19620006",
-            "lot": "新園新吉",
+            "city": "屏東縣",
+            "town": "潮州",
+            "section": "劉厝庄",
+            "subsection": null,
             "owner_name": "李O雲",
             "owner_id": "T125896357",
             "area": "0.250000",
