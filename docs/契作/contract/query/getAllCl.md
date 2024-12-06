@@ -64,7 +64,10 @@ getAllCl 會把有引用外鍵(id)的部分，一併把外鍵資料抽取出來�
             "land": {
                 "id": number,
                 "no": string,
-                "lot": string,
+                "city": string,
+                "town": string,
+                "section": string,
+                "subsection": string | null,
                 "owner_name": string,
                 "owner_id": string,
                 "area": number,
@@ -98,7 +101,10 @@ getAllCl 會把有引用外鍵(id)的部分，一併把外鍵資料抽取出來�
             "land": {
                 "id": 24,
                 "no": "19620006",
-                "lot": "新園新吉",
+                "city": "屏東縣",
+                "town": "新園",
+                "section": "新吉",
+                "subsection": null,
                 "owner_name": "李鳳雲",
                 "owner_id": "T221484747",
                 "area": 0.25,
