@@ -70,7 +70,10 @@ AllowPermissions: `[]`
             "land": {
                 "id": number,
                 "no": string;
-                "lot": string;
+                "city": string;
+                "town": string;
+                "section": string;
+                "subsection": string | null;
                 "owner_name": string;
                 "owner_id": string;
                 "area": number;
@@ -113,7 +116,10 @@ AllowPermissions: `[]`
             "land": {
                 "id": 1,
                 "no": "19620006",
-                "lot": "新園新吉",
+                "city": "屏東縣",
+                "town": "新園",
+                "section": "新吉",
+                "subsection": null,
                 "owner_name": "李O雲",
                 "owner_id": "T125896357",
                 "area": "0.250000",
