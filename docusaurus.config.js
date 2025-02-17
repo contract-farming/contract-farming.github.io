@@ -58,7 +58,7 @@ const config = {
           editUrl:
             'https://github.com/contract-farming/contract-farming.github.io/blob/main/',
             lastVersion: lastVersion,
-            // onlyIncludeVersions: versionList,
+            onlyIncludeVersions: versionList,
             versions: versionListConversion(versionList),
         },
         blog: {
