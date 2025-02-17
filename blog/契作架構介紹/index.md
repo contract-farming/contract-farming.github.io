@@ -11,7 +11,7 @@ date: 2024-09-25
 
 ## 所需技術
 前端: `Node.js`, `TypeScript`, `vue3`, `vite`, `Nginx (Web Server)`  
-後端: `Node.js`, `TypeScript`, `Nginx (Reverse Proxy)`, `Docker`, `MariaDB`, `Linux`  
+後端: `Node.js`, `TypeScript`, `Nginx (Reverse Proxy)`, `Docker`, `MariaDB`, `Redis`, `Linux`  
 Server: `RockyLinux9`, `Certbot`  
 文檔: `React`, `Docusaurus v2`  
 
