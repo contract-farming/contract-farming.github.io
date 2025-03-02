@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkcontract_farming_docs=self.webpackChunkcontract_farming_docs||[]).push([[8913],{8913:(c,s,a)=>{a.r(s)}}]);
